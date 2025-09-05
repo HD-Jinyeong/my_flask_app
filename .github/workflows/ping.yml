@@ -1,0 +1,13 @@
+name: Keep Render Awake
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # 15분마다 실행
+  workflow_dispatch:          # 수동 실행도 가능
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Curl Render App
+        run: curl -s https://my-flask-app-49gt.onrender.com/ > /dev/null
