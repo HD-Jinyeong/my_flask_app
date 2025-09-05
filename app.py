@@ -20,11 +20,22 @@ s3 = boto3.client(
 
 @app.route("/", methods=["GET", "POST"])
 def home():
+    # if request.method == "POST":
+    #     f = request.files["file"]
+
+    #     # 파일을 S3에 업로드
+    #     s3.upload_fileobj(f, S3_BUCKET, f.filename)
+
     if request.method == "POST":
         f = request.files["file"]
+        print("📂 업로드 시도 파일명:", f.filename)   # ← 업로드 시작 확인용
 
-        # 파일을 S3에 업로드
-        s3.upload_fileobj(f, S3_BUCKET, f.filename)
+        try:
+            s3.upload_fileobj(f, S3_BUCKET, f.filename)
+            print("✅ 업로드 성공:", f.filename)      # ← 성공 로그
+        except Exception as e:
+            print("❌ 업로드 실패:", e)              # ← 에러 로그
+
 
         # 업로드된 파일 URL 생성
         file_url = f"https://{S3_BUCKET}.s3.{S3_REGION}.amazonaws.com/{f.filename}"
