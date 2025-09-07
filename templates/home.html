@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+  <h2 style="margin-top:0">설명</h2>
+  <p class="muted">구글폼처럼 텍스트와 여러 파일을 함께 제출합니다. 제출 후 S3에 저장되고,
+  엑셀/워드로 내보낼 수 있습니다.</p>
+</div>
+
+<form class="card" method="post" enctype="multipart/form-data" action="{{ url_for('submit') }}">
+  <h3 style="margin-top:0">입력</h3>
+  <div class="row">
+    <div>
+      <label>이름</label>
+      <input type="text" name="name" required />
+    </div>
+    <div>
+      <label>날짜</label>
+      <input type="date" name="date" />
+    </div>
+  </div>
+  <div style="margin-top:12px">
+    <label>메모</label>
+    <textarea name="memo" rows="3" placeholder="간단한 설명을 남겨주세요."></textarea>
+  </div>
+
+  <div style="margin-top:16px">
+    <label>파일</label>
+    <div id="fileInputs">
+      <input type="file" name="files" />
+    </div>
+    <div style="margin-top:8px">
+      <button type="button" class="btn btn-secondary" onclick="addFileInput()">+ 파일 추가</button>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;display:flex;gap:10px">
+    <button class="btn-primary" type="submit">제출</button>
+    <a class="btn btn-secondary" href="{{ url_for('export_excel') }}">엑셀로 내보내기</a>
+    <a class="btn btn-secondary" href="{{ url_for('export_word') }}">워드로 내보내기</a>
+  </div>
+</form>
+
+<div class="card">
+  <h3 style="margin-top:0">최근 제출</h3>
+  {% if submissions %}
+    <ol>
+      {% for s in submissions|reverse %}
+        <li>
+          <b>{{ s.name }}</b> — {{ s.date or "-" }}<br/>
+          <span class="muted">{{ s.memo or "" }}</span><br/>
+          <small class="muted">{{ s.timestamp }}</small>
+          <div style="margin-top:6px">
+            {% for f in s.files %}
+              <div>• <a href="{{ f.url }}" target="_blank">{{ f.filename }}</a></div>
+            {% endfor %}
+          </div>
+        </li>
+      {% endfor %}
+    </ol>
+  {% else %}
+    <p class="muted">아직 제출된 데이터가 없습니다.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

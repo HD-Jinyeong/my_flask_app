@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ title or "데이터 수집" }}</title>
+  <style>
+    body{max-width:920px;margin:40px auto;font-family:system-ui,Segoe UI,Apple SD Gothic Neo,sans-serif;line-height:1.6}
+    header{display:flex;gap:12px;align-items:center;margin-bottom:20px}
+    .card{background:#fff;border:1px solid #eee;border-radius:12px;padding:16px;margin:16px 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    input[type="text"],input[type="date"],textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:8px}
+    button, .btn{padding:10px 14px;border-radius:10px;border:0;cursor:pointer}
+    .btn-primary{background:#2563eb;color:#fff}
+    .btn-secondary{background:#e5e7eb}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .muted{color:#666;font-size:.92rem}
+  </style>
+</head>
+<body>
+  <header>
+    <h1 style="margin:0">{{ title or "데이터 수집" }}</h1>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
