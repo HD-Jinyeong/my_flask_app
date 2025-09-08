@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>관리자 페이지 - HD 현대미포 방폭 장비 관리</title>
+  <style>
+    body {max-width: 1100px; margin: 30px auto; font-family: sans-serif;}
+    table {border-collapse: collapse; width: 100%;}
+    th, td {border: 1px solid #ccc; padding: 6px; text-align: center;}
+    th {background: #f5f5f5;}
+    .btn {padding: 4px 10px; margin: 2px; border: none; cursor: pointer; border-radius: 4px;}
+    .btn-edit {background: #2563eb; color: #fff;}
+    .btn-reupload {background: #ef4444; color: #fff;}
+  </style>
+</head>
+<body>
+  <h2>관리자 페이지</h2>
+  <form method="post" action="/admin/export_selected">
+    <a href="/export/excel">전체 Excel 다운로드</a>
+    <button type="submit">선택 항목 Excel 다운로드</button>
+    <table>
+      <thead>
+        <tr>
+          <th><input type="checkbox" onclick="toggleAll(this)"></th>
+          <th>ID</th>
+          <th>제출자</th>
+          <th>Email</th>
+          <th>프로젝트</th>
+          <th>장비명</th>
+          <th>파일</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in submissions %}
+        <tr>
+          <td><input type="checkbox" name="selected_ids" value="{{ s.id }}"></td>
+          <td>{{ s.id }}</td>
+          <td>{{ s.submitter_name }}</td>
+          <td>{{ s.submitter_email }}</td>
+          <td>{{ s.project_name }}</td>
+          <td>{{ s.equipment_name }}</td>
+          <td>
+            {% if s.file_url %}
+              <a href="{{ s.file_url }}" target="_blank">{{ s.file }}</a>
+            {% else %} 없음 {% endif %}
+          </td>
+          <td>
+            <a class="btn btn-edit" href="/admin/edit/{{ s.id }}">수정</a>
+            <a class="btn btn-reupload" href="/admin/reupload/{{ s.id }}">재입력 요청</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </form>
+
+  <script>
+  function toggleAll(source) {
+    const checkboxes = document.querySelectorAll('input[name="selected_ids"]');
+    checkboxes.forEach(cb => cb.checked = source.checked);
+  }
+  </script>
+</body>
+</html>
