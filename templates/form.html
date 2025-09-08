@@ -1,124 +1,105 @@
-<!doctype html>
-<html lang="ko">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>HD 현대미포 방폭 장비 관리 페이지</title>
+  <meta charset="UTF-8">
+  <title>Submission Form</title>
   <style>
-    body {
-      max-width: 960px;
-      margin: 30px auto;
-      font-family: sans-serif;
-      background-color: #ccffcc; /* 연두색 배경 */
+    body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; }
+    .header { display: flex; align-items: center; margin-bottom: 20px; }
+    .header img { height: 50px; margin-right: 15px; }
+    .header h1 { font-size: 24px; color: #2e7d32; margin: 0; }
+    h2 { color: #2e7d32; }
+    form { background: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    label { color: #2e7d32; font-weight: bold; margin-right: 8px; }
+    input[type="text"], input[type="email"], input[type="date"], input[type="number"], input[type="file"] {
+      padding: 6px; margin: 5px;
     }
-    header {
-      text-align: center;
-      padding: 20px;
-      background: #99ff99;
-      border-radius: 12px;
-      margin-bottom: 20px;
+    button {
+      background-color: #2e7d32; color: #fff; border: none;
+      padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 10px;
     }
-    header h1 {
-      margin: 0;
-      font-size: 1.8em;
-      color: #004d00;
+    button:hover { background-color: #1b5e20; }
+    .row {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      padding: 10px; margin-bottom: 10px;
+      border: 1px solid #ddd; border-radius: 4px; background-color: #f1f8e9;
     }
-    table {border-collapse: collapse; width: 100%; margin-top: 16px;}
-    th, td {border: 1px solid #ccc; padding: 6px; text-align: center;}
-    th {background: #f5f5f5;}
-    input, textarea {width: 100%; box-sizing: border-box;}
-    .btn {margin: 8px; padding: 6px 12px; border: none; cursor: pointer; border-radius: 4px;}
-    .btn-add {background: #2563eb; color: #fff;}
-    .btn-del {background: #ef4444; color: #fff;}
-    .btn-submit {background: #16a34a; color: #fff;}
-    .section {margin-bottom: 20px; padding: 12px; border: 1px solid #ddd; border-radius: 8px; background: #ffffffcc;}
-    label {font-weight: bold;}
+    .file-row { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
   </style>
-</head>
-<body>
-  <!-- 🔹 페이지 상단 제목 -->
-  <header>
-    <h1>HD 현대미포 방폭 장비 관리 페이지</h1>
-  </header>
-
-  <form method="post" enctype="multipart/form-data" action="/submit">
-
-    <!-- 🔹 제출자 정보 -->
-    <div class="section">
-      <label>제출자 이름</label>
-      <input type="text" name="submitter_name" required><br><br>
-
-      <label>제출자 이메일</label>
-      <input type="email" name="submitter_email" required><br><br>
-
-      <label>제출 날짜</label>
-      <input type="date" name="submit_date" required><br><br>
-
-      <label>프로젝트 명</label>
-      <input type="text" name="project_name" required>
-    </div>
-
-    <!-- 🔹 장비 리스트 -->
-    <div class="section">
-      <table id="equipmentTable">
-        <thead>
-          <tr>
-            <th>EQUIPMENT NAME</th>
-            <th>QTY</th>
-            <th>TYPE</th>
-            <th>CERT. NO</th>
-            <th>EX-PROOF GRADE</th>
-            <th>IP GRADE</th>
-            <th>PAGE</th>
-            <th>FILE</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><input type="text" name="equipment_name[]"></td>
-            <td><input type="number" name="qty[]"></td>
-            <td><input type="text" name="type[]"></td>
-            <td><input type="text" name="cert_no[]"></td>
-            <td><input type="text" name="ex_proof_grade[]"></td>
-            <td><input type="text" name="ip_grade[]"></td>
-            <td><input type="text" name="page[]"></td>
-            <td><input type="file" name="file[]"></td>
-            <td><button type="button" class="btn btn-del" onclick="deleteRow(this)">삭제</button></td>
-          </tr>
-        </tbody>
-      </table>
-      <button type="button" class="btn btn-add" onclick="addRow()">+ 행 추가</button>
-    </div>
-
-    <button type="submit" class="btn btn-submit">제출</button>
-  </form>
-
   <script>
+    let count = 1;
     function addRow() {
-      const table = document.getElementById("equipmentTable").getElementsByTagName("tbody")[0];
-      const rowCount = table.rows.length;
-      if (rowCount >= 20) {
-        alert("최대 20행까지 추가 가능합니다.");
+      if (count >= 20) {
+        alert("Maximum 20 equipment entries allowed.");
         return;
       }
-      const row = table.insertRow();
+      count++;
+      const container = document.getElementById("equipment-list");
+      const row = document.createElement("div");
+      row.className = "row";
       row.innerHTML = `
-        <td><input type="text" name="equipment_name[]"></td>
-        <td><input type="number" name="qty[]"></td>
-        <td><input type="text" name="type[]"></td>
-        <td><input type="text" name="cert_no[]"></td>
-        <td><input type="text" name="ex_proof_grade[]"></td>
-        <td><input type="text" name="ip_grade[]"></td>
-        <td><input type="text" name="page[]"></td>
-        <td><input type="file" name="file[]"></td>
-        <td><button type="button" class="btn btn-del" onclick="deleteRow(this)">삭제</button></td>
+        EQUIPMENT NAME: <input type="text" name="equipment_name[]" required>
+        Q'TY: <input type="number" name="qty[]" min="1" value="1">
+        MAKER: <input type="text" name="maker[]">
+        TYPE: <input type="text" name="type[]">
+        CERT. NO.: <input type="text" name="cert_no[]">
+        EX-PROOF GRADE: <input type="text" name="ex_proof_grade[]">
+        IP GRADE: <input type="text" name="ip_grade[]">
+        PAGE: <input type="text" name="page[]">
+        <div class="file-row">
+          FILE: <input type="file" name="file[]">
+          <button type="submit">Submit</button>
+        </div>
       `;
-    }
-
-    function deleteRow(btn) {
-      const row = btn.parentNode.parentNode;
-      row.parentNode.removeChild(row);
+      container.appendChild(row);
     }
   </script>
+</head>
+<body>
+  <div class="header">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="HD Hyundai Mipo Logo">
+    <h1>HD Hyundai Mipo</h1>
+  </div>
+
+  <h2>Explosion-proof Equipment Submission Form</h2>
+
+  <form method="post" action="{{ url_for('submit') }}" enctype="multipart/form-data">
+    <label>Submitter Name:</label>
+    <input type="text" name="submitter_name" required><br>
+
+    <label>Email:</label>
+    <input type="email" name="submitter_email" required><br>
+
+    <label>Submission Date:</label>
+    <input type="date" name="submit_date"><br>
+
+    <label>Project Name:</label>
+    <input type="text" name="project_name" required><br>
+
+    <!-- ✅ Category 직접 입력 -->
+    <label>Category:</label>
+    <input type="text" name="category" placeholder="e.g. VENTILATION FAN" required><br><br>
+
+    <hr>
+    <h3>Equipment Information</h3>
+    <div id="equipment-list">
+      <div class="row">
+        EQUIPMENT NAME: <input type="text" name="equipment_name[]" required>
+        Q'TY: <input type="number" name="qty[]" min="1" value="1">
+        MAKER: <input type="text" name="maker[]">
+        TYPE: <input type="text" name="type[]">
+        CERT. NO.: <input type="text" name="cert_no[]">
+        EX-PROOF GRADE: <input type="text" name="ex_proof_grade[]">
+        IP GRADE: <input type="text" name="ip_grade[]">
+        PAGE: <input type="text" name="page[]">
+        <div class="file-row">
+          FILE: <input type="file" name="file[]">
+          <button type="submit">Submit</button>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" onclick="addRow()">+ Add Equipment</button>
+  </form>
 </body>
 </html>
