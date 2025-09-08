@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>수정 페이지</title>
+</head>
+<body>
+  <h3>수정 페이지 (ID: {{ s.id }})</h3>
+  <form method="post">
+    장비명: <input type="text" name="equipment_name" value="{{ s.equipment_name }}"><br>
+    수량: <input type="number" name="qty" value="{{ s.qty }}"><br>
+    <button type="submit">저장</button>
+  </form>
+</body>
+</html>
