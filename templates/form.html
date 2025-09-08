@@ -2,50 +2,95 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <title>장비 제출 폼</title>
+  <title>HD 현대미포 방폭 장비 관리 페이지</title>
   <style>
+    body {
+      max-width: 960px;
+      margin: 30px auto;
+      font-family: sans-serif;
+      background-color: #ccffcc; /* 연두색 배경 */
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+      background: #99ff99;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8em;
+      color: #004d00;
+    }
     table {border-collapse: collapse; width: 100%; margin-top: 16px;}
-    th, td {border: 1px solid #ccc; padding: 8px; text-align: center;}
+    th, td {border: 1px solid #ccc; padding: 6px; text-align: center;}
     th {background: #f5f5f5;}
-    input, select {width: 100%; box-sizing: border-box;}
+    input, textarea {width: 100%; box-sizing: border-box;}
     .btn {margin: 8px; padding: 6px 12px; border: none; cursor: pointer; border-radius: 4px;}
     .btn-add {background: #2563eb; color: #fff;}
     .btn-del {background: #ef4444; color: #fff;}
+    .btn-submit {background: #16a34a; color: #fff;}
+    .section {margin-bottom: 20px; padding: 12px; border: 1px solid #ddd; border-radius: 8px; background: #ffffffcc;}
+    label {font-weight: bold;}
   </style>
 </head>
 <body>
-  <h2>장비 제출 폼</h2>
+  <!-- 🔹 페이지 상단 제목 -->
+  <header>
+    <h1>HD 현대미포 방폭 장비 관리 페이지</h1>
+  </header>
+
   <form method="post" enctype="multipart/form-data" action="/submit">
-    <table id="equipmentTable">
-      <thead>
-        <tr>
-          <th>EQUIPMENT NAME</th>
-          <th>QTY</th>
-          <th>TYPE</th>
-          <th>CERT. NO</th>
-          <th>EX-PROOF GRADE</th>
-          <th>IP GRADE</th>
-          <th>PAGE</th>
-          <th>FILE</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><input type="text" name="equipment_name[]"></td>
-          <td><input type="number" name="qty[]"></td>
-          <td><input type="text" name="type[]"></td>
-          <td><input type="text" name="cert_no[]"></td>
-          <td><input type="text" name="ex_proof_grade[]"></td>
-          <td><input type="text" name="ip_grade[]"></td>
-          <td><input type="text" name="page[]"></td>
-          <td><input type="file" name="file[]"></td>
-          <td><button type="button" class="btn btn-del" onclick="deleteRow(this)">삭제</button></td>
-        </tr>
-      </tbody>
-    </table>
-    <button type="button" class="btn btn-add" onclick="addRow()">+ 행 추가</button>
-    <button type="submit" class="btn">제출</button>
+
+    <!-- 🔹 제출자 정보 -->
+    <div class="section">
+      <label>제출자 이름</label>
+      <input type="text" name="submitter_name" required><br><br>
+
+      <label>제출자 이메일</label>
+      <input type="email" name="submitter_email" required><br><br>
+
+      <label>제출 날짜</label>
+      <input type="date" name="submit_date" required><br><br>
+
+      <label>프로젝트 명</label>
+      <input type="text" name="project_name" required>
+    </div>
+
+    <!-- 🔹 장비 리스트 -->
+    <div class="section">
+      <table id="equipmentTable">
+        <thead>
+          <tr>
+            <th>EQUIPMENT NAME</th>
+            <th>QTY</th>
+            <th>TYPE</th>
+            <th>CERT. NO</th>
+            <th>EX-PROOF GRADE</th>
+            <th>IP GRADE</th>
+            <th>PAGE</th>
+            <th>FILE</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" name="equipment_name[]"></td>
+            <td><input type="number" name="qty[]"></td>
+            <td><input type="text" name="type[]"></td>
+            <td><input type="text" name="cert_no[]"></td>
+            <td><input type="text" name="ex_proof_grade[]"></td>
+            <td><input type="text" name="ip_grade[]"></td>
+            <td><input type="text" name="page[]"></td>
+            <td><input type="file" name="file[]"></td>
+            <td><button type="button" class="btn btn-del" onclick="deleteRow(this)">삭제</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-add" onclick="addRow()">+ 행 추가</button>
+    </div>
+
+    <button type="submit" class="btn btn-submit">제출</button>
   </form>
 
   <script>
