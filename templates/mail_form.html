@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>재입력 요청 메일 작성</title>
+  <style>
+    body {max-width: 700px; margin: 30px auto; font-family: sans-serif;}
+    label {font-weight: bold;}
+    textarea, input {width: 100%; margin-bottom: 12px; padding: 6px;}
+    button {padding: 8px 16px; background: #2563eb; color: #fff; border: none; border-radius: 4px; cursor: pointer;}
+  </style>
+</head>
+<body>
+  <h2>재입력 요청 메일 작성</h2>
+  <form method="post" action="/admin/mail_send/{{ submission.id }}">
+    <p><b>수신자:</b> {{ submission.submitter_email }}</p>
+    <p><b>프로젝트:</b> {{ submission.project_name }}</p>
+    <p><b>제출 날짜:</b> {{ submission.submit_date }}</p>
+    <p><b>장비명:</b> {{ submission.equipment_name }}</p>
+
+    <label for="due_date">수정 요청 기한</label>
+    <input type="date" id="due_date" name="due_date" required>
+
+    <label for="message">수정 사유 / 요청 내용</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+
+    <button type="submit">메일 전송</button>
+  </form>
+</body>
+</html>
