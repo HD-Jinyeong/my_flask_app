@@ -33,102 +33,112 @@ def presigned_url(key, expires=3600*24*7):
         ExpiresIn=expires
     )
 
+# 🔹 홈 = form.html 보여주기
 @app.route("/", methods=["GET"])
 def home():
-    return render_template("home.html", title="데이터 수집", submissions=SUBMISSIONS)
+    return render_template("form.html", submissions=SUBMISSIONS)
 
+# 🔹 제출 처리
 @app.route("/submit", methods=["POST"])
 def submit():
-    name = request.form.get("name")
-    memo = request.form.get("memo")
-    date = request.form.get("date")  # YYYY-MM-DD
-    files = request.files.getlist("files")
+    # 테이블 형태로 받은 값들 (리스트로 수집)
+    names = request.form.getlist("equipment_name[]")
+    qtys = request.form.getlist("qty[]")
+    types = request.form.getlist("type[]")
+    certs = request.form.getlist("cert_no[]")
+    exgrades = request.form.getlist("ex_proof_grade[]")
+    ipgrades = request.form.getlist("ip_grade[]")
+    pages = request.form.getlist("page[]")
+    files = request.files.getlist("file[]")
 
     sub_id = str(uuid.uuid4())[:8]
     now = datetime.datetime.utcnow().isoformat() + "Z"
 
     s3 = s3_client()
-    uploaded_files = []
+    rows = []
 
-    for f in files:
-        if not f or f.filename == "":
-            continue
-        safe = secure_filename(f.filename)
-        # 키 규칙: submissions/날짜/uuid_파일명
-        folder = date if date else datetime.datetime.utcnow().strftime("%Y-%m-%d")
-        key = f"uploads/{folder}/{sub_id}_{safe}"
+    for i in range(len(names)):
+        file_url = None
+        filename = None
+        if i < len(files) and files[i] and files[i].filename != "":
+            f = files[i]
+            safe = secure_filename(f.filename)
+            folder = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+            key = f"uploads/{folder}/{sub_id}_{i}_{safe}"
+            s3.upload_fileobj(f, S3_BUCKET, key, ExtraArgs={"ContentType": f.mimetype})
+            file_url = presigned_url(key)
+            filename = safe
 
-        # 업로드
-        s3.upload_fileobj(
-            f, S3_BUCKET, key,
-            ExtraArgs={"ContentType": f.mimetype}  # Content-Type 유지
-        )
+        row = {
+            "id": sub_id,
+            "equipment_name": names[i],
+            "qty": qtys[i],
+            "type": types[i],
+            "cert_no": certs[i],
+            "ex_proof_grade": exgrades[i],
+            "ip_grade": ipgrades[i],
+            "page": pages[i],
+            "file": filename,
+            "file_url": file_url,
+            "timestamp": now
+        }
+        rows.append(row)
 
-        url = presigned_url(key)  # 버킷 private이어도 접근 가능
-        uploaded_files.append({"filename": safe, "key": key, "url": url})
+    SUBMISSIONS.extend(rows)
 
-    submission = {
-        "id": sub_id,
-        "name": name,
-        "memo": memo,
-        "date": date,
-        "timestamp": now,
-        "files": uploaded_files,
-    }
-    SUBMISSIONS.append(submission)
-
-    # 간단한 영속성: 제출 JSON을 S3에 저장
+    # JSON으로도 S3에 저장
     s3.put_object(
         Bucket=S3_BUCKET,
         Key=f"submissions/{sub_id}.json",
-        Body=json.dumps(submission, ensure_ascii=False).encode("utf-8"),
+        Body=json.dumps(rows, ensure_ascii=False).encode("utf-8"),
         ContentType="application/json"
     )
 
     return redirect(url_for("home"))
 
+# 🔹 Excel 내보내기
 @app.route("/export/excel")
 def export_excel():
     wb = Workbook()
     ws = wb.active
-    ws.title = "Submissions"
-    ws.append(["id", "name", "date", "memo", "timestamp", "filename", "file_url"])
+    ws.title = "Equipments"
+    ws.append(["id", "equipment_name", "qty", "type", "cert_no", "ex_proof_grade",
+               "ip_grade", "page", "file", "file_url", "timestamp"])
 
     for s in SUBMISSIONS:
-        if s["files"]:
-            for f in s["files"]:
-                ws.append([s["id"], s["name"], s["date"] or "", s["memo"] or "", s["timestamp"], f["filename"], f["url"]])
-        else:
-            ws.append([s["id"], s["name"], s["date"] or "", s["memo"] or "", s["timestamp"], "", ""])
+        ws.append([s["id"], s["equipment_name"], s["qty"], s["type"], s["cert_no"],
+                   s["ex_proof_grade"], s["ip_grade"], s["page"], s["file"] or "", s["file_url"] or "", s["timestamp"]])
 
     stream = io.BytesIO()
     wb.save(stream)
     stream.seek(0)
-    return send_file(stream, as_attachment=True, download_name="submissions.xlsx", mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    return send_file(stream, as_attachment=True, download_name="equipments.xlsx",
+                     mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 
+# 🔹 Word 내보내기
 @app.route("/export/word")
 def export_word():
     doc = Document()
-    doc.add_heading("제출 내역", level=1)
+    doc.add_heading("제출 장비 내역", level=1)
     for s in SUBMISSIONS:
-        doc.add_paragraph(f"ID: {s['id']}")
-        doc.add_paragraph(f"이름: {s['name']}")
-        doc.add_paragraph(f"날짜: {s['date'] or '-'}")
-        if s["memo"]:
-            doc.add_paragraph(f"메모: {s['memo']}")
-        doc.add_paragraph(f"시간: {s['timestamp']}")
-        if s["files"]:
-            doc.add_paragraph("파일:")
-            for f in s["files"]:
-                # 워드는 하이퍼링크 API가 번거롭지만, URL 텍스트만 써도 자동 인식됨
-                doc.add_paragraph(f" - {f['filename']} : {f['url']}")
+        doc.add_paragraph(f"EQUIPMENT NAME: {s['equipment_name']}")
+        doc.add_paragraph(f"QTY: {s['qty']}")
+        doc.add_paragraph(f"TYPE: {s['type']}")
+        doc.add_paragraph(f"CERT. NO: {s['cert_no']}")
+        doc.add_paragraph(f"EX-PROOF GRADE: {s['ex_proof_grade']}")
+        doc.add_paragraph(f"IP GRADE: {s['ip_grade']}")
+        doc.add_paragraph(f"PAGE: {s['page']}")
+        if s["file_url"]:
+            doc.add_paragraph(f"FILE: {s['file']} → {s['file_url']}")
+        doc.add_paragraph(f"Timestamp: {s['timestamp']}")
         doc.add_paragraph("")  # 빈 줄
+
     stream = io.BytesIO()
     doc.save(stream)
     stream.seek(0)
-    return send_file(stream, as_attachment=True, download_name="submissions.docx", mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+    return send_file(stream, as_attachment=True, download_name="equipments.docx",
+                     mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
 
-# 헬스체크
 @app.route("/health")
 def health():
     return "ok", 200

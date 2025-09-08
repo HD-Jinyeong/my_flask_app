@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>장비 제출 폼</title>
+  <style>
+    table {border-collapse: collapse; width: 100%; margin-top: 16px;}
+    th, td {border: 1px solid #ccc; padding: 8px; text-align: center;}
+    th {background: #f5f5f5;}
+    input, select {width: 100%; box-sizing: border-box;}
+    .btn {margin: 8px; padding: 6px 12px; border: none; cursor: pointer; border-radius: 4px;}
+    .btn-add {background: #2563eb; color: #fff;}
+    .btn-del {background: #ef4444; color: #fff;}
+  </style>
+</head>
+<body>
+  <h2>장비 제출 폼</h2>
+  <form method="post" enctype="multipart/form-data" action="/submit">
+    <table id="equipmentTable">
+      <thead>
+        <tr>
+          <th>EQUIPMENT NAME</th>
+          <th>QTY</th>
+          <th>TYPE</th>
+          <th>CERT. NO</th>
+          <th>EX-PROOF GRADE</th>
+          <th>IP GRADE</th>
+          <th>PAGE</th>
+          <th>FILE</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="text" name="equipment_name[]"></td>
+          <td><input type="number" name="qty[]"></td>
+          <td><input type="text" name="type[]"></td>
+          <td><input type="text" name="cert_no[]"></td>
+          <td><input type="text" name="ex_proof_grade[]"></td>
+          <td><input type="text" name="ip_grade[]"></td>
+          <td><input type="text" name="page[]"></td>
+          <td><input type="file" name="file[]"></td>
+          <td><button type="button" class="btn btn-del" onclick="deleteRow(this)">삭제</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-add" onclick="addRow()">+ 행 추가</button>
+    <button type="submit" class="btn">제출</button>
+  </form>
+
+  <script>
+    function addRow() {
+      const table = document.getElementById("equipmentTable").getElementsByTagName("tbody")[0];
+      const rowCount = table.rows.length;
+      if (rowCount >= 20) {
+        alert("최대 20행까지 추가 가능합니다.");
+        return;
+      }
+      const row = table.insertRow();
+      row.innerHTML = `
+        <td><input type="text" name="equipment_name[]"></td>
+        <td><input type="number" name="qty[]"></td>
+        <td><input type="text" name="type[]"></td>
+        <td><input type="text" name="cert_no[]"></td>
+        <td><input type="text" name="ex_proof_grade[]"></td>
+        <td><input type="text" name="ip_grade[]"></td>
+        <td><input type="text" name="page[]"></td>
+        <td><input type="file" name="file[]"></td>
+        <td><button type="button" class="btn btn-del" onclick="deleteRow(this)">삭제</button></td>
+      `;
+    }
+
+    function deleteRow(btn) {
+      const row = btn.parentNode.parentNode;
+      row.parentNode.removeChild(row);
+    }
+  </script>
+</body>
+</html>
