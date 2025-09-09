@@ -11,49 +11,12 @@
     h2 { color: #2e7d32; }
     form { background: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
     label { color: #2e7d32; font-weight: bold; margin-right: 8px; }
-    input[type="text"], input[type="email"], input[type="date"], input[type="number"], input[type="file"] {
-      padding: 6px; margin: 5px;
-    }
-    button {
-      background-color: #2e7d32; color: #fff; border: none;
-      padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 10px;
-    }
+    input, select { padding: 6px; margin: 5px; }
+    button { background-color: #2e7d32; color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 10px; }
     button:hover { background-color: #1b5e20; }
-    .row {
-      display: flex; flex-wrap: wrap; gap: 10px;
-      padding: 10px; margin-bottom: 10px;
-      border: 1px solid #ddd; border-radius: 4px; background-color: #f1f8e9;
-    }
+    .row { display: flex; flex-wrap: wrap; gap: 10px; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; background-color: #f1f8e9; }
     .file-row { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
   </style>
-  <script>
-    let count = 1;
-    function addRow() {
-      if (count >= 20) {
-        alert("Maximum 20 equipment entries allowed.");
-        return;
-      }
-      count++;
-      const container = document.getElementById("equipment-list");
-      const row = document.createElement("div");
-      row.className = "row";
-      row.innerHTML = `
-        EQUIPMENT NAME: <input type="text" name="equipment_name[]" required>
-        Q'TY: <input type="number" name="qty[]" min="1" value="1">
-        MAKER: <input type="text" name="maker[]">
-        TYPE: <input type="text" name="type[]">
-        CERT. NO.: <input type="text" name="cert_no[]">
-        EX-PROOF GRADE: <input type="text" name="ex_proof_grade[]">
-        IP GRADE: <input type="text" name="ip_grade[]">
-        PAGE: <input type="text" name="page[]">
-        <div class="file-row">
-          FILE: <input type="file" name="file[]">
-          <button type="submit">Submit</button>
-        </div>
-      `;
-      container.appendChild(row);
-    }
-  </script>
 </head>
 <body>
   <div class="header">
@@ -70,15 +33,48 @@
     <label>Email:</label>
     <input type="email" name="submitter_email" required><br>
 
+    <label>Contact:</label>
+    <input type="tel" name="contact" placeholder="010-1234-5678" required><br>
+
+    <label>Affiliation:</label>
+    <input type="text" name="affiliation" required><br>
+
     <label>Submission Date:</label>
     <input type="date" name="submit_date"><br>
 
     <label>Project Name:</label>
     <input type="text" name="project_name" required><br>
 
-    <!-- ✅ Category 직접 입력 -->
     <label>Category:</label>
-    <input type="text" name="category" placeholder="e.g. VENTILATION FAN" required><br><br>
+    <select name="category" id="category" required onchange="toggleOtherCategory()">
+      <option value="VENTILATION FAN">VENTILATION FAN</option>
+      <option value="ELECTRIC SENSOR">ELECTRIC SENSOR</option>
+      <option value="LINKED EMERGENCY SHUTDOWN SYSTEM">LINKED EMERGENCY SHUTDOWN SYSTEM</option>
+      <option value="HOSE HANDLING CRANE">HOSE HANDLING CRANE</option>
+      <option value="LIGHTING SYSTEM">LIGHTING SYSTEM</option>
+      <option value="AUTO EXCHANGER TELEPHONE SYSTEM">AUTO EXCHANGER TELEPHONE SYSTEM</option>
+      <option value="UHF SYSTEM">UHF SYSTEM</option>
+      <option value="OIL DISCHARGE MONITORING SYSTEM">OIL DISCHARGE MONITORING SYSTEM</option>
+      <option value="INERT GAS SYSTEM">INERT GAS SYSTEM</option>
+      <option value="TANK CLEANING HEATER">TANK CLEANING HEATER</option>
+      <option value="CARGO TANK HIGH & HI-HI LEVEL ALARM SYSTEM">CARGO TANK HIGH & HI-HI LEVEL ALARM SYSTEM</option>
+      <option value="OXYGEN MONITORING SYSTEM">OXYGEN MONITORING SYSTEM</option>
+      <option value="FIXED GAS SAMPLING SYSTEM">FIXED GAS SAMPLING SYSTEM</option>
+      <option value="CARGO TANK LEVEL GAUGING SYSTEM">CARGO TANK LEVEL GAUGING SYSTEM</option>
+      <option value="VALVE REMOTE CONTROL SYSTEM">VALVE REMOTE CONTROL SYSTEM</option>
+      <option value="CARGO PUMPING SYSTEM">CARGO PUMPING SYSTEM</option>
+      <option value="FIRE DETECTION SYSTEM">FIRE DETECTION SYSTEM</option>
+      <option value="CO2 FIRE EXTINGUISHING SYSTEM">CO2 FIRE EXTINGUISHING SYSTEM</option>
+      <option value="BALLAST WATER TREATMENT SYSTEM">BALLAST WATER TREATMENT SYSTEM</option>
+      <option value="SIGNAL LIGHT COLUMN">SIGNAL LIGHT COLUMN</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <div id="other-category-div" style="display:none; margin-top:5px;">
+      <label>Other Category:</label>
+      <input type="text" name="other_category" placeholder="Enter category name">
+    </div>
+    <br><br>
 
     <hr>
     <h3>Equipment Information</h3>
@@ -94,12 +90,43 @@
         PAGE: <input type="text" name="page[]">
         <div class="file-row">
           FILE: <input type="file" name="file[]">
-          <button type="submit">Submit</button>
         </div>
       </div>
     </div>
 
     <button type="button" onclick="addRow()">+ Add Equipment</button>
+    <button type="submit">Submit</button>
   </form>
+
+  <script>
+    function toggleOtherCategory() {
+      const categorySelect = document.getElementById("category");
+      const otherDiv = document.getElementById("other-category-div");
+      if (categorySelect.value === "Other") {
+        otherDiv.style.display = "block";
+      } else {
+        otherDiv.style.display = "none";
+      }
+    }
+
+    function addRow() {
+      const list = document.getElementById('equipment-list');
+      const row = document.createElement('div');
+      row.className = 'row';
+      row.innerHTML = `
+        EQUIPMENT NAME: <input type="text" name="equipment_name[]" required>
+        Q'TY: <input type="number" name="qty[]" min="1" value="1">
+        MAKER: <input type="text" name="maker[]">
+        TYPE: <input type="text" name="type[]">
+        CERT. NO.: <input type="text" name="cert_no[]">
+        EX-PROOF GRADE: <input type="text" name="ex_proof_grade[]">
+        IP GRADE: <input type="text" name="ip_grade[]">
+        PAGE: <input type="text" name="page[]">
+        <div class="file-row">
+          FILE: <input type="file" name="file[]">
+        </div>`;
+      list.appendChild(row);
+    }
+  </script>
 </body>
 </html>

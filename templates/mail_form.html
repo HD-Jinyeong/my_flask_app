@@ -1,30 +1,38 @@
-<!doctype html>
-<html lang="ko">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>재입력 요청 메일 작성</title>
+  <meta charset="UTF-8">
+  <title>Send Mail</title>
   <style>
-    body {max-width: 700px; margin: 30px auto; font-family: sans-serif;}
-    label {font-weight: bold;}
-    textarea, input {width: 100%; margin-bottom: 12px; padding: 6px;}
-    button {padding: 8px 16px; background: #2563eb; color: #fff; border: none; border-radius: 4px; cursor: pointer;}
+    body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; }
+    h3 { color: #2e7d32; }
+    form { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 600px; }
+    label { display: block; margin: 10px 0 5px; font-weight: bold; color: #2e7d32; }
+    input, textarea { padding: 6px; width: 100%; border: 1px solid #ccc; border-radius: 4px; }
+    textarea { resize: vertical; height: 120px; }
+    button { background-color: #2e7d32; color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 10px; }
+    button:hover { background-color: #1b5e20; }
+    .info-box { background: #f1f8e9; padding: 10px; margin-bottom: 15px; border-radius: 4px; }
   </style>
 </head>
 <body>
-  <h2>재입력 요청 메일 작성</h2>
-  <form method="post" action="/admin/mail_send/{{ submission.id }}">
-    <p><b>수신자:</b> {{ submission.submitter_email }}</p>
-    <p><b>프로젝트:</b> {{ submission.project_name }}</p>
-    <p><b>제출 날짜:</b> {{ submission.submit_date }}</p>
-    <p><b>장비명:</b> {{ submission.equipment_name }}</p>
+  <h3>Send Mail Request</h3>
 
-    <label for="due_date">수정 요청 기한</label>
-    <input type="date" id="due_date" name="due_date" required>
+  <div class="info-box">
+    <p><b>Project:</b> {{ submission.project_name }}</p>
+    <p><b>Submitter:</b> {{ submission.submitter_name }} ({{ submission.submitter_email }})</p>
+    <p><b>Category:</b> {{ submission.category }}</p>
+    <p><b>Equipment:</b> {{ submission.equipment_name }} (Qty: {{ submission.qty }})</p>
+  </div>
 
-    <label for="message">수정 사유 / 요청 내용</label>
-    <textarea id="message" name="message" rows="5" required></textarea>
+  <form method="post" action="{{ url_for('mail_send', id=submission.id) }}">
+    <label>Due Date:</label>
+    <input type="date" name="due_date" required>
 
-    <button type="submit">메일 전송</button>
+    <label>Message:</label>
+    <textarea name="message" placeholder="Enter reason for request" required></textarea>
+
+    <button type="submit">Send Mail</button>
   </form>
 </body>
 </html>
