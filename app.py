@@ -157,12 +157,13 @@ def mail_send(id):
     message = request.form.get("message")
 
     subject = f"[HD Hyundai Mipo] {s['project_name']} 수정 요청드립니다."
+    
     body = f"""
-[{s'submitter_name'}]님,
+[{s["submitter_name"]}]님,
 
 평소 업무 협조에 감사드립니다.
 
-표제의 건에 관련하여, 제출건에 수정이 필요합니다.
+표제의 건에 관련하여, [{s["project_name"]}] 데이터에 수정이 필요합니다.
 
 요청 사유:
 {message}
@@ -171,6 +172,10 @@ def mail_send(id):
 
 감사합니다.
 """
+
+    
+    
+
 
     # ✅ send_mail 모듈 사용
     send_mail(s["submitter_email"], subject, body)
