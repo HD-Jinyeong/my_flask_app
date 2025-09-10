@@ -42,7 +42,7 @@
         <td>{{ s.submitter_name }}</td>
         <td>{{ s.affiliation }}</td>
         <td>{{ s.contact }}</td>
-        <td><a href="{{ url_for('edit_submission', id=s.id) }}">Edit</a></td>
+        <td><a href="{{ url_for('edit_submission', id=s['id']) }}">Edit</a></td>
         <td><a href="{{ url_for('mail_form', id=s.id) }}">Mail</a></td>
       </tr>
       {% endfor %}

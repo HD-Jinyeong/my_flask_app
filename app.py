@@ -3,10 +3,6 @@ from werkzeug.utils import secure_filename
 from flask import Flask, request, render_template, redirect, url_for, send_file, flash
 import boto3
 from openpyxl import Workbook
-import smtplib
-from email.mime.text import MIMEText
-# ✅ send_mail.py 불러오기
-from send_mail import send_mail
 
 app = Flask(__name__)
 app.secret_key = "secret-key-for-flash"
@@ -16,12 +12,13 @@ S3_BUCKET = os.getenv("S3_BUCKET")
 S3_REGION = os.getenv("S3_REGION", "ap-northeast-2")
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
-ADMIN_EMAIL = os.getenv("ADMIN_EMAIL")
-ADMIN_EMAIL_PASSWORD = os.getenv("ADMIN_EMAIL_PASSWORD")
 
-# 로컬 저장 디렉토리
+# 로컬 저장 디렉토리 (JSON 백업용)
 LOCAL_SUBMISSION_DIR = "submissions"
 os.makedirs(LOCAL_SUBMISSION_DIR, exist_ok=True)
+
+# 메모리 저장
+SUBMISSIONS = []
 
 def s3_client():
     return boto3.client(
@@ -30,8 +27,6 @@ def s3_client():
         aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
         region_name=S3_REGION
     )
-
-SUBMISSIONS = []  # 메모리 저장
 
 def presigned_url(key, expires=3600*24*7):
     s3 = s3_client()
@@ -72,7 +67,7 @@ def submit():
     files = request.files.getlist("file[]")
 
     sub_id = str(uuid.uuid4())[:8]
-    now = datetime.datetime.utcnow().isoformat() + "Z"
+    now = datetime.datetime.utcnow().isoformat()
 
     s3 = s3_client()
     rows = []
@@ -112,14 +107,20 @@ def submit():
         SUBMISSIONS.append(row)
         rows.append(row)
 
-    # ✅ JSON은 로컬에 저장
+    # JSON 백업
+    # JSON 백업 (로컬 저장)
     local_path = os.path.join(LOCAL_SUBMISSION_DIR, f"{sub_id}.json")
     with open(local_path, "w", encoding="utf-8") as f:
         json.dump(rows, f, ensure_ascii=False, indent=2)
 
+    # ✅ JSON 파일 S3에도 업로드
+    s3 = s3_client()
+    s3.upload_file(local_path, S3_BUCKET, f"submissions/{sub_id}.json")
+
     return redirect(url_for("home"))
 
-# ================= 관리자 대시보드 =================
+
+# ================= 관리자 기능 =================
 @app.route("/admin")
 def admin_dashboard():
     return render_template("admin.html", submissions=SUBMISSIONS)
@@ -152,74 +153,39 @@ def mail_send(id):
     s = next((x for x in SUBMISSIONS if x["id"] == id), None)
     if not s:
         return "Not found", 404
-
     due_date = request.form.get("due_date")
     message = request.form.get("message")
-
-    subject = f"[HD Hyundai Mipo] {s['project_name']} 수정 요청드립니다."
-    
-    body = f"""
-[{s["submitter_name"]}]님,
-
-평소 업무 협조에 감사드립니다.
-
-표제의 건에 관련하여, [{s["project_name"]}] 데이터에 수정이 필요합니다.
-
-요청 사유:
-{message}
-
-수정 기한: {due_date}까지 부탁드립니다.
-
-감사합니다.
-"""
-
-    
-    
-
-
-    # ✅ send_mail 모듈 사용
-    send_mail(s["submitter_email"], subject, body)
-    flash("메일 발송 완료")
+    s["due_date"] = due_date
+    s["message"] = message
+    flash("메일 발송 요청이 기록되었습니다. (Render에서는 실제 전송 안 함)")
     return redirect(url_for("admin_dashboard"))
-
-
 
 # ================= Excel Export =================
 def write_grouped_excel(submissions, wb):
     ws = wb.active
     ws.title = "Submissions"
-
-    grouped = {}
+    ws.append([
+        "ID","Submitter Name","Email","Project","Category",
+        "Equipment Name","QTY","Maker","Type","Cert No.",
+        "Ex-proof Grade","IP Grade","Page","File"
+    ])
     for s in submissions:
-        proj = s["project_name"]
-        cat = s["category"]
-        grouped.setdefault(proj, {}).setdefault(cat, []).append(s)
-
-    for proj, cats in grouped.items():
-        ws.append([f"Project: {proj}"])
-        for cat, items in cats.items():
-            ws.append([f"Category: {cat}"])
-            # ✅ 모든 주요 항목 헤더 추가
-            ws.append([
-                "NO", "Equipment Name", "QTY", "Maker", "Type",
-                "Cert. No.", "Ex-proof Grade", "IP Grade", "Page", "File"
-            ])
-            for idx, s in enumerate(items, start=1):
-                ws.append([
-                    idx,
-                    s.get("equipment_name", ""),
-                    s.get("qty", ""),
-                    s.get("maker", ""),
-                    s.get("type", ""),
-                    s.get("cert_no", ""),
-                    s.get("ex_proof_grade", ""),
-                    s.get("ip_grade", ""),
-                    s.get("page", ""),
-                    s.get("file", "")
-                ])
-            ws.append([])
-        ws.append([])
-
+        ws.append([
+            s.get("id",""),
+            s.get("submitter_name",""),
+            s.get("submitter_email",""),
+            s.get("project_name",""),
+            s.get("category",""),
+            s.get("equipment_name",""),
+            s.get("qty",""),
+            s.get("maker",""),
+            s.get("type",""),
+            s.get("cert_no",""),
+            s.get("ex_proof_grade",""),
+            s.get("ip_grade",""),
+            s.get("page",""),
+            s.get("file","")
+        ])
 
 @app.route("/export/excel")
 def export_excel():
@@ -237,8 +203,8 @@ def export_selected():
     selected_ids = request.form.getlist("selected_ids")
     if not selected_ids:
         return "선택된 항목이 없습니다.", 400
-    wb = Workbook()
     selected = [s for s in SUBMISSIONS if s["id"] in selected_ids]
+    wb = Workbook()
     write_grouped_excel(selected, wb)
     stream = io.BytesIO()
     wb.save(stream)
