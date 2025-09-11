@@ -25,14 +25,16 @@
     <p><b>Equipment:</b> {{ submission.equipment_name }} (Qty: {{ submission.qty }})</p>
   </div>
 
-  <form method="post" action="{{ url_for('mail_send', id=submission.id) }}">
-    <label>Due Date:</label>
-    <input type="date" name="due_date" required>
+<h2>메일 전송</h2>
+<form method="post" action="{{ url_for('mail_send', id=submission.id) }}">
+  <label>Due Date:</label>
+  <input type="date" name="due_date" required><br><br>
 
-    <label>Message:</label>
-    <textarea name="message" placeholder="Enter reason for request" required></textarea>
+  <label>Message:</label><br>
+  <textarea name="message" rows="5" cols="40"></textarea><br><br>
 
-    <button type="submit">Send Mail</button>
-  </form>
+  <button type="submit">Send Mail</button>
+</form>
+
 </body>
 </html>

@@ -7,18 +7,11 @@ from openpyxl import Workbook
 app = Flask(__name__)
 app.secret_key = "secret-key-for-flash"
 
-# 환경변수
+# ================= 환경변수 =================
 S3_BUCKET = os.getenv("S3_BUCKET")
 S3_REGION = os.getenv("S3_REGION", "ap-northeast-2")
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
-
-# 로컬 저장 디렉토리 (JSON 백업용)
-LOCAL_SUBMISSION_DIR = "submissions"
-os.makedirs(LOCAL_SUBMISSION_DIR, exist_ok=True)
-
-# 메모리 저장
-SUBMISSIONS = []
 
 def s3_client():
     return boto3.client(
@@ -104,70 +97,114 @@ def submit():
             "file_url": file_url,
             "timestamp": now
         }
-        SUBMISSIONS.append(row)
         rows.append(row)
 
-    # JSON 백업
-    # JSON 백업 (로컬 저장)
-    local_path = os.path.join(LOCAL_SUBMISSION_DIR, f"{sub_id}.json")
-    with open(local_path, "w", encoding="utf-8") as f:
-        json.dump(rows, f, ensure_ascii=False, indent=2)
-
-    # ✅ JSON 파일 S3에도 업로드
-    s3 = s3_client()
-    s3.upload_file(local_path, S3_BUCKET, f"submissions/{sub_id}.json")
+    # JSON → S3 저장
+    json_key = f"submissions/{sub_id}.json"
+    s3.put_object(
+        Bucket=S3_BUCKET,
+        Key=json_key,
+        Body=json.dumps(rows, ensure_ascii=False, indent=2),
+        ContentType="application/json"
+    )
 
     return redirect(url_for("home"))
-
 
 # ================= 관리자 기능 =================
 @app.route("/admin")
 def admin_dashboard():
-    return render_template("admin.html", submissions=SUBMISSIONS)
+    s3 = s3_client()
+    resp = s3.list_objects_v2(Bucket=S3_BUCKET, Prefix="submissions/")
+    submissions = []
 
-@app.route("/admin/edit/<id>", methods=["GET", "POST"])
-def edit_submission(id):
-    s = next((x for x in SUBMISSIONS if x["id"] == id), None)
-    if not s:
-        return "Not found", 404
-    if request.method == "POST":
-        s["equipment_name"] = request.form.get("equipment_name")
-        s["qty"] = request.form.get("qty")
-        s["maker"] = request.form.get("maker")
-        s["type"] = request.form.get("type")
-        s["cert_no"] = request.form.get("cert_no")
-        s["category"] = request.form.get("category")
-        flash("수정 완료")
-        return redirect(url_for("admin_dashboard"))
-    return render_template("edit.html", s=s)
+    if "Contents" in resp:
+        for obj in resp["Contents"]:
+            if not obj["Key"].endswith(".json"):
+                continue
+            data = s3.get_object(Bucket=S3_BUCKET, Key=obj["Key"])["Body"].read()
+            rows = json.loads(data)
+            submissions.extend(rows)
+
+    return render_template("admin.html", submissions=submissions)
 
 @app.route("/admin/mail/<id>", methods=["GET"])
 def mail_form(id):
-    s = next((x for x in SUBMISSIONS if x["id"] == id), None)
-    if not s:
+    s3 = s3_client()
+    key = f"submissions/{id}.json"
+
+    try:
+        data = s3.get_object(Bucket=S3_BUCKET, Key=key)["Body"].read()
+        rows = json.loads(data)
+        submission = rows[0]  # JSON은 리스트이므로 첫 번째 항목
+    except Exception:
         return "Not found", 404
-    return render_template("mail_form.html", submission=s)
+
+    return render_template("mail_form.html", submission=submission)
 
 @app.route("/admin/mail_send/<id>", methods=["POST"])
 def mail_send(id):
-    s = next((x for x in SUBMISSIONS if x["id"] == id), None)
-    if not s:
-        return "Not found", 404
     due_date = request.form.get("due_date")
     message = request.form.get("message")
-    s["due_date"] = due_date
-    s["message"] = message
-    flash("메일 발송 요청이 기록되었습니다. (Render에서는 실제 전송 안 함)")
+    now = datetime.datetime.utcnow().isoformat()
+
+    # S3 JSON 불러오기
+    s3 = s3_client()
+    key = f"submissions/{id}.json"
+    obj = s3.get_object(Bucket=S3_BUCKET, Key=key)
+    rows = json.loads(obj["Body"].read())
+
+    # 모든 row 업데이트
+    for row in rows:
+        row["due_date"] = due_date
+        row["message"] = message
+        row["last_updated"] = now
+        row["force_send"] = True   # ✅ 강제 발송 플래그
+
+    # 다시 S3 업로드
+    s3.put_object(
+        Bucket=S3_BUCKET,
+        Key=key,
+        Body=json.dumps(rows, ensure_ascii=False, indent=2),
+        ContentType="application/json"
+    )
+
+    flash("메일 발송 요청이 저장되었습니다. (로컬 worker에서 처리)")
     return redirect(url_for("admin_dashboard"))
 
-# ================= Excel Export =================
+
+@app.route("/admin/edit/<id>", methods=["GET", "POST"])
+def edit_submission(id):
+    s3 = s3_client()
+    data = s3.get_object(Bucket=S3_BUCKET, Key=f"submissions/{id}.json")["Body"].read()
+    rows = json.loads(data)
+    submission = rows[0]  # 첫 번째 row 사용
+
+    if request.method == "POST":
+        submission["equipment_name"] = request.form.get("equipment_name")
+        submission["qty"] = request.form.get("qty")
+        submission["maker"] = request.form.get("maker")
+        submission["type"] = request.form.get("type")
+
+        # 다시 S3에 덮어쓰기
+        s3.put_object(
+            Bucket=S3_BUCKET,
+            Key=f"submissions/{id}.json",
+            Body=json.dumps([submission], ensure_ascii=False, indent=2),
+            ContentType="application/json"
+        )
+        return redirect(url_for("admin_dashboard"))
+
+    return render_template("edit.html", s=submission)
+
+
+
 def write_grouped_excel(submissions, wb):
     ws = wb.active
     ws.title = "Submissions"
     ws.append([
-        "ID","Submitter Name","Email","Project","Category",
-        "Equipment Name","QTY","Maker","Type","Cert No.",
-        "Ex-proof Grade","IP Grade","Page","File"
+        "ID", "Submitter Name", "Email", "Project", "Category",
+        "Equipment Name", "QTY", "Maker", "Type", "Cert No.",
+        "Ex-proof Grade", "IP Grade", "Page", "File"
     ])
     for s in submissions:
         ws.append([
@@ -184,33 +221,32 @@ def write_grouped_excel(submissions, wb):
             s.get("ex_proof_grade",""),
             s.get("ip_grade",""),
             s.get("page",""),
-            s.get("file","")
+            s.get("file",""),
         ])
+
+        
 
 @app.route("/export/excel")
 def export_excel():
+    s3 = s3_client()
+    resp = s3.list_objects_v2(Bucket=S3_BUCKET, Prefix="submissions/")
+    submissions = []
+
+    if "Contents" in resp:
+        for obj in resp["Contents"]:
+            if not obj["Key"].endswith(".json"):
+                continue
+            data = s3.get_object(Bucket=S3_BUCKET, Key=obj["Key"])["Body"].read()
+            rows = json.loads(data)
+            submissions.extend(rows)
+
     wb = Workbook()
-    write_grouped_excel(SUBMISSIONS, wb)
+    write_grouped_excel(submissions, wb)
     stream = io.BytesIO()
     wb.save(stream)
     stream.seek(0)
     return send_file(stream, as_attachment=True,
                      download_name="submissions.xlsx",
-                     mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-
-@app.route("/admin/export_selected", methods=["POST"])
-def export_selected():
-    selected_ids = request.form.getlist("selected_ids")
-    if not selected_ids:
-        return "선택된 항목이 없습니다.", 400
-    selected = [s for s in SUBMISSIONS if s["id"] in selected_ids]
-    wb = Workbook()
-    write_grouped_excel(selected, wb)
-    stream = io.BytesIO()
-    wb.save(stream)
-    stream.seek(0)
-    return send_file(stream, as_attachment=True,
-                     download_name="selected_submissions.xlsx",
                      mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 
 @app.route("/health")
