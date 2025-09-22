@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>Send Mail</title>
+  <title>메일 작성</title>
   <style>
     body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; }
     h3 { color: #2e7d32; }
@@ -12,29 +12,25 @@
     textarea { resize: vertical; height: 120px; }
     button { background-color: #2e7d32; color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 10px; }
     button:hover { background-color: #1b5e20; }
-    .info-box { background: #f1f8e9; padding: 10px; margin-bottom: 15px; border-radius: 4px; }
   </style>
 </head>
 <body>
-  <h3>Send Mail Request</h3>
+  <h3>메일 작성 (Ship: {{ submission.ship_number }})</h3>
 
-  <div class="info-box">
-    <p><b>Project:</b> {{ submission.project_name }}</p>
-    <p><b>Submitter:</b> {{ submission.submitter_name }} ({{ submission.submitter_email }})</p>
-    <p><b>Category:</b> {{ submission.category }}</p>
-    <p><b>Equipment:</b> {{ submission.equipment_name }} (Qty: {{ submission.qty }})</p>
-  </div>
+  <form method="post">
+    <label>Due Date:</label>
+    <input type="date" name="due_date" value="{{ submission.due_date or '' }}">
 
-<h2>메일 전송</h2>
-<form method="post" action="{{ url_for('mail_send', id=submission.id) }}">
-  <label>Due Date:</label>
-  <input type="date" name="due_date" required><br><br>
+    <label>Message:</label>
+    <textarea name="message">{{ submission.message or '' }}</textarea>
 
-  <label>Message:</label><br>
-  <textarea name="message" rows="5" cols="40"></textarea><br><br>
+    <label>To Emails:</label>
+    <input type="text" name="to_emails[]" value="{{ submission.submitter_email }}">
 
-  <button type="submit">Send Mail</button>
-</form>
+    <label>Cc Emails:</label>
+    <input type="text" name="cc_emails[]" placeholder="comma,separated@example.com">
 
+    <button type="submit">메일 요청 저장</button>
+  </form>
 </body>
 </html>

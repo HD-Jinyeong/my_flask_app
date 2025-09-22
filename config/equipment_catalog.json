@@ -1,0 +1,384 @@
+{
+  "VENTILATION FAN": {
+    "MOTOR FOR PAINT STORE EXH. FAN": {
+      "responsible": {
+        "name": "하태현",
+        "email": "wlsdud5706@naver.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "CABLE GLAND FOR PAINT STORE EXH. FAN": {
+      "responsible": {
+        "name": "하태현",
+        "email": "wlsdud5706@naver.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "done",
+      "qty": "1",
+      "maker": "HYOSUNG",
+      "type": "HICO",
+      "cert_no": "Sira 15"
+    },
+    "JUNCTION BOX FOR PAINT STORE EXH. FAN": {
+      "responsible": {
+        "name": "전민수",
+        "email": "wlsdud706@knu.ac.kr",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "MOTOR FOR PUMP ROOM (S) EXH. (REV.) FAN": {
+      "responsible": {
+        "name": "하태현",
+        "email": "wlsdud5706@naver.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "done",
+      "qty": "2",
+      "maker": "HYOSUNG",
+      "type": "HICO",
+      "cert_no": "Sira 15"
+    },
+    "MOTOR FOR PUMP ROOM (P) EXH. FAN": {
+      "responsible": {
+        "name": "최현서",
+        "email": "jinyeong@hd.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "MOTOR FOR DECK STORE (S) EXH. FAN": {
+      "responsible": {
+        "name": "하태현",
+        "email": "wlsdud5706@naver.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "MOTOR FOR DECK STORE (P) EXH. FAN": {
+      "responsible": {
+        "name": "최현서",
+        "email": "jinyeong@hd.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "CABLE GLAND FOR PUMP ROOM (S) EXH. (REV.) FAN": {
+      "responsible": {
+        "name": "전민수",
+        "email": "wlsdud706@knu.ac.kr",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "CABLE GLAND FOR PUMP ROOM (P) EXH. FAN": {
+      "responsible": {
+        "name": "전민수",
+        "email": "wlsdud706@knu.ac.kr",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "CABLE GLAND FOR DECK STORE (S) EXH. FAN": {
+      "responsible": {
+        "name": "하태현",
+        "email": "wlsdud5706@naver.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "CABLE GLAND FOR DECK STORE (P) EXH. FAN": {
+      "responsible": {
+        "name": "최현서",
+        "email": "jinyeong@hd.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "done",
+      "qty": "-1",
+      "maker": "HYOSUNG",
+      "type": "HICO",
+      "cert_no": "Sira 15"
+    },
+    "DPS FOR PUMP ROOM (S) EXH. (REV.) FAN & PUMP ROOM (S) EXH. FAN": {
+      "responsible": {
+        "name": "전민수",
+        "email": "wlsdud706@knu.ac.kr",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    }
+  },
+  "ELECTRIC SENSOR": {
+    "I.S BARRIER FOR LEVEL SWITCH": {
+      "responsible": {
+        "name": "최현서",
+        "email": "jinyeong@hd.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "LEVEL SWITCH": {
+      "responsible": {
+        "name": "전민수",
+        "email": "wlsdud706@knu.ac.kr",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    }
+  },
+  "LINKED EMERGENCY SHUTDOWN SYSTEM": {
+    "SIDE BOX": {
+      "responsible": {
+        "name": "전민수",
+        "email": "wlsdud706@knu.ac.kr",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "ESD PENDANT UNIT": {
+      "responsible": {
+        "name": "최현서",
+        "email": "jinyeong@hd.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "done",
+      "qty": "1",
+      "maker": "HYOSUNG",
+      "type": "HICO",
+      "cert_no": "Sira 15"
+    },
+    "ELECTRIC HORN WITH LAMP": {
+      "responsible": {
+        "name": "하태현",
+        "email": "wlsdud5706@naver.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "PUSH BUTTON": {
+      "responsible": {
+        "name": "최현서",
+        "email": "jinyeong@hd.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "I.S ALARM/SOLENOID DRIVER": {
+      "responsible": {
+        "name": "하태현",
+        "email": "wlsdud5706@naver.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "I.S TRIP AMPLIFIER": {
+      "responsible": {
+        "name": "하태현",
+        "email": "wlsdud5706@naver.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "I.S ISOLATION AMPLIFIER": {
+      "responsible": {
+        "name": "최현서",
+        "email": "jinyeong@hd.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    }
+  },
+  "HOSE HANDLING CRANE": {
+    "CRANE MOTOR": {
+      "responsible": {
+        "name": "전민수",
+        "email": "wlsdud706@knu.ac.kr",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "REMOTE PUSH BUTTON": {
+      "responsible": {
+        "name": "전민수",
+        "email": "wlsdud706@knu.ac.kr",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "WARNING LIGHT": {
+      "responsible": {
+        "name": "최현서",
+        "email": "jinyeong@hd.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "CABLE GLAND FOR CRANE MOTOR": {
+      "responsible": {
+        "name": "최현서",
+        "email": "jinyeong@hd.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "CABLE GLAND FOR WARNING LIGHT": {
+      "responsible": {
+        "name": "최현서",
+        "email": "jinyeong@hd.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    }
+  },
+  "LIGHTING SYSTEM": {
+    "EX-PROOF LED. CEILING LIGHT 25Wx1 W.T 1-GLAND, EXE-TYPE": {
+      "responsible": {
+        "name": "전민수",
+        "email": "wlsdud706@knu.ac.kr",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "EX-PROOF LED. CEILING LIGHT 25Wx1 W.T 2-GLAND, EXE-TYPE": {
+      "responsible": {
+        "name": "하태현",
+        "email": "wlsdud5706@naver.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "CABLE GLAND FOR EX-PROOF LIGHTING FIXTURE": {
+      "responsible": {
+        "name": "전민수",
+        "email": "wlsdud706@knu.ac.kr",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "EX-PROOF JUNCTION BOX": {
+      "responsible": {
+        "name": "최현서",
+        "email": "jinyeong@hd.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    },
+    "CABLE GLAND FOR EX-PROOF JUNCTION BOX": {
+      "responsible": {
+        "name": "최현서",
+        "email": "jinyeong@hd.com",
+        "phone": "010-0000-0000"
+      },
+      "status": "pending",
+      "qty": "",
+      "maker": "",
+      "type": "",
+      "cert_no": ""
+    }
+  }
+}

@@ -16,14 +16,19 @@ S3_REGION = os.getenv("S3_REGION", "ap-northeast-2")
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 
-print("DEBUG ENV:", S3_BUCKET, S3_REGION, AWS_ACCESS_KEY_ID)
-
 s3 = boto3.client(
     "s3",
     aws_access_key_id=AWS_ACCESS_KEY_ID,
     aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
     region_name=S3_REGION
 )
+
+# ================== 담당자 DB ==================
+responsibles = [
+    {"name": "최현서", "email": "jinyeong@hd.com"},
+    {"name": "하태현", "email": "wlsdud5706@naver.com"},
+    {"name": "전민수", "email": "wlsdud706@knu.ac.kr"}
+]
 
 # ================== 메일 발송 함수 ==================
 def send_mail(to_addr, subject, body):
@@ -36,65 +41,51 @@ def send_mail(to_addr, subject, body):
         server.sendmail(FROM_ADDR, [to_addr], msg.as_string())
         print(f"메일 전송 성공 → {to_addr}")
 
-# ================== S3 파일 처리 ==================
-def process_s3_files():
+# ================== S3 파일 확인 후 메일 전송 ==================
+def process_and_send():
     resp = s3.list_objects_v2(Bucket=S3_BUCKET, Prefix="submissions/")
     if "Contents" not in resp:
-        print("DEBUG: submissions/ 안에 파일 없음")
+        print("DEBUG: submissions/ 없음")
         return
 
+    # 담당자별 미입력 장비 모으기
+    pending_by_person = {p["email"]: [] for p in responsibles}
+
     for obj in resp["Contents"]:
-        key = obj["Key"]
-        if not key.endswith(".json"):
+        if not obj["Key"].endswith(".json"):
             continue
 
-        data = s3.get_object(Bucket=S3_BUCKET, Key=key)["Body"].read()
+        data = s3.get_object(Bucket=S3_BUCKET, Key=obj["Key"])["Body"].read()
         rows = json.loads(data)
 
-        changed = False
-
         for row in rows:
-            last_mail_sent = row.get("last_mail_sent")
-            last_updated   = row.get("last_updated")
-            force_send     = row.get("force_send", False)
+            if row.get("status") != "done":  # 미입력 상태
+                person = row["responsible"]["email"]
+                pending_by_person[person].append(
+                    (row.get("ship_number"), row.get("category"), row.get("equipment_name"))
+                )
 
-            # ================== 발송 조건 ==================
-            if force_send or (not last_mail_sent) or (last_updated and last_updated > last_mail_sent):
-                subject = f"[HD Hyundai Mipo] {row['project_name']} 수정 요청드립니다."
-                body = f"""{row['submitter_name']}님, 
+    # 담당자별 메일 발송 (중복 없이)
+    for person in responsibles:
+        email = person["email"]
+        tasks = pending_by_person[email]
+        if not tasks:
+            continue
 
-평소 업무 협조에 감사드립니다.
+        subject = "[HD Hyundai Mipo] 미입력 장비 자동 알림"
+        body = f"{person['name']}님,\n\n다음 장비 입력이 아직 완료되지 않았습니다:\n\n"
+        for ship, cat, eq in tasks:
+            body += f"- Ship {ship} / {cat} / {eq}\n"
+        body += "\n이 메일은 매일 오후 4시에 자동 발송됩니다.\n감사합니다."
 
-표제의 건에 관련하여, [{row['project_name']}] 데이터에 수정이 필요합니다.
-
-요청 사유:
-{row.get('message', '사유 미입력')}
-
-수정 기한: {row.get('due_date', '날짜 미지정')}까지 부탁드립니다.
-
-감사합니다.
-"""
-                send_mail(row["submitter_email"], subject, body)
-
-                # ✅ 발송 후 기록 업데이트
-                row["last_mail_sent"] = datetime.datetime.now(datetime.UTC).isoformat()
-                row["force_send"] = False  # 강제 발송은 1회 처리 후 해제
-                changed = True
-
-        # ================== 변경된 경우 JSON 다시 업로드 ==================
-        if changed:
-            s3.put_object(
-                Bucket=S3_BUCKET,
-                Key=key,
-                Body=json.dumps(rows, ensure_ascii=False, indent=2),
-                ContentType="application/json"
-            )
-            print(f"DEBUG: {key} 업데이트 완료 (메일 발송 기록 반영됨)")
-
+        send_mail(email, subject, body)
 
 # ================== 메인 루프 ==================
 if __name__ == "__main__":
+    print("Local Worker 실행 중 (매일 16:00 자동 발송) ...")
     while True:
-        process_s3_files()
-        print("DEBUG: 10초 대기중...")
-        time.sleep(10)
+        now = datetime.datetime.now()
+        if now.hour == 16 and now.minute == 0:  # 오후 4시 정각
+            process_and_send()
+            time.sleep(60)  # 중복 발송 방지 (1분 대기)
+        time.sleep(5)

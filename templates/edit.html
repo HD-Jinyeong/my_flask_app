@@ -1,40 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>Edit Submission</title>
+  <title>Edit Equipment</title>
   <style>
-    body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; }
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f1f8e9; }
     h3 { color: #2e7d32; }
-    form { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 600px; }
-    label { display: block; margin: 10px 0 5px; font-weight: bold; color: #2e7d32; }
-    input { padding: 6px; width: 100%; border: 1px solid #ccc; border-radius: 4px; }
-    button { background-color: #2e7d32; color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 10px; }
+    form { background: #fff; padding: 20px; border-radius: 8px;
+           box-shadow: 0 0 8px rgba(0,0,0,0.1); width: 400px; }
+    label { display: block; margin-top: 12px; font-weight: bold; }
+    input { width: 100%; padding: 6px; margin-top: 4px;
+            border: 1px solid #ccc; border-radius: 4px; }
+    button { margin-top: 15px; padding: 8px 16px;
+             background-color: #2e7d32; color: #fff;
+             border: none; border-radius: 4px; cursor: pointer; }
     button:hover { background-color: #1b5e20; }
   </style>
 </head>
 <body>
-  <h3>Edit Submission (ID: {{ s.id }})</h3>
+  <h3>Edit Equipment: {{ eq }}</h3>
   <form method="post">
-    <label>Equipment Name:</label>
-    <input type="text" name="equipment_name" value="{{ s.equipment_name }}">
+    <label>QTY</label>
+    <input type="number" name="qty" value="{{ info.qty or '' }}">
 
-    <label>Qty:</label>
-    <input type="number" name="qty" value="{{ s.qty }}">
+    <label>Maker</label>
+    <input type="text" name="maker" value="{{ info.maker or '' }}">
 
-    <label>Maker:</label>
-    <input type="text" name="maker" value="{{ s.maker }}">
+    <label>Type</label>
+    <input type="text" name="type" value="{{ info.type or '' }}">
 
-    <label>Type:</label>
-    <input type="text" name="type" value="{{ s.type }}">
+    <label>Cert. No.</label>
+    <input type="text" name="cert_no" value="{{ info.cert_no or '' }}">
 
-    <label>Cert. No.:</label>
-    <input type="text" name="cert_no" value="{{ s.cert_no }}">
-
-    <label>Category:</label>
-    <input type="text" name="category" value="{{ s.category }}">
-
-    <button type="submit">Save</button>
+    <button type="submit">저장</button>
   </form>
 </body>
 </html>

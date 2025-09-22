@@ -1,0 +1,9 @@
+{
+  "Category1": {
+    "EQ-1": { "responsible": {"name":"밍끼","email":"jinyeong@hd.com","phone":"010-1111-2222"} },
+    "EQ-2": { "responsible": {"name":"맹끼","email":"wlsdud5706@naver.com","phone":"010-1111-2222"} }
+  },
+  "Category2": {
+    "EQ-3": { "responsible": {"name":"묘","email":"wlsdud706@knu.ac.kr","phone":"010-1111-2222"} }
+  }
+}

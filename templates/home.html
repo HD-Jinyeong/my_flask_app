@@ -1,66 +1,69 @@
-{% extends "base.html" %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Ship Equipment Status</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; }
+    h2 { color: #2e7d32; }
+    select { padding: 6px; margin: 5px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; background: #fff; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+    th { background-color: #2e7d32; color: white; }
+    .category-row { background-color: #1b5e20; color: white; font-weight: bold; text-align: left; }
+    
+    /* 상태별 색상 */
+    .done { background-color: #e8f5e9; }   /* 연녹색 (✅ 완료) */
+    .pending { background-color: #ffebee; } /* 연분홍 (❌ 미완료) */
 
-<div class="card">
-  <h2 style="margin-top:0">설명</h2>
-  <p class="muted">구글폼처럼 텍스트와 여러 파일을 함께 제출합니다. 제출 후 S3에 저장되고,
-  엑셀/워드로 내보낼 수 있습니다.</p>
-</div>
+    a { color: #2e7d32; text-decoration: none; font-weight: bold; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <h2>🚢 Ship Equipment Status</h2>
 
-<form class="card" method="post" enctype="multipart/form-data" action="{{ url_for('submit') }}">
-  <h3 style="margin-top:0">입력</h3>
-  <div class="row">
-    <div>
-      <label>이름</label>
-      <input type="text" name="name" required />
-    </div>
-    <div>
-      <label>날짜</label>
-      <input type="date" name="date" />
-    </div>
-  </div>
-  <div style="margin-top:12px">
-    <label>메모</label>
-    <textarea name="memo" rows="3" placeholder="간단한 설명을 남겨주세요."></textarea>
-  </div>
+  <form method="get" action="/">
+    <label for="ship_number"><b>Ship Number:</b></label>
+    <select name="ship_number" id="ship_number" onchange="this.form.submit()">
+      <option value="">-- Select --</option>
+      <option value="1" {% if selected_ship == "1" %}selected{% endif %}>Ship 1</option>
+      <option value="2" {% if selected_ship == "2" %}selected{% endif %}>Ship 2</option>
+      <option value="3" {% if selected_ship == "3" %}selected{% endif %}>Ship 3</option>
+    </select>
+  </form>
 
-  <div style="margin-top:16px">
-    <label>파일</label>
-    <div id="fileInputs">
-      <input type="file" name="files" />
-    </div>
-    <div style="margin-top:8px">
-      <button type="button" class="btn btn-secondary" onclick="addFileInput()">+ 파일 추가</button>
-    </div>
-  </div>
+  {% if catalog and selected_ship %}
+  <table>
+    <tr>
+      <th>Equipment</th>
+      <th>Responsible</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
 
-  <div style="margin-top:16px;display:flex;gap:10px">
-    <button class="btn-primary" type="submit">제출</button>
-    <a class="btn btn-secondary" href="{{ url_for('export_excel') }}">엑셀로 내보내기</a>
-    <a class="btn btn-secondary" href="{{ url_for('export_word') }}">워드로 내보내기</a>
-  </div>
-</form>
-
-<div class="card">
-  <h3 style="margin-top:0">최근 제출</h3>
-  {% if submissions %}
-    <ol>
-      {% for s in submissions|reverse %}
-        <li>
-          <b>{{ s.name }}</b> — {{ s.date or "-" }}<br/>
-          <span class="muted">{{ s.memo or "" }}</span><br/>
-          <small class="muted">{{ s.timestamp }}</small>
-          <div style="margin-top:6px">
-            {% for f in s.files %}
-              <div>• <a href="{{ f.url }}" target="_blank">{{ f.filename }}</a></div>
-            {% endfor %}
-          </div>
-        </li>
+    {% for cat, eqs in catalog.items() %}
+      <tr class="category-row">
+        <td colspan="4">{{ cat }}</td>
+      </tr>
+      {% for eq, info in eqs.items() %}
+      <tr class="{% if info.status == 'done' %}done{% else %}pending{% endif %}">
+        <td>{{ eq }}</td>
+        <td>{{ info.responsible.name }} ({{ info.responsible.email }})</td>
+        <td>
+          {% if info.status == "done" %}
+            ✅ 입력 완료
+          {% else %}
+            ❌ 미입력
+          {% endif %}
+        </td>
+        <td>
+          <a href="{{ url_for('edit_equipment', ship_number=selected_ship, category=cat, eq=eq) }}">Edit</a>
+        </td>
+      </tr>
       {% endfor %}
-    </ol>
-  {% else %}
-    <p class="muted">아직 제출된 데이터가 없습니다.</p>
+    {% endfor %}
+  </table>
   {% endif %}
-</div>
-
-{% endblock %}
+</body>
+</html>

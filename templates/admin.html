@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <title>Admin Dashboard</title>
@@ -10,8 +10,8 @@
     th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
     th { background-color: #2e7d32; color: white; }
     tr:nth-child(even) { background-color: #f1f8e9; }
-    a { background-color: #2e7d32; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; text-decoration: none; }
-    a:hover { background-color: #1b5e20; }
+    a, button { background-color: #2e7d32; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; text-decoration: none; }
+    a:hover, button:hover { background-color: #1b5e20; }
     .top-bar { margin-bottom: 15px; }
   </style>
 </head>
@@ -19,29 +19,28 @@
   <h2>Admin Dashboard</h2>
   <div class="top-bar">
     <a href="{{ url_for('export_excel') }}">Export All</a>
+    <form method="post" action="{{ url_for('manual_mail') }}" style="display:inline;">
+      <button type="submit">📧 수동 발송</button>
+    </form>
   </div>
   <table>
     <tr>
-      <th>ID</th><th>Project</th><th>Category</th>
-      <th>Equipment Name</th><th>Qty</th><th>Maker</th><th>Type</th>
-      <th>Cert. No.</th><th>Submitter</th><th>Affiliation</th><th>Contact</th>
-      <th>Edit</th><th>Mail</th>
+      <th>ID</th><th>Ship</th><th>Category</th><th>Equipment</th>
+      <th>Qty</th><th>Maker</th><th>Type</th><th>Status</th>
+      <th>Responsible</th><th>Submitter</th>
     </tr>
     {% for s in submissions %}
     <tr>
       <td>{{ s['id'] }}</td>
-      <td>{{ s['project_name'] }}</td>
+      <td>{{ s['ship_number'] }}</td>
       <td>{{ s['category'] }}</td>
       <td>{{ s['equipment_name'] }}</td>
       <td>{{ s['qty'] }}</td>
       <td>{{ s['maker'] }}</td>
       <td>{{ s['type'] }}</td>
-      <td>{{ s['cert_no'] }}</td>
+      <td>{{ s['status'] }}</td>
+      <td>{{ s['responsible']['name'] if s['responsible'] else '' }}</td>
       <td>{{ s['submitter_name'] }}</td>
-      <td>{{ s['affiliation'] }}</td>
-      <td>{{ s['contact'] }}</td>
-      <td><a href="{{ url_for('edit_submission', id=s['id']) }}">Edit</a></td>
-      <td><a href="{{ url_for('mail_form', id=s['id']) }}">Mail</a></td>
     </tr>
     {% endfor %}
   </table>
