@@ -1,14 +1,16 @@
 # app.py
-import os, io, json, uuid, datetime
+import os, io, json, uuid, datetime, hmac
+from functools import wraps
 from werkzeug.utils import secure_filename
-from flask import Flask, request, render_template, redirect, url_for, send_file, flash, jsonify
+from flask import (
+    Flask, request, render_template, redirect,
+    url_for, send_file, flash, jsonify
+)
 import boto3
 from openpyxl import Workbook
 
-
-
 app = Flask(__name__)
-# app.secret_key = "secret-key-for-flash"  # 환경변수 사용 권장
+# 환경변수에서 secret key 불러오기 (없으면 dev 기본값)
 app.secret_key = os.getenv("SECRET_KEY", "dev-only-change-me")
 
 # ================ 환경변수 ================
@@ -20,6 +22,13 @@ AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 CATALOG_KEY = "config/equipment_catalog.json"
 CONTACTS_KEY = "config/contacts.json"
 
+# 관리자 보호용 플래그
+ADMIN_ENABLED = os.getenv("ADMIN_ENABLED", "0") == "1"
+ADMIN_IPS = [ip.strip() for ip in os.getenv("ADMIN_IP_ALLOWLIST", "").split(",") if ip.strip()]
+BASIC_USER = os.getenv("BASIC_AUTH_USER")
+BASIC_PASS = os.getenv("BASIC_AUTH_PASS")
+
+# ================ AWS S3 Helper ================
 def s3_client():
     return boto3.client(
         "s3",
@@ -53,10 +62,38 @@ def put_json_to_s3(key, data):
         ContentType="application/json"
     )
 
-# ================= 사용자 제출 =================
+# ================ Admin 보호 데코레이터 ================
+def _constant_time_eq(a, b):
+    a = a or ""
+    b = b or ""
+    return hmac.compare_digest(a, b)
+
+def require_admin(f):
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        # 1) Admin 비활성화시 404 위장
+        if not ADMIN_ENABLED:
+            return "Not found", 404
+
+        # 2) IP 제한 (있을 경우)
+        if ADMIN_IPS:
+            remote = request.headers.get("X-Forwarded-For", request.remote_addr or "")
+            client_ip = remote.split(",")[0].strip()
+            if client_ip not in ADMIN_IPS:
+                return "Forbidden", 403
+
+        # 3) Basic Auth (있을 경우)
+        if BASIC_USER and BASIC_PASS:
+            auth = request.authorization
+            if not auth or not (_constant_time_eq(auth.username, BASIC_USER) and _constant_time_eq(auth.password, BASIC_PASS)):
+                return ("Unauthorized", 401, {"WWW-Authenticate": 'Basic realm="Admin Area"'})
+
+        return f(*args, **kwargs)
+    return wrapper
+
+# ================ 사용자 제출 ================
 @app.route("/", methods=["GET"])
 def home():
-    # 단순 폼(카탈로그/연락처는 프런트가 /api에서 로드)
     return render_template("form.html")
 
 @app.route("/submit", methods=["POST"])
@@ -66,12 +103,11 @@ def submit():
     contact         = request.form.get("contact")
     affiliation     = request.form.get("affiliation")
     submit_date     = request.form.get("submit_date")
-    ship_number     = request.form.get("ship_number")  # 변경
-    due_date        = request.form.get("due_date")      # 신규
+    ship_number     = request.form.get("ship_number")
+    due_date        = request.form.get("due_date")
 
-    # 참고/수신자 선택(다중)
-    cc_emails = request.form.getlist("cc_emails[]")   # 신규
-    to_emails = request.form.getlist("to_emails[]")   # 신규(없으면 submitter로 대체)
+    cc_emails = request.form.getlist("cc_emails[]")
+    to_emails = request.form.getlist("to_emails[]")
 
     category = request.form.get("category")
     if category == "Other":
@@ -123,8 +159,8 @@ def submit():
             "contact": contact,
             "affiliation": affiliation,
             "submit_date": submit_date,
-            "ship_number": ship_number,          # 신규
-            "project_name": ship_number,         # 하위호환
+            "ship_number": ship_number,
+            "project_name": ship_number,  # 하위호환
             "category": category,
             "equipment_name": name,
             "qty": qty,
@@ -137,7 +173,6 @@ def submit():
             "file": filename,
             "file_url": file_url,
             "timestamp": now,
-            # 자동메일 파라미터
             "due_date": due_date,
             "to_emails": to_emails if to_emails else [submitter_email],
             "cc_emails": cc_emails,
@@ -159,8 +194,9 @@ def api_catalog():
 def api_contacts():
     return jsonify(get_json_from_s3(CONTACTS_KEY, default=[]))
 
-# ================= 관리자 기능 =================
+# ================ 관리자 기능 ================
 @app.route("/admin")
+@require_admin
 def admin_dashboard():
     s3 = s3_client()
     resp = s3.list_objects_v2(Bucket=S3_BUCKET, Prefix="submissions/")
@@ -174,30 +210,28 @@ def admin_dashboard():
             rows = json.loads(data)
             submissions.extend(rows)
 
-    # ship_number 기준 / category / equipment_name 정렬
     submissions.sort(key=lambda x: (
         x.get("ship_number",""),
         x.get("category",""),
         x.get("equipment_name","")
     ))
-
     return render_template("admin.html", submissions=submissions)
 
 @app.route("/admin/mail/<id>", methods=["GET"])
+@require_admin
 def mail_form(id):
     s3 = s3_client()
     key = f"submissions/{id}.json"
-
     try:
         data = s3.get_object(Bucket=S3_BUCKET, Key=key)["Body"].read()
         rows = json.loads(data)
-        submission = rows[0]  # JSON은 리스트이므로 첫 번째 항목
+        submission = rows[0]
     except Exception:
         return "Not found", 404
-
     return render_template("mail_form.html", submission=submission)
 
 @app.route("/admin/mail_send/<id>", methods=["POST"])
+@require_admin
 def mail_send(id):
     due_date = request.form.get("due_date")
     message  = request.form.get("message")
@@ -205,28 +239,25 @@ def mail_send(id):
     cc_emails = request.form.getlist("cc_emails[]")
     now = datetime.datetime.utcnow().isoformat()
 
-    # S3 JSON 불러오기
     s3 = s3_client()
     key = f"submissions/{id}.json"
     obj = s3.get_object(Bucket=S3_BUCKET, Key=key)
     rows = json.loads(obj["Body"].read())
 
-    # 모든 row 업데이트
     for row in rows:
         row["due_date"] = due_date or row.get("due_date")
         row["message"]  = message
         row["to_emails"] = to_emails or row.get("to_emails") or [row.get("submitter_email")]
         row["cc_emails"] = cc_emails or row.get("cc_emails") or []
         row["last_updated"] = now
-        row["force_send"] = True   # ✅ 강제 발송 플래그
+        row["force_send"] = True
 
-    # 다시 S3 업로드
     put_json_to_s3(key, rows)
-
     flash("메일 발송 요청이 저장되었습니다. (로컬 worker가 처리)")
     return redirect(url_for("admin_dashboard"))
 
 @app.route("/admin/edit/<id>", methods=["GET", "POST"])
+@require_admin
 def edit_submission(id):
     s3 = s3_client()
     data = s3.get_object(Bucket=S3_BUCKET, Key=f"submissions/{id}.json")["Body"].read()
@@ -276,6 +307,7 @@ def write_grouped_excel(submissions, wb):
         ])
 
 @app.route("/export/excel")
+@require_admin
 def export_excel():
     s3 = s3_client()
     resp = s3.list_objects_v2(Bucket=S3_BUCKET, Prefix="submissions/")
