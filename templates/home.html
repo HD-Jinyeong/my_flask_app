@@ -34,6 +34,10 @@
   </form>
 
   {% if catalog and selected_ship %}
+  <p style="font-size:14px; color:#555; margin-top:10px;">
+    ⏰ Due Date for Ship {{ selected_ship }}: {{ due_date }}
+  </p>
+
   <table>
     <tr>
       <th>Equipment</th>
@@ -48,7 +52,8 @@
       </tr>
       {% for eq, info in eqs.items() %}
       <tr class="{% if info.status == 'done' %}done{% else %}pending{% endif %}">
-        <td>{{ eq }}</td>
+        <!-- category + eq name 함께 표시 -->
+        <td>{{ cat }} - {{ eq }}</td>
         <td>{{ info.responsible.name }} ({{ info.responsible.email }})</td>
         <td>
           {% if info.status == "done" %}

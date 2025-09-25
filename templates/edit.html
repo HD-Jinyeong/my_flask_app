@@ -19,7 +19,8 @@
 </head>
 <body>
   <h3>Edit Equipment: {{ eq }}</h3>
-  <form method="post">
+  <!-- 파일 첨부를 위해 enctype 반드시 추가 -->
+  <form method="post" enctype="multipart/form-data">
     <label>QTY</label>
     <input type="number" name="qty" value="{{ info.qty or '' }}">
 
@@ -31,6 +32,13 @@
 
     <label>Cert. No.</label>
     <input type="text" name="cert_no" value="{{ info.cert_no or '' }}">
+
+    <label>File</label>
+    <input type="file" name="file">
+
+    {% if info.file %}
+      <p>현재 파일: <a href="{{ info.file_url }}" target="_blank">{{ info.file }}</a></p>
+    {% endif %}
 
     <button type="submit">저장</button>
   </form>

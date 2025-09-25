@@ -1,6 +1,6 @@
 import os, io, json, uuid, datetime, random
 from werkzeug.utils import secure_filename
-from flask import Flask, request, render_template, redirect, url_for, send_file, flash, jsonify
+from flask import Flask, request, render_template, redirect, url_for, send_file, flash
 import boto3
 from openpyxl import Workbook
 
@@ -32,22 +32,20 @@ def presigned_url(key, expires=3600*24*7):
         ExpiresIn=expires
     )
 
-def get_json_from_s3(key, default=None):
-    s3 = s3_client()
+def get_json_from_file(path, default=None):
     try:
-        obj = s3.get_object(Bucket=S3_BUCKET, Key=key)
-        return json.loads(obj["Body"].read())
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
     except Exception:
-        return default if default is not None else {}
+        pass
+    return default if default is not None else {}
 
-def put_json_to_s3(key, data):
-    s3 = s3_client()
-    s3.put_object(
-        Bucket=S3_BUCKET,
-        Key=key,
-        Body=json.dumps(data, ensure_ascii=False, indent=2),
-        ContentType="application/json"
-    )
+def put_json_to_file(path, data):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    print("[INFO] JSON saved:", path)
 
 # ================== 담당자 DB ==================
 responsibles = [
@@ -56,210 +54,216 @@ responsibles = [
     {"name": "전민수", "email": "wlsdud706@knu.ac.kr", "phone": "010-0000-0000"}
 ]
 
-# ================= 사용자 제출 =================
+# ================= Ship 별 Due Date =================
+SHIP_DUE_DATES = {
+    "1": "2025-12-17",
+    "2": "2025-12-18",
+    "3": "2025-12-19"
+}
+
+# ================= 실무 Catalog & EQ List =================
+CATALOG_EQUIPMENTS = {
+    "Lighting": [
+        "Flood Light",
+        "Search Light",
+        "Navigation Light",
+        "Explosion-proof Light"
+    ],
+    "Switches & Junction Boxes": [
+        "Explosion-proof Switch",
+        "Explosion-proof Junction Box",
+        "Limit Switch",
+        "Control Box"
+    ],
+    "Motor & Machinery": [
+        "Explosion-proof Motor",
+        "Fan Unit",
+        "Pump Unit",
+        "Starter Panel"
+    ],
+    "Communication & Alarm": [
+        "Telephone Set",
+        "Alarm Bell",
+        "Signal Horn",
+        "Intercom"
+    ],
+    "Miscellaneous Equipment": [
+        "Heater",
+        "Transformer",
+        "Battery Charger",
+        "Cable Gland"
+    ]
+}
+
+# ================= Ship별 항목 수량 =================
+SHIP_EQUIPMENT_COUNT = {
+    "1": 15,
+    "2": 15,
+    "3": 15
+}
+
+def get_or_create_catalog(ship_number, force_reset=False):
+    catalog_path = os.path.join("config", f"equipment_catalog_{ship_number}.json")
+    print("catalog_path:", catalog_path)
+
+    if force_reset or not os.path.exists(catalog_path):
+        print(f"[INFO] Creating new catalog for ship {ship_number}")
+        catalog = {}
+        total_count = SHIP_EQUIPMENT_COUNT.get(ship_number, 15)
+
+        count = 0
+        for category, equipments in CATALOG_EQUIPMENTS.items():
+            catalog[category] = {}
+            for eq in equipments:
+                if count >= total_count:
+                    break
+                resp = random.choice(responsibles)
+                catalog[category][eq] = {
+                    "qty": "",
+                    "maker": "",
+                    "type": "",
+                    "cert_no": "",
+                    "responsible": resp,
+                    "status": "pending",
+                    "file": "",
+                    "file_url": ""
+                }
+                count += 1
+            if count >= total_count:
+                break
+
+        put_json_to_file(catalog_path, catalog)
+        return catalog
+    else:
+        print(f"[INFO] Loading existing catalog for ship {ship_number}")
+        return get_json_from_file(catalog_path, default={})
+
+# ================= 홈 =================
 @app.route("/", methods=["GET"])
 def home():
     ship_number = request.args.get("ship_number")
-    catalog_path = os.path.join("config", "equipment_catalog.json")
     catalog = {}
-    if os.path.exists(catalog_path):
-        with open(catalog_path, "r", encoding="utf-8") as f:
-            catalog = json.load(f)
-    return render_template("home.html", catalog=catalog, selected_ship=ship_number)
+    due_date = None
 
-@app.route("/submit", methods=["POST"])
-def submit():
-    submitter_name  = request.form.get("submitter_name")
-    submitter_email = request.form.get("submitter_email")
-    contact         = request.form.get("contact")
-    affiliation     = request.form.get("affiliation")
-    submit_date     = request.form.get("submit_date")
-    ship_number     = request.form.get("ship_number")
-    due_date        = request.form.get("due_date")
+    if ship_number:
+        catalog = get_or_create_catalog(ship_number, force_reset=False)
+        due_date = SHIP_DUE_DATES.get(ship_number)
 
-    category = request.form.get("category")
-    names    = request.form.getlist("equipment_name[]")
-    qtys     = request.form.getlist("qty[]")
-    makers   = request.form.getlist("maker[]")
-    types    = request.form.getlist("type[]")
-    certs    = request.form.getlist("cert_no[]")
-    exgrades = request.form.getlist("ex_proof_grade[]")
-    ipgrades = request.form.getlist("ip_grade[]")
-    pages    = request.form.getlist("page[]")
-    files    = request.files.getlist("file[]")
+    return render_template("home.html", catalog=catalog, selected_ship=ship_number, due_date=due_date)
 
-    sub_id = str(uuid.uuid4())[:8]
-    now    = datetime.datetime.now(datetime.timezone.utc).isoformat()
-
-    s3 = s3_client()
-    rows = []
-
-    max_len = max(len(names), len(qtys), len(makers), len(types), len(certs), len(exgrades), len(ipgrades), len(pages))
-    for i in range(max_len):
-        name  = names[i]    if i < len(names)    else ""
-        qty   = qtys[i]     if i < len(qtys)     else ""
-        maker = makers[i]   if i < len(makers)   else ""
-        typ   = types[i]    if i < len(types)    else ""
-        cert  = certs[i]    if i < len(certs)    else ""
-        exg   = exgrades[i] if i < len(exgrades) else ""
-        ipg   = ipgrades[i] if i < len(ipgrades) else ""
-        page  = pages[i]    if i < len(pages)    else ""
-
-        file_url, filename = None, None
-        if i < len(files) and files[i] and files[i].filename != "":
-            f = files[i]
-            safe = secure_filename(f.filename)
-            folder = submit_date if submit_date else datetime.datetime.now().strftime("%Y-%m-%d")
-            key = f"uploads/{folder}/{sub_id}_{i}_{safe}"
-            s3.upload_fileobj(f, S3_BUCKET, key, ExtraArgs={"ContentType": f.mimetype})
-            file_url = presigned_url(key)
-            filename = safe
-
-        # 담당자 랜덤 배정
-        resp = random.choice(responsibles)
-
-        row = {
-            "id": sub_id,
-            "submitter_name": submitter_name,
-            "submitter_email": submitter_email,
-            "contact": contact,
-            "affiliation": affiliation,
-            "submit_date": submit_date,
-            "ship_number": ship_number,
-            "category": category,
-            "equipment_name": name,
-            "qty": qty,
-            "maker": maker,
-            "type": typ,
-            "cert_no": cert,
-            "ex_proof_grade": exg,
-            "ip_grade": ipg,
-            "page": page,
-            "file": filename,
-            "file_url": file_url,
-            "timestamp": now,
-            "due_date": due_date,
-            "responsible": resp,
-            "status": "pending"
-        }
-        rows.append(row)
-
-    json_key = f"submissions/{sub_id}.json"
-    put_json_to_s3(json_key, rows)
-    flash("제출이 완료되었습니다.")
-    return redirect(url_for("home"))
-
-# ================== 장비 수정 ==================
+# ================= 장비 수정 =================
 @app.route("/edit/<ship_number>/<category>/<eq>", methods=["GET", "POST"])
 def edit_equipment(ship_number, category, eq):
-    catalog_path = os.path.join("config", "equipment_catalog.json")
-    if not os.path.exists(catalog_path):
-        return "Catalog not found", 404
-
-    with open(catalog_path, "r", encoding="utf-8") as f:
-        catalog = json.load(f)
+    catalog_path = os.path.join("config", f"equipment_catalog_{ship_number}.json")
+    catalog = get_or_create_catalog(ship_number)
 
     if request.method == "POST":
         qty   = request.form.get("qty")
         maker = request.form.get("maker")
         typ   = request.form.get("type")
         cert  = request.form.get("cert_no")
+        file  = request.files.get("file")
 
-        # 값 저장
-        catalog[category][eq]["qty"] = qty
-        catalog[category][eq]["maker"] = maker
-        catalog[category][eq]["type"] = typ
-        catalog[category][eq]["cert_no"] = cert
-        catalog[category][eq]["status"] = "done"
+        if category in catalog and eq in catalog[category]:
+            catalog[category][eq]["qty"] = qty
+            catalog[category][eq]["maker"] = maker
+            catalog[category][eq]["type"] = typ
+            catalog[category][eq]["cert_no"] = cert
+            catalog[category][eq]["status"] = "done"
 
-        with open(catalog_path, "w", encoding="utf-8") as f:
-            json.dump(catalog, f, ensure_ascii=False, indent=2)
+            if file and file.filename != "":
+                safe = secure_filename(file.filename)
+                key = f"uploads/edit/{ship_number}_{category}_{eq}_{safe}"
+                s3 = s3_client()
+                s3.upload_fileobj(file, S3_BUCKET, key, ExtraArgs={"ContentType": file.mimetype})
+                catalog[category][eq]["file"] = safe
+                catalog[category][eq]["file_url"] = presigned_url(key)
 
+        put_json_to_file(catalog_path, catalog)
         flash("장비 정보가 업데이트되었습니다.")
         return redirect(url_for("home", ship_number=ship_number))
 
-    info = catalog[category][eq]
+    info = catalog.get(category, {}).get(eq, {})
     return render_template(
-        "edit_equipment.html",
+        "edit.html",
         ship_number=ship_number, category=category, eq=eq, info=info
     )
 
 # ================== Admin 기능 ==================
 if ADMIN_ENABLED:
-
     @app.route("/admin")
     def admin_dashboard():
-        s3 = s3_client()
-        resp = s3.list_objects_v2(Bucket=S3_BUCKET, Prefix="submissions/")
         submissions = []
-
-        if "Contents" in resp:
-            for obj in resp["Contents"]:
-                if not obj["Key"].endswith(".json"): continue
-                data = s3.get_object(Bucket=S3_BUCKET, Key=obj["Key"])["Body"].read()
-                rows = json.loads(data)
-                submissions.extend(rows)
+        s3 = s3_client()
+        try:
+            resp = s3.list_objects_v2(Bucket=S3_BUCKET, Prefix="submissions/")
+            if "Contents" in resp:
+                for obj in resp["Contents"]:
+                    if not obj["Key"].endswith(".json"):
+                        continue
+                    data = s3.get_object(Bucket=S3_BUCKET, Key=obj["Key"])["Body"].read()
+                    rows = json.loads(data)
+                    submissions.extend(rows)
+        except Exception as e:
+            print("[ERROR] Admin load failed:", e)
 
         return render_template("admin.html", submissions=submissions)
 
-    @app.route("/admin/manual_mail", methods=["POST"])
-    def manual_mail():
-        from local_worker import process_and_send
-        process_and_send()
-        flash("📧 수동 메일 발송 완료")
-        return redirect(url_for("admin_dashboard"))
-
-    def write_grouped_excel(submissions, wb):
+    # 📌 엑셀 내보내기
+    @app.route("/export/excel")
+    def export_excel():
+        wb = Workbook()
         ws = wb.active
         ws.title = "Submissions"
         ws.append([
-            "ID","Ship Number","Submitter Name","Email","Category",
-            "Equipment Name","QTY","Maker","Type","Cert No.",
-            "Ex-proof Grade","IP Grade","Page","File","Status","Responsible"
+            "id", "ship_number", "category", "equipment_name", "qty",
+            "maker", "type", "cert_no", "status", "responsible", "submitter_name"
         ])
+
+        s3 = s3_client()
+        submissions = []
+        try:
+            resp = s3.list_objects_v2(Bucket=S3_BUCKET, Prefix="submissions/")
+            if "Contents" in resp:
+                for obj in resp["Contents"]:
+                    if obj["Key"].endswith(".json"):
+                        data = s3.get_object(Bucket=S3_BUCKET, Key=obj["Key"])["Body"].read()
+                        rows = json.loads(data)
+                        submissions.extend(rows)
+        except Exception as e:
+            print("[ERROR] Excel export failed:", e)
+
         for s in submissions:
             ws.append([
                 s.get("id",""),
                 s.get("ship_number",""),
-                s.get("submitter_name",""),
-                s.get("submitter_email",""),
                 s.get("category",""),
                 s.get("equipment_name",""),
                 s.get("qty",""),
                 s.get("maker",""),
                 s.get("type",""),
                 s.get("cert_no",""),
-                s.get("ex_proof_grade",""),
-                s.get("ip_grade",""),
-                s.get("page",""),
-                s.get("file",""),
                 s.get("status",""),
-                s.get("responsible",{}).get("name","")
+                s.get("responsible",{}).get("name","") if s.get("responsible") else "",
+                s.get("submitter_name","")
             ])
 
-    @app.route("/export/excel")
-    def export_excel():
-        s3 = s3_client()
-        resp = s3.list_objects_v2(Bucket=S3_BUCKET, Prefix="submissions/")
-        submissions = []
-
-        if "Contents" in resp:
-            for obj in resp["Contents"]:
-                if not obj["Key"].endswith(".json"): continue
-                data = s3.get_object(Bucket=S3_BUCKET, Key=obj["Key"])["Body"].read()
-                rows = json.loads(data)
-                submissions.extend(rows)
-
-        wb = Workbook()
-        write_grouped_excel(submissions, wb)
         stream = io.BytesIO()
-        wb.save(stream)
-        stream.seek(0)
-        return send_file(stream, as_attachment=True,
-                        download_name="submissions.xlsx",
-                        mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+        wb.save(stream); stream.seek(0)
+        return send_file(
+            stream,
+            as_attachment=True,
+            download_name="submissions.xlsx",
+            mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
 
-# ================== Health Check ==================
+    # 📌 수동 메일 발송 버튼용 (임시 처리)
+    @app.route("/manual_mail", methods=["POST"])
+    def manual_mail():
+        flash("📧 수동 메일 발송 기능은 아직 구현되지 않았습니다.")
+        return redirect(url_for("admin_dashboard"))
+
+# ================= Health Check =================
 @app.route("/health")
 def health():
     return "ok", 200
