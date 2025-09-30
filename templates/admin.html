@@ -4,45 +4,216 @@
   <meta charset="UTF-8">
   <title>Admin Dashboard</title>
   <style>
-    body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; }
-    h2 { color: #2e7d32; }
-    table { border-collapse: collapse; width: 100%; margin-bottom: 20px; background: #fff; }
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f4f6f8; }
+    h2 { color: #2e7d32; margin-bottom: 8px; }
+    h3 { color: #1b5e20; margin-top: 24px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 12px; background: #fff; }
     th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
     th { background-color: #2e7d32; color: white; }
-    tr:nth-child(even) { background-color: #f1f8e9; }
-    a, button { background-color: #2e7d32; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; text-decoration: none; }
-    a:hover, button:hover { background-color: #1b5e20; }
-    .top-bar { margin-bottom: 15px; }
+    tr:nth-child(even) { background-color: #f9f9f9; }
+    a { color: #2e7d32; text-decoration: none; font-weight: bold; }
+    a:hover { text-decoration: underline; }
+    button { padding: 6px 10px; background: #2e7d32; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #1b5e20; }
+    .toolbar { display: flex; gap: 10px; align-items: center; margin: 8px 0 16px; }
+    .split { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+    .card { background:#fff; padding: 12px; border:1px solid #e0e0e0; border-radius: 8px; }
+    .muted { color:#666; font-size: 12px; }
+    .nowrap { white-space: nowrap; }
+    .status { font-size:12px; padding-left:8px; }
+    .status.ok { color:#1b5e20; }
+    .status.err { color:#c62828; }
   </style>
 </head>
 <body>
-  <h2>Admin Dashboard</h2>
-  <div class="top-bar">
-    <a href="{{ url_for('export_excel') }}">Export All</a>
-    <form method="post" action="{{ url_for('manual_mail') }}" style="display:inline;">
-      <button type="submit">📧 수동 발송</button>
-    </form>
+  <h2>📋 Admin Dashboard</h2>
+
+  <div class="toolbar">
+    <a href="{{ url_for('export_excel') }}">📑 Export All</a>
+    <span class="muted">선택 항목만 내보내려면 표에서 체크 후 아래 버튼 사용</span>
   </div>
-  <table>
-    <tr>
-      <th>ID</th><th>Ship</th><th>Category</th><th>Equipment</th>
-      <th>Qty</th><th>Maker</th><th>Type</th><th>Status</th>
-      <th>Responsible</th><th>Submitter</th>
-    </tr>
-    {% for s in submissions %}
-    <tr>
-      <td>{{ s['id'] }}</td>
-      <td>{{ s['ship_number'] }}</td>
-      <td>{{ s['category'] }}</td>
-      <td>{{ s['equipment_name'] }}</td>
-      <td>{{ s['qty'] }}</td>
-      <td>{{ s['maker'] }}</td>
-      <td>{{ s['type'] }}</td>
-      <td>{{ s['status'] }}</td>
-      <td>{{ s['responsible']['name'] if s['responsible'] else '' }}</td>
-      <td>{{ s['submitter_name'] }}</td>
-    </tr>
-    {% endfor %}
-  </table>
+
+  <!-- Ship별 수동 메일 전송 -->
+  <div class="card">
+    <h3>🚢 Ship별 수동 메일 전송</h3>
+    {% if ships|length == 0 %}
+      <p class="muted">등록된 Ship이 없습니다.</p>
+    {% else %}
+      <table>
+        <tr>
+          <th>Ship</th>
+          <th>Due Date</th>
+          <th>미입력 건수</th>
+          <th style="width:50%;">추가 CC (연락처에서 선택)</th>
+          <th>Action</th>
+        </tr>
+        {% for sh in ships %}
+        <tr id="row-{{ sh }}">
+          <td>{{ sh }}</td>
+          <td class="nowrap">{{ SHIP_DUE_DATES[sh] if SHIP_DUE_DATES and SHIP_DUE_DATES.get(sh) else '' }}</td>
+          <td id="missing-{{ sh }}">{{ incomplete_count.get(sh, 0) }}</td>
+          <td style="text-align:left;">
+            <div style="max-height:120px; overflow:auto; border:1px solid #eee; padding:6px; border-radius:6px;">
+              {% for c in contacts %}
+                <label style="display:block; font-weight:normal;">
+                  <input type="checkbox" name="cc-{{ sh }}" value="{{ c.email }}"> {{ c.name }} <span class="muted">({{ c.email }})</span>
+                </label>
+              {% endfor %}
+            </div>
+          </td>
+          <td>
+            <button type="button" onclick="sendShip('{{ sh }}')">📧 전송</button>
+            <span id="status-{{ sh }}" class="status"></span>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+    <p class="muted" style="margin-top:8px;">
+      * 메일 본문에는 카테고리별 미입력 장비 리스트가 포함됩니다. (입력 요청 문구 자동 포함)
+    </p>
+  </div>
+
+  <!-- 상세 데이터 표 -->
+  <form method="post" action="{{ url_for('export_selected') }}" style="margin-top:16px;">
+    <table>
+      <tr>
+        <th><input type="checkbox" onclick="toggleAll(this)"></th>
+        <th>Ship</th>
+        <th>Due</th>
+        <th>Category</th>
+        <th>Equipment</th>
+        <th>QTY</th>
+        <th>Maker</th>
+        <th>Type</th>
+        <th>Cert No.</th>
+        <th>Status</th>
+        <th>Responsible</th>
+        <th>Submitter</th>
+        <th>File</th>
+        <th class="nowrap">Action</th>
+      </tr>
+      {% for s in submissions %}
+      <tr>
+        <td>
+          <input type="checkbox" name="rows[]" value="{{ s.ship_number }}|{{ s.category }}|{{ s.equipment_name }}">
+        </td>
+        <td>{{ s.ship_number }}</td>
+        <td class="nowrap">{{ s.due_date }}</td>
+        <td>{{ s.category }}</td>
+        <td>{{ s.equipment_name }}</td>
+        <td>{{ s.qty }}</td>
+        <td>{{ s.maker }}</td>
+        <td>{{ s.type }}</td>
+        <td>{{ s.cert_no }}</td>
+        <td>{{ s.status }}</td>
+        <td>
+          {% if s.responsible %}
+            {{ s.responsible.name }}<br>
+            <span class="muted">{{ s.responsible.email }} / {{ s.responsible.phone }}</span>
+          {% endif %}
+        </td>
+        <td>{{ s.submitter_name }}</td>
+        <td>
+          {% if s.file_key %}
+            <a href="{{ url_for('file_redirect', key=s.file_key) }}" target="_blank">열기</a>
+          {% elif s.file_url %}
+            <a href="{{ s.file_url }}" target="_blank">열기</a>
+          {% else %}
+            <span class="muted">-</span>
+          {% endif %}
+        </td>
+        <td class="nowrap">
+          <!-- Admin에서 진입 시 next=/admin 로 되돌아오게 -->
+          <a href="{{ url_for('edit', ship_number=s.ship_number, category=s.category, eq=s.equipment_name, next=url_for('admin_dashboard')) }}">✏️ Edit</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <div style="margin-top:10px;">
+      <button type="submit">📤 선택 항목만 Excel Export</button>
+    </div>
+  </form>
+
+  <!-- 연락처/로그 패널 -->
+  <div class="split" style="margin-top:20px;">
+    <div class="card">
+      <h3>📇 연락처 (AWS 저장)</h3>
+      <table>
+        <tr>
+          <th>Name</th><th>Email</th><th>Phone</th>
+        </tr>
+        {% for c in contacts %}
+        <tr>
+          <td>{{ c.name }}</td>
+          <td>{{ c.email }}</td>
+          <td>{{ c.phone }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      <p class="muted">※ 항목 편집 시 책임자 변경 내용이 자동 반영됩니다.</p>
+    </div>
+
+    <div class="card">
+      <h3>🗂 최근 변경 로그(상위 50)</h3>
+      <table>
+        <tr>
+          <th>시간</th><th>주체</th><th>동작</th><th>Ship</th><th>Category</th><th>EQ</th><th>비고</th>
+        </tr>
+        {% for log in logs %}
+        <tr>
+          <td class="nowrap">{{ log.ts }}</td>
+          <td>{{ log.actor }}</td>
+          <td>{{ log.action }}</td>
+          <td>{{ log.ship }}</td>
+          <td>{{ log.category }}</td>
+          <td>{{ log.equipment }}</td>
+          <td class="muted">
+            {% if log.result %}{{ log.result }}{% else %}-{% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function toggleAll(chk){
+      const boxes = document.querySelectorAll('input[type=checkbox][name="rows[]"]');
+      boxes.forEach(b=>b.checked = chk.checked);
+    }
+
+    async function sendShip(ship){
+      const statusEl = document.getElementById('status-' + ship);
+      statusEl.className = 'status';
+      statusEl.textContent = '전송 중...';
+
+      const ccs = [];
+      document.querySelectorAll('input[name="cc-' + ship + '"]:checked').forEach(cb => ccs.push(cb.value));
+
+      const form = new FormData();
+      ccs.forEach(v => form.append('cc_emails', v));
+
+      try {
+        const res = await fetch(`{{ url_for('send_ship_mail', ship_number='__SHIP__') }}`.replace('__SHIP__', ship), {
+          method: 'POST',
+          headers: { 'X-Requested-With': 'fetch' },
+          body: form
+        });
+        const data = await res.json();
+        if (!res.ok || !data.ok){
+          statusEl.className = 'status err';
+          statusEl.textContent = data.message || '전송 실패';
+          return;
+        }
+        statusEl.className = 'status ok';
+        statusEl.textContent = `전송 완료 (미입력 ${data.missing}건, 수신자 ${data.to.length}명)`;
+      } catch (e){
+        statusEl.className = 'status err';
+        statusEl.textContent = '에러: ' + (e.message || e);
+      }
+    }
+  </script>
 </body>
 </html>

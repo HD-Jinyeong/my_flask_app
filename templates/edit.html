@@ -7,7 +7,7 @@
     body { font-family: Arial, sans-serif; padding: 20px; background: #f1f8e9; }
     h3 { color: #2e7d32; }
     form { background: #fff; padding: 20px; border-radius: 8px;
-           box-shadow: 0 0 8px rgba(0,0,0,0.1); width: 400px; }
+           box-shadow: 0 0 8px rgba(0,0,0,0.1); width: 420px; }
     label { display: block; margin-top: 12px; font-weight: bold; }
     input { width: 100%; padding: 6px; margin-top: 4px;
             border: 1px solid #ccc; border-radius: 4px; }
@@ -15,6 +15,8 @@
              background-color: #2e7d32; color: #fff;
              border: none; border-radius: 4px; cursor: pointer; }
     button:hover { background-color: #1b5e20; }
+    .meta { margin-top: 15px; font-size: 0.9em; color: #555; }
+    .muted { color:#666; font-size:12px; }
   </style>
 </head>
 <body>
@@ -33,14 +35,31 @@
     <label>Cert. No.</label>
     <input type="text" name="cert_no" value="{{ info.cert_no or '' }}">
 
-    <label>File</label>
+    <label>File <span class="muted">(선택 시 교체 업로드)</span></label>
     <input type="file" name="file">
 
     {% if info.file %}
       <p>현재 파일: <a href="{{ info.file_url }}" target="_blank">{{ info.file }}</a></p>
     {% endif %}
 
+    <!-- 사용자 화면에서 제출자 기록 가능(관리자 편집에도 무해) -->
+    <label class="muted">Submitter (선택)</label>
+    <input type="text" name="submitter_name" value="{{ info.submitter_name or '' }}" placeholder="작성자명">
+
+    <!-- 관리자 화면에서 책임자 변경을 위해 동일 템플릿 재활용 -->
+    <label class="muted">Responsible (Admin 전용, 선택)</label>
+    <input type="text" name="resp_name"  value="{{ info.responsible.name if info.responsible else '' }}" placeholder="이름">
+    <input type="text" name="resp_email" value="{{ info.responsible.email if info.responsible else '' }}" placeholder="email@example.com">
+    <input type="text" name="resp_phone" value="{{ info.responsible.phone if info.responsible else '' }}" placeholder="010-xxxx-xxxx">
+    <input type="text" name="status" value="{{ info.status or '' }}" placeholder="pending/done 등">
+
     <button type="submit">저장</button>
   </form>
+
+  <!-- 추가 메타 정보 표시 -->
+  <div class="meta">
+    <p>제공자: {{ info.submitter_name or 'Unknown' }}</p>
+    <p>마지막 수정: {{ info.last_modified or 'N/A' }}</p>
+  </div>
 </body>
 </html>
