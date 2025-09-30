@@ -31,7 +31,7 @@ CONTACTS_KEY   = CATALOG_PREFIX + "contacts/contacts.json"
 ACTIVITY_LOG_KEY = CATALOG_PREFIX + "logs/activity.jsonl"
 MAIL_ARCHIVE_PREFIX = CATALOG_PREFIX + "mails/"
 
-# 카탈로그 자동 생성 (Render는 true 권장, 로컬은 false 권장)
+# 카탈로그 자동 생성
 AUTO_CREATE_CATALOG = os.getenv("AUTO_CREATE_CATALOG", "true").lower() == "true"
 
 # 진단/부트스트랩용 토큰 (선택)
@@ -117,28 +117,78 @@ def append_activity_log(event: dict):
 def get_contacts():
     return s3_get_json(CONTACTS_KEY, default={"list": []})
 
-# ---------- 연락처 정규화 & 중복 방지(이메일+이름 조합 유지) ----------
+# ---------- 연락처 정규화 ----------
 def _normalize_contact(name, email, phone):
     name  = (name or "").strip()
     email = (email or "").strip().lower()
     phone = (phone or "").strip()
     return name, email, phone
 
+# ================== 담당자 DB(요청대로 갱신) ==================
+responsibles = [
+    {"name": "최현서", "email": "jinyeong@hd.com",      "phone": "010-0000-0000"},
+    {"name": "하태현", "email": "wlsdud5706@naver.com", "phone": "010-0000-0000"},
+    {"name": "전민수", "email": "wlsdud5706@knu.ac.kr", "phone": "010-0000-0000"}
+]
+
+# ★ 기존 DB(contacts.json & 각 catalog)의 통일된 메일을 정리/치환하기 위한 매핑
+RESP_EMAIL_OVERRIDE = {
+    "최현서": "jinyeong@hd.com",
+    "하태현": "wlsdud5706@naver.com",
+    "전민수": "wlsdud5706@knu.ac.kr",
+}
+RESP_PHONE_OVERRIDE = {
+    "최현서": "010-0000-0000",
+    "하태현": "010-0000-0000",
+    "전민수": "010-0000-0000",
+}
+OLD_UNIFIED_EMAIL = "jinyeong@hd.com"  # 과거 임시 통일 메일
+
+# ---------- 연락처 중복 방지(개선판: 이름 기준으로 1건만 유지, 표준 이메일 우선) ----------
 def dedupe_contacts():
     data = get_contacts()
     lst = data.get("list", [])
     if not lst:
         return
-    seen = {}
+    # 이름 그룹핑
+    by_name = {}
     for c in lst:
-        n = (c.get("name") or "").strip()
-        e = (c.get("email") or "").strip().lower()
-        p = (c.get("phone") or "").strip()
+        n, e, p = _normalize_contact(c.get("name"), c.get("email"), c.get("phone"))
         if not n and not e:
             continue
-        key = f"{e}||{n}" if e else f"||{n}"
-        seen[key] = {"name": n, "email": e, "phone": p}
-    s3_put_json(CONTACTS_KEY, {"list": list(seen.values())})
+        if n not in by_name:
+            by_name[n] = []
+        by_name[n].append({"name": n, "email": e, "phone": p})
+
+    result = []
+    for name, items in by_name.items():
+        # 1) 표준 이메일(있으면) 선택
+        preferred_email = RESP_EMAIL_OVERRIDE.get(name, "").strip().lower()
+        chosen = None
+        if preferred_email:
+            for it in items:
+                if it["email"] == preferred_email:
+                    chosen = it
+                    break
+        # 2) 없다면 이메일이 있는 것 중 하나 선택
+        if not chosen:
+            with_email = [it for it in items if it["email"]]
+            if with_email:
+                chosen = with_email[0]
+        # 3) 그래도 없으면(모두 이메일 없음) 첫 번째
+        if not chosen:
+            chosen = items[0]
+
+        # 전화번호 보강(비어있으면 다른 항목의 번호로 보강)
+        if not chosen.get("phone"):
+            for it in items:
+                if it.get("phone"):
+                    chosen["phone"] = it["phone"]
+                    break
+
+        result.append(chosen)
+
+    s3_put_json(CONTACTS_KEY, {"list": result})
 
 def upsert_contact(name, email, phone):
     name, email, phone = _normalize_contact(name, email, phone)
@@ -147,31 +197,29 @@ def upsert_contact(name, email, phone):
     contacts = get_contacts()
     if "list" not in contacts:
         contacts["list"] = []
+    # 동일 이름의 기존 항목을 찾아 업데이트(이메일 없던 항목도 병합)
     updated = False
     for c in contacts["list"]:
-        cn = (c.get("name") or "").strip()
-        ce = (c.get("email") or "").strip().lower()
-        if email and ce == email and name and cn == name:
-            if name:  c["name"] = name
-            if email: c["email"] = email
-            if phone: c["phone"] = phone
-            updated = True
-            break
-        if not email and name and cn == name and not ce:
-            if phone: c["phone"] = phone
+        cn, ce, cp = _normalize_contact(c.get("name"), c.get("email"), c.get("phone"))
+        if cn == name:
+            # 표준 이메일이 있으면 그걸로, 없으면 새 이메일이 있으면 덮어쓰기
+            pref = RESP_EMAIL_OVERRIDE.get(name, "").strip().lower()
+            if pref:
+                c["email"] = pref
+            elif email:
+                c["email"] = email
+            # 전화번호 보강
+            if phone:
+                c["phone"] = phone
+            c["name"] = name
             updated = True
             break
     if not updated:
+        # 신규 추가 시도
         contacts["list"].append({"name": name, "email": email, "phone": phone})
     s3_put_json(CONTACTS_KEY, contacts)
+    # 마지막에 강제 dedupe(이름당 1건)
     dedupe_contacts()
-
-# ================== 담당자 DB(초기 샘플) ==================
-responsibles = [
-    {"name": "최현서", "email": "jinyeong@hd.com", "phone": "010-0000-0000"},
-    {"name": "하태현", "email": "jinyeong@hd.com", "phone": "010-0000-0000"},
-    {"name": "전민수", "email": "jinyeong@hd.com", "phone": "010-0000-0000"}
-]
 
 def seed_contacts():
     try:
@@ -179,6 +227,71 @@ def seed_contacts():
             upsert_contact(r.get("name"), r.get("email"), r.get("phone"))
     except Exception as e:
         print("[WARN] seed_contacts failed:", e)
+
+def cleanup_contacts_unified_email():
+    """
+    contacts.json 에서 과거 통일 메일(OLD_UNIFIED_EMAIL)을
+    '최현서' 외 이름에는 제거하고, dedupe로 재정렬.
+    """
+    data = get_contacts()
+    lst = data.get("list", [])
+    cleaned = []
+    for c in lst:
+        name, email, phone = _normalize_contact(c.get("name"), c.get("email"), c.get("phone"))
+        if email == OLD_UNIFIED_EMAIL and name != "최현서":
+            # 제거(이후 upsert+dedupe로 표준 이메일로 병합)
+            continue
+        cleaned.append({"name": name, "email": email, "phone": phone})
+    s3_put_json(CONTACTS_KEY, {"list": cleaned})
+    # 표준 담당자 3명 업서트 → dedupe로 이름 기준 1건 유지
+    for name, new_email in RESP_EMAIL_OVERRIDE.items():
+        upsert_contact(name, new_email, RESP_PHONE_OVERRIDE.get(name, ""))
+
+def update_catalog_responsibles():
+    """
+    모든 ship 카탈로그에서 responsible의 name 기준으로 email/phone을 새 값으로 업데이트.
+    """
+    s3 = s3_client()
+    try:
+        resp = s3.list_objects_v2(Bucket=S3_BUCKET, Prefix=CATALOG_PREFIX)
+        if "Contents" not in resp:
+            return
+        for obj in resp["Contents"]:
+            k = obj["Key"]
+            if not k.endswith(".json"):
+                continue
+            if "/contacts/" in k or "/logs/" in k or "/mails/" in k:
+                continue
+            try:
+                raw = s3.get_object(Bucket=S3_BUCKET, Key=k)["Body"].read()
+                catalog = json.loads(raw.decode("utf-8"))
+            except Exception as e:
+                print(f"[WARN] catalog load failed: {k} - {e}")
+                continue
+
+            changed = False
+            for category, eqs in catalog.items():
+                for eq_name, info in eqs.items():
+                    resp_info = info.get("responsible") or {}
+                    name = (resp_info.get("name") or "").strip()
+                    if not name:
+                        continue
+                    new_email = RESP_EMAIL_OVERRIDE.get(name)
+                    new_phone = RESP_PHONE_OVERRIDE.get(name)
+                    cur_email = (resp_info.get("email") or "").strip().lower()
+                    cur_phone = (resp_info.get("phone") or "").strip()
+                    if new_email and cur_email != new_email:
+                        resp_info["email"] = new_email
+                        changed = True
+                    if new_phone and cur_phone != new_phone:
+                        resp_info["phone"] = new_phone
+                        changed = True
+                    info["responsible"] = resp_info
+                    info["status"] = _recompute_status(info)
+            if changed:
+                s3_put_json(k, catalog)
+    except Exception as e:
+        print("[WARN] update_catalog_responsibles failed:", e)
 
 # ================= Ship 별 Due Date =================
 SHIP_DUE_DATES = {
@@ -672,7 +785,16 @@ def health():
     return "ok", 200
 
 if __name__ == "__main__":
-    seed_contacts()
-    dedupe_contacts()
+    def _s3_ready():
+        return bool(S3_BUCKET and AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY and S3_REGION)
+
+    if _s3_ready():
+        seed_contacts()
+        cleanup_contacts_unified_email()
+        update_catalog_responsibles()
+        dedupe_contacts()
+    else:
+        print("[WARN] S3 env not set or partial. Skipping contacts/catalog cleanup.")
+
     print("[BOOT] S3_BUCKET=", S3_BUCKET, " S3_REGION=", S3_REGION, " PREFIX=", CATALOG_PREFIX, " AUTO_CREATE_CATALOG=", AUTO_CREATE_CATALOG, " ADMIN_ENABLED=", ADMIN_ENABLED)
     app.run(host="0.0.0.0", port=5000, debug=True)
