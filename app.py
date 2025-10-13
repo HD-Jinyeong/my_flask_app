@@ -317,12 +317,33 @@ SHIP_DUE_DATES = {
 
 # ================= 실무 Catalog & EQ List =================
 CATALOG_EQUIPMENTS = {
-    "Lighting": ["Flood Light","Search Light","Navigation Light","Explosion-proof Light"],
-    "Switches & Junction Boxes": ["Explosion-proof Switch","Explosion-proof Junction Box","Limit Switch","Control Box"],
-    "Motor & Machinery": ["Explosion-proof Motor","Fan Unit","Pump Unit","Starter Panel"],
-    "Communication & Alarm": ["Telephone Set","Alarm Bell","Signal Horn","Intercom"],
-    "Miscellaneous Equipment": ["Heater","Transformer","Battery Charger","Cable Gland"]
+    "Lighting": [
+        "Flood Light","Search Light","Navigation Light","Explosion-proof Light",
+        "Deck Light","Emergency Light","Work Light","Pilot Lamp",
+        "LED Panel Light","Area Light"
+    ],
+    "Switches & Junction Boxes": [
+        "Explosion-proof Switch","Explosion-proof Junction Box","Limit Switch","Control Box",
+        "Local Control Station","Terminal Box","Push Button Station","Selector Switch",
+        "Circuit Breaker Panel","Distribution Box"
+    ],
+    "Motor & Machinery": [
+        "Explosion-proof Motor","Fan Unit","Pump Unit","Starter Panel",
+        "Gear Motor","Blower","Compressor","Hydraulic Power Unit",
+        "Winch Motor","Conveyor Motor"
+    ],
+    "Communication & Alarm": [
+        "Telephone Set","Alarm Bell","Signal Horn","Intercom",
+        "Public Address Amp","Call Point","Beacon","Siren Controller",
+        "Talk Back Unit","CCTV Camera"
+    ],
+    "Miscellaneous Equipment": [
+        "Heater","Transformer","Battery Charger","Cable Gland",
+        "Light Fitting","Distribution Board","Power Supply","UPS Unit",
+        "Inverter","Rectifier"
+    ]
 }
+
 
 # ================= Catalog 유틸 =================
 def _catalog_key(ship_number): return f"{CATALOG_PREFIX}equipment_catalog_{ship_number}.json"
@@ -391,25 +412,34 @@ def load_catalog(ship_number):
     return catalog
 
 def create_catalog(ship_number):
-    catalog = {}; total_count = 15; count = 0
+    catalog = {}
     for category, equipments in CATALOG_EQUIPMENTS.items():
-        catalog[category] = {"__owners__": [], "__status__": "미입력", "__cat_locs__": [], "__cat_photo_key__": ""}
-        for eq in equipments:
-            if count >= total_count: break
+        # ✅ 카테고리별 7~10개 랜덤 선택
+        pick_n = random.randint(7, min(10, len(equipments)))
+        picked = random.sample(equipments, pick_n)
+
+        catalog[category] = {
+            "__owners__": [],
+            "__status__": "미입력",
+            "__cat_locs__": [],
+            "__cat_photo_key__": ""
+        }
+        for eq in picked:
             init_qty = str(random.randint(1,10)) if AUTO_QTY_ENABLED else ""
             catalog[category][eq] = {
                 "qty": init_qty, "maker": "", "type": "", "cert_no": "",
                 "responsible": {}, "status": "pending",
                 "file": "", "file_url": "", "file_key": "",
                 "submitter_name": "", "last_modified": "",
-                "photo_key": "",  # 아이템 공용 사진
-                "locs": []        # 포인트 배열(아이템용) - 유지
+                "photo_key": "",      # 아이템 공용 사진
+                "locs": []            # 포인트 배열(아이템용)
             }
-            count += 1
-        if count >= total_count: break
+
     _assign_random_category_owners(catalog)
-    save_catalog(ship_number, catalog)
+    save_catalog(ship_number, catalog)   # ✅ 기존 카탈로그를 덮어씀
     return catalog
+
+
 
 def get_or_create_catalog(ship_number, force_reset=False):
     if force_reset:
@@ -1087,6 +1117,23 @@ def admin_invite_all_contacts():
     if errs:
         return jsonify({"ok": True, "sent": sent, "errors": errs}), 207
     return jsonify({"ok": True, "sent": sent})
+
+@app.route("/admin/catalog_regen/<ship_number>", methods=["POST"])
+def admin_catalog_regen(ship_number):
+    _require_admin()
+    create_catalog(ship_number)  # ✅ 기존 것을 제거하고 새로 생성
+    append_activity_log({
+        "ts": datetime.datetime.now().isoformat(),
+        "actor": "admin",
+        "action": "catalog_regen",
+        "ship": ship_number, "category": "-", "equipment": "-",
+        "result": "ok"
+    })
+    if request.headers.get("X-Requested-With") == "fetch":
+        return jsonify({"ok": True})
+    flash(f"Ship {ship_number} 카탈로그를 7~10개 랜덤으로 재생성했습니다.")
+    return redirect(url_for("admin_dashboard", _=int(time.time())))
+
 
 # ---------- Admin: Excel Export ----------
 @app.route("/admin/export_selected", methods=["POST"], endpoint="export_selected")
