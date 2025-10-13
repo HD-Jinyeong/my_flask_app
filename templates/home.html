@@ -11,13 +11,18 @@
     th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
     th { background-color: #2e7d32; color: white; }
     .category-row { background-color: #1b5e20; color: white; font-weight: bold; text-align: left; }
-    
-    /* 상태별 색상 */
-    .done { background-color: #e8f5e9; }   /* 연녹색 (✅ 완료) */
-    .pending { background-color: #ffebee; } /* 연분홍 (❌ 미완료) */
-
+    .done { background-color: #e8f5e9; }
+    .pending { background-color: #ffebee; }
     a { color: #2e7d32; text-decoration: none; font-weight: bold; }
     a:hover { text-decoration: underline; }
+    .muted { color:#666; font-size:12px; }
+    .panel { background:#fff; border:1px solid #e0e0e0; border-radius:8px; padding:12px; margin-top:12px; }
+    .btn { padding:6px 10px; border:none; border-radius:4px; cursor:pointer; }
+    .btn.primary { background:#2e7d32; color:#fff; }
+    .btn.ghost { background:#fff; border:1px solid #2e7d32; color:#2e7d32; }
+    .nowrap { white-space:nowrap; }
+    .row { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    input[type="text"], input[type="tel"], input[type="email"] { padding:6px; border:1px solid #ccc; border-radius:4px; }
   </style>
 </head>
 <body>
@@ -31,45 +36,79 @@
       <option value="2" {% if selected_ship == "2" %}selected{% endif %}>Ship 2</option>
       <option value="3" {% if selected_ship == "3" %}selected{% endif %}>Ship 3</option>
     </select>
+
+    {% if categories %}
+      <label for="category"><b>Category:</b></label>
+      <select name="category" id="category" onchange="this.form.submit()">
+        <option value="">-- Select --</option>
+        {% for c in categories %}
+          <option value="{{ c }}" {% if selected_category == c %}selected{% endif %}>{{ c }}</option>
+        {% endfor %}
+      </select>
+    {% endif %}
   </form>
 
-  {% if catalog and selected_ship %}
-  <p style="font-size:14px; color:#555; margin-top:10px;">
-    ⏰ Due Date for Ship {{ selected_ship }}: {{ due_date }}
-  </p>
+  {% if selected_ship %}
+    <p class="muted" style="margin-top:10px;">⏰ Due Date for Ship {{ selected_ship }}: {{ due_date }}</p>
+  {% endif %}
+
+  {% if selected_ship and selected_category %}
+  <div class="panel">
+    <div class="row">
+      <b>카테고리 상태:</b>
+      <form method="post" action="{{ url_for('category_status_set') }}" class="row">
+        <input type="hidden" name="ship_number" value="{{ selected_ship }}">
+        <input type="hidden" name="category" value="{{ selected_category }}">
+        <button class="btn {% if cat_status=='미입력' %}primary{% else %}ghost{% endif %}" name="status" value="미입력" type="submit">미입력</button>
+        <button class="btn {% if cat_status=='미완료' %}primary{% else %}ghost{% endif %}" name="status" value="미완료" type="submit">미완료</button>
+        <button class="btn {% if cat_status=='완료' %}primary{% else %}ghost{% endif %}" name="status" value="완료" type="submit">완료</button>
+        <span class="muted">현재: {{ cat_status or '미입력' }}</span>
+      </form>
+    </div>
+
+    <hr>
+
+    <form method="post" action="{{ url_for('category_owners_update') }}">
+      <input type="hidden" name="ship_number" value="{{ selected_ship }}">
+      <input type="hidden" name="category" value="{{ selected_category }}">
+      <b>카테고리 담당자 (공통, 최대 2명)</b>
+      <div class="row" style="margin-top:6px;">
+        <input type="text"   name="name1"  placeholder="이름" value="{{ owners[0].name if owners|length>0 else '' }}">
+        <input type="email"  name="email1" placeholder="email@example.com" value="{{ owners[0].email if owners|length>0 else '' }}">
+        <input type="tel"    name="phone1" placeholder="010-xxxx-xxxx" value="{{ owners[0].phone if owners|length>0 else '' }}">
+      </div>
+      <div class="row" style="margin-top:6px;">
+        <input type="text"   name="name2"  placeholder="이름" value="{{ owners[1].name if owners|length>1 else '' }}">
+        <input type="email"  name="email2" placeholder="email@example.com" value="{{ owners[1].email if owners|length>1 else '' }}">
+        <input type="tel"    name="phone2" placeholder="010-xxxx-xxxx" value="{{ owners[1].phone if owners|length>1 else '' }}">
+      </div>
+      <div style="margin-top:8px;">
+        <button type="submit" class="btn primary">저장</button>
+        <span class="muted">* 저장 시 연락처 DB에도 반영됩니다.</span>
+      </div>
+    </form>
+  </div>
 
   <table>
     <tr>
       <th>Equipment</th>
-      <th>Responsible</th>
       <th>Status</th>
       <th>Action</th>
     </tr>
-
-    {% for cat, eqs in catalog.items() %}
-      <tr class="category-row">
-        <td colspan="4">{{ cat }}</td>
-      </tr>
-      {% for eq, info in eqs.items() %}
+    {% for eq, info in eqs_in_category.items() %}
       <tr class="{% if info.status == 'done' %}done{% else %}pending{% endif %}">
-        <!-- category + eq name 함께 표시 -->
-        <td>{{ cat }} - {{ eq }}</td>
-        <td>{{ info.responsible.name }} ({{ info.responsible.email }})</td>
+        <td>{{ selected_category }} - {{ eq }}</td>
         <td>
-          {% if info.status == "done" %}
-            ✅ 입력 완료
-          {% else %}
-            ❌ 미입력
-          {% endif %}
+          {% if info.status == "done" %}✅ 입력 완료{% else %}❌ 미완료{% endif %}
         </td>
         <td>
-          <!-- ✅ edit_equipment → edit 으로 수정 -->
-          <a href="{{ url_for('edit', ship_number=selected_ship, category=cat, eq=eq) }}">Edit</a>
+          <a href="{{ url_for('edit', ship_number=selected_ship, category=selected_category, eq=eq) }}">Edit</a>
+          {# Location 링크 제거(요청사항) #}
         </td>
       </tr>
-      {% endfor %}
     {% endfor %}
   </table>
   {% endif %}
+
 </body>
 </html>

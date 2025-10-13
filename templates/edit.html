@@ -21,7 +21,6 @@
 </head>
 <body>
   <h3>Edit Equipment: {{ eq }}</h3>
-  <!-- 파일 첨부를 위해 enctype 반드시 추가 -->
   <form method="post" enctype="multipart/form-data">
     <label>QTY</label>
     <input type="number" name="qty" value="{{ info.qty or '' }}">
@@ -38,28 +37,22 @@
     <label>File <span class="muted">(선택 시 교체 업로드)</span></label>
     <input type="file" name="file">
 
-    {% if info.file %}
+    {% if info.file_key %}
+      <p>현재 파일: <a href="{{ url_for('file_redirect', key=info.file_key) }}" target="_blank">{{ info.file }}</a></p>
+    {% elif info.file %}
       <p>현재 파일: <a href="{{ info.file_url }}" target="_blank">{{ info.file }}</a></p>
     {% endif %}
 
-    <!-- 사용자 화면에서 제출자 기록 가능(관리자 편집에도 무해) -->
     <label class="muted">Submitter (선택)</label>
     <input type="text" name="submitter_name" value="{{ info.submitter_name or '' }}" placeholder="작성자명">
-
-    <!-- 관리자 화면에서 책임자 변경을 위해 동일 템플릿 재활용 -->
-    <label class="muted">Responsible (Admin 전용, 선택)</label>
-    <input type="text" name="resp_name"  value="{{ info.responsible.name if info.responsible else '' }}" placeholder="이름">
-    <input type="text" name="resp_email" value="{{ info.responsible.email if info.responsible else '' }}" placeholder="email@example.com">
-    <input type="text" name="resp_phone" value="{{ info.responsible.phone if info.responsible else '' }}" placeholder="010-xxxx-xxxx">
-    <input type="text" name="status" value="{{ info.status or '' }}" placeholder="pending/done 등">
 
     <button type="submit">저장</button>
   </form>
 
-  <!-- 추가 메타 정보 표시 -->
   <div class="meta">
     <p>제공자: {{ info.submitter_name or 'Unknown' }}</p>
     <p>마지막 수정: {{ info.last_modified or 'N/A' }}</p>
+    <p><a href="{{ url_for('home', ship_number=ship_number, category=category) }}">← 목록으로</a></p>
   </div>
 </body>
 </html>
