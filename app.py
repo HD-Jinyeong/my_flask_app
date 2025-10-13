@@ -682,6 +682,9 @@ def home():
     cat_status = None
     owners = []
 
+    # --- ADD: 현재 로그인 이메일 ---
+    user_email = _current_user_email()
+
     if ship_number:
         catalog = load_catalog(ship_number)
         due_date = SHIP_DUE_DATES.get(ship_number)
@@ -694,6 +697,17 @@ def home():
                 catalog[cat].setdefault("__status__", "미입력")
                 catalog[cat].setdefault("__cat_locs__", [])
                 catalog[cat].setdefault("__cat_photo_key__", "")
+
+        # --- ADD: 담당자 이메일이 포함된 카테고리만 노출 ---
+        if user_email:
+            categories = [
+                c for c in categories
+                if _is_owner_of_category(catalog, c, user_email)
+            ]
+
+    # --- ADD: 선택된 카테고리가 권한 밖이면 선택 해제 ---
+    if ship_number and category and category not in categories:
+        category = None
 
     if ship_number and category and isinstance(catalog.get(category), dict):
         cat_block = catalog.get(category)
@@ -710,6 +724,7 @@ def home():
                            eqs_in_category=eqs_in_category,
                            cat_status=cat_status,
                            owners=owners)
+
 
 # --------- 완료 판정 유틸 ----------
 def _recompute_status(item: dict) -> str:
@@ -958,6 +973,19 @@ def send_email_via_smtp(to_emails, cc_emails, subject, body_text):
     recipients = list(dict.fromkeys([*(to_emails or []), *(cc_emails or [])]))
     with smtplib.SMTP(SMTP_SERVER) as server:
         server.sendmail(from_addr, recipients, msg.as_string())
+# --- ADD: 소유자(담당자) 확인용 헬퍼 ---
+def _current_user_email() -> str:
+    return (session.get("user", {}).get("email") or "").strip().lower()
+
+def _is_owner_of_category(catalog: dict, category: str, email: str) -> bool:
+    owners = (catalog.get(category) or {}).get("__owners__", [])
+    for o in owners:
+        if not isinstance(o, dict): 
+            continue
+        if (o.get("email") or "").strip().lower() == email:
+            return True
+    return False
+
 
 @app.route("/admin/ship_mail/<ship_number>", methods=["POST"])
 def send_ship_mail(ship_number):
