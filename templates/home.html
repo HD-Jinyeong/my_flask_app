@@ -111,4 +111,11 @@
   {% endif %}
 
 </body>
+  <div style="display:flex;justify-content:flex-end;align-items:center;gap:8px;">
+    {% if session.get('user') %}
+      <span class="muted">{{ session['user']['email'] }}</span>
+      <a href="{{ url_for('logout') }}" class="btn ghost">로그아웃</a>
+    {% endif %}
+  </div>
+
 </html>
