@@ -71,7 +71,7 @@
     <form method="post" action="{{ url_for('category_owners_update') }}">
       <input type="hidden" name="ship_number" value="{{ selected_ship }}">
       <input type="hidden" name="category" value="{{ selected_category }}">
-      <b>카테고리 담당자 (공통, 최대 2명)</b>
+      <b>카테고리 담당자</b>
       <div class="row" style="margin-top:6px;">
         <input type="text"   name="name1"  placeholder="이름" value="{{ owners[0].name if owners|length>0 else '' }}">
         <input type="email"  name="email1" placeholder="email@example.com" value="{{ owners[0].email if owners|length>0 else '' }}">
