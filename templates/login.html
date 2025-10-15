@@ -5,21 +5,44 @@
   <title>Login</title>
   <style>
     body { font-family: Arial, sans-serif; background:#f9f9f9; padding:40px; display:flex; justify-content:center; }
-    form { background:#fff; padding:24px; border-radius:8px; border:1px solid #e0e0e0; width:320px; }
+    .top-left { position:fixed; top:16px; left:16px; display:flex; align-items:center; gap:10px; }
+    .logo { height:64px; display:block; } /* 로고 조금 더 키움 */
+    form { background:#fff; padding:24px; border-radius:8px; border:1px solid #e0e0e0; width:320px; margin-top:80px; }
     h3 { color:#2e7d32; margin-top:0; }
     label { display:block; margin-top:10px; font-weight:bold; }
     input { width:100%; padding:8px; margin-top:4px; border:1px solid #ccc; border-radius:4px; }
     button { margin-top:14px; width:100%; padding:10px; background:#2e7d32; color:#fff; border:none; border-radius:4px; cursor:pointer; }
     .muted { color:#666; font-size:12px; margin-top:8px; display:block; }
+    .alert { background:#ffebee; border:1px solid #ffcdd2; color:#b71c1c; padding:8px; border-radius:6px; margin-bottom:10px; }
   </style>
 </head>
 <body>
-  <form method="post">
+  <!-- 좌측 상단 로고 -->
+  <div class="top-left">
+    <a href="/" title="Hyundai Mipo Dockyard">
+      <img class="logo" src="{{ url_for('static', filename='hmipo_logo.png') }}" alt="Hyundai Mipo Logo">
+    </a>
+  </div>
+
+  <form method="post" action="{{ url_for('login') }}">
+    <!-- 로그인 후 돌아갈 경로 보존 -->
+    <input type="hidden" name="next" value="{{ request.args.get('next','') }}">
+
     <h3>로그인</h3>
+
+    <!-- 플래시 메시지 노출 -->
+    {% with msgs = get_flashed_messages() %}
+      {% if msgs %}
+        <div class="alert">{{ msgs[0] }}</div>
+      {% endif %}
+    {% endwith %}
+
     <label>Email</label>
-    <input type="email" name="email" required>
+    <input type="email" name="email" required autocomplete="username" autofocus>
+
     <label>Password</label>
-    <input type="password" name="password" required>
+    <input type="password" name="password" required autocomplete="current-password">
+
     <button type="submit">로그인</button>
     <span class="muted">초대 메일로 계정 생성 후 로그인하세요.</span>
   </form>

@@ -4,17 +4,28 @@
   <meta charset="UTF-8">
   <title>Ship Equipment Status</title>
   <style>
-    body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; }
-    h2 { color: #2e7d32; }
+    body { font-family: Arial, sans-serif; background-color: #f9f9f9; margin:0; }
+    h2 { color: #2e7d32; margin: 0; }
+
+    /* 상단 고정바: 로고가 본문 가리지 않게 */
+    .topbar {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 64px; background:#ffffff; border-bottom:1px solid #e0e0e0;
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 0 16px; z-index: 1000;
+    }
+    .leftbar { display:flex; align-items:center; gap:12px; }
+    .rightbar { display:flex; align-items:center; gap:8px; }
+    .logo { height:48px; display:block; }
+    .pill { display:inline-block; padding:4px 8px; border-radius:999px; background:#e8f5e9; color:#1b5e20; font-size:12px; text-decoration:none; }
+
+    .page { padding: 20px; padding-top: 88px; }
+
     select { padding: 6px; margin: 5px; }
-    table { border-collapse: collapse; width: 100%; margin-top: 20px; background: #fff; }
+    table { border-collapse: collapse; width: 100%; margin-top: 16px; background: #fff; }
     th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
     th { background-color: #2e7d32; color: white; }
-    .category-row { background-color: #1b5e20; color: white; font-weight: bold; text-align: left; }
     .done { background-color: #e8f5e9; }
-    .pending { background-color: #ffebee; }
-    a { color: #2e7d32; text-decoration: none; font-weight: bold; }
-    a:hover { text-decoration: underline; }
     .muted { color:#666; font-size:12px; }
     .panel { background:#fff; border:1px solid #e0e0e0; border-radius:8px; padding:12px; margin-top:12px; }
     .btn { padding:6px 10px; border:none; border-radius:4px; cursor:pointer; }
@@ -22,100 +33,303 @@
     .btn.ghost { background:#fff; border:1px solid #2e7d32; color:#2e7d32; }
     .nowrap { white-space:nowrap; }
     .row { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
-    input[type="text"], input[type="tel"], input[type="email"] { padding:6px; border:1px solid #ccc; border-radius:4px; }
+    input[type="text"], input[type="tel"], input[type="email"], input[type="number"] { padding:6px; border:1px solid #ccc; border-radius:4px; }
+
+    .inline-form { display:grid; grid-template-columns: repeat(4, minmax(160px, 1fr)); gap:10px; align-items:end; }
+    .field { display:flex; flex-direction:column; gap:4px; }
+    .field label { font-size:12px; color:#444; }
+    .list-compact td { text-align:left; }
   </style>
 </head>
 <body>
-  <h2>🚢 Ship Equipment Status</h2>
 
-  <form method="get" action="/">
-    <label for="ship_number"><b>Ship Number:</b></label>
-    <select name="ship_number" id="ship_number" onchange="this.form.submit()">
-      <option value="">-- Select --</option>
-      <option value="1" {% if selected_ship == "1" %}selected{% endif %}>Ship 1</option>
-      <option value="2" {% if selected_ship == "2" %}selected{% endif %}>Ship 2</option>
-      <option value="3" {% if selected_ship == "3" %}selected{% endif %}>Ship 3</option>
-    </select>
+  <!-- 상단 고정바 -->
+  <div class="topbar">
+    <div class="leftbar">
+      <a href="{{ url_for('home') }}" title="Hyundai Mipo Dockyard">
+        <img class="logo" src="{{ url_for('static', filename='hmipo_logo.png') }}" alt="Hyundai Mipo Logo">
+      </a>
+      <h2>🚢 Ship Equipment Status</h2>
+    </div>
+    <div class="rightbar">
+      {% if session.get('user') %}
+        <span class="pill">{{ session['user']['email'] }}</span>
+        <a class="pill" href="{{ url_for('admin_dashboard') }}">Admin</a>
+        <a class="pill" href="{{ url_for('logout') }}">로그아웃</a>
+      {% else %}
+        <a class="pill" href="{{ url_for('login') }}">로그인</a>
+      {% endif %}
+    </div>
+  </div>
 
-    {% if categories %}
-      <label for="category"><b>Category:</b></label>
-      <select name="category" id="category" onchange="this.form.submit()">
+  <div class="page">
+    <!-- 상단 선택 -->
+    <form method="get" action="/">
+      <label><b>Ship Number:</b></label>
+      <select name="ship_number" id="ship_number" onchange="this.form.submit()">
         <option value="">-- Select --</option>
-        {% for c in categories %}
-          <option value="{{ c }}" {% if selected_category == c %}selected{% endif %}>{{ c }}</option>
-        {% endfor %}
+        <option value="1" {% if selected_ship == "1" %}selected{% endif %}>Ship 1</option>
+        <option value="2" {% if selected_ship == "2" %}selected{% endif %}>Ship 2</option>
+        <option value="3" {% if selected_ship == "3" %}selected{% endif %}>Ship 3</option>
       </select>
+
+      {% if categories %}
+        <label><b>System:</b></label>
+        <select name="category" id="category" onchange="this.form.submit()">
+          <option value="">-- Select --</option>
+          {% for c in categories %}
+            <option value="{{ c }}" {% if selected_category == c %}selected{% endif %}>{{ c }}</option>
+          {% endfor %}
+        </select>
+      {% endif %}
+    </form>
+
+    {% if selected_ship %}
+      <p class="muted" style="margin-top:10px;">⏰ Due Date for Ship {{ selected_ship }}: {{ due_date }}</p>
     {% endif %}
-  </form>
 
-  {% if selected_ship %}
-    <p class="muted" style="margin-top:10px;">⏰ Due Date for Ship {{ selected_ship }}: {{ due_date }}</p>
-  {% endif %}
+    {% if selected_ship and selected_category %}
+    <!-- 시스템 상태 & 담당자 -->
+    <div class="panel">
+      <div class="row" style="justify-content:space-between;">
+        <div class="row">
+          <b>시스템 상태:</b>
+          <form method="post" action="{{ url_for('category_status_set') }}" class="row">
+            <input type="hidden" name="ship_number" value="{{ selected_ship }}">
+            <input type="hidden" name="category" value="{{ selected_category }}">
+            <button class="btn {% if cat_status=='미입력' %}primary{% else %}ghost{% endif %}" name="status" value="미입력" type="submit">미입력</button>
+            <button class="btn {% if cat_status=='미완료' %}primary{% else %}ghost{% endif %}" name="status" value="미완료" type="submit">미완료</button>
+            <button class="btn {% if cat_status=='완료' %}primary{% else %}ghost{% endif %}" name="status" value="완료" type="submit">완료</button>
+            <span class="muted">현재: {{ cat_status or '미입력' }}</span>
+          </form>
+        </div>
 
-  {% if selected_ship and selected_category %}
-  <div class="panel">
-    <div class="row">
-      <b>카테고리 상태:</b>
-      <form method="post" action="{{ url_for('category_status_set') }}" class="row">
+        <!-- 담당자 표시 -->
+        <div>
+          <b>담당자:</b>
+          {% if owners and owners|length > 0 %}
+            <ul style="margin:4px 0 0 16px; padding:0;">
+              {% for o in owners %}
+                <li style="list-style:disc;">
+                  {{ o.name or '(이름없음)' }}
+                  <span class="muted">({{ o.email or '-' }}, {{ o.phone or '-' }})</span>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <span class="muted">등록된 담당자가 없습니다.</span>
+          {% endif %}
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- 담당자 편집 -->
+      <form method="post" action="{{ url_for('category_owners_update') }}">
         <input type="hidden" name="ship_number" value="{{ selected_ship }}">
         <input type="hidden" name="category" value="{{ selected_category }}">
-        <button class="btn {% if cat_status=='미입력' %}primary{% else %}ghost{% endif %}" name="status" value="미입력" type="submit">미입력</button>
-        <button class="btn {% if cat_status=='미완료' %}primary{% else %}ghost{% endif %}" name="status" value="미완료" type="submit">미완료</button>
-        <button class="btn {% if cat_status=='완료' %}primary{% else %}ghost{% endif %}" name="status" value="완료" type="submit">완료</button>
-        <span class="muted">현재: {{ cat_status or '미입력' }}</span>
+        <b>시스템 담당자 수정</b>
+        <div class="inline-form" id="owners-box" style="margin-top:6px; grid-template-columns: repeat(3, minmax(180px, 1fr));">
+          <div class="field">
+            <label>이름</label>
+            <input type="text" name="name1" placeholder="이름" value="{{ owners[0].name if owners|length>0 else '' }}">
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" name="email1" placeholder="email@example.com" value="{{ owners[0].email if owners|length>0 else '' }}">
+          </div>
+          <div class="field">
+            <label>Phone</label>
+            <input type="tel" name="phone1" placeholder="010-xxxx-xxxx" value="{{ owners[0].phone if owners|length>0 else '' }}">
+          </div>
+
+          <div class="field">
+            <label>이름</label>
+            <input type="text" name="name2" placeholder="이름" value="{{ owners[1].name if owners|length>1 else '' }}">
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" name="email2" placeholder="email@example.com" value="{{ owners[1].email if owners|length>1 else '' }}">
+          </div>
+          <div class="field">
+            <label>Phone</label>
+            <input type="tel" name="phone2" placeholder="010-xxxx-xxxx" value="{{ owners[1].phone if owners|length>1 else '' }}">
+          </div>
+        </div>
+        <div style="margin-top:8px; display:flex; gap:8px; align-items:center;">
+          <button type="submit" class="btn primary">저장</button>
+          <span class="muted">* 저장 시 연락처 DB에도 반영됩니다.</span>
+        </div>
       </form>
     </div>
 
-    <hr>
+    <!-- 입력된 항목 (공유) : "입력된 것만" 노출 -->
+    {% set rows = [] %}
+    {% for eq, info in (eqs_in_category or {}).items() %}
+      {% if info is mapping %}
+        {% set entered = (info.qty or info.maker or info.type or info.cert_no
+                           or info.ex_proof_grade or info.ip_grade
+                           or info.location or info.page
+                           or info.file_key or info.file_url or info.last_modified) %}
+        {% if entered %}
+          {% set _ = rows.append({
+            'eq': eq,
+            'qty': info.qty or '',
+            'maker': info.maker or '',
+            'type': info.type or '',
+            'cert_no': info.cert_no or '',
+            'ex_proof_grade': info.ex_proof_grade or '',
+            'ip_grade': info.ip_grade or '',
+            'location': info.location or '',
+            'page': info.page or '',
+            'file_key': info.file_key or '',
+            'file_url': info.file_url or '',
+            'last_modified': info.last_modified or ''
+          }) %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
 
-    <form method="post" action="{{ url_for('category_owners_update') }}">
-      <input type="hidden" name="ship_number" value="{{ selected_ship }}">
-      <input type="hidden" name="category" value="{{ selected_category }}">
-      <b>카테고리 담당자</b>
-      <div class="row" style="margin-top:6px;">
-        <input type="text"   name="name1"  placeholder="이름" value="{{ owners[0].name if owners|length>0 else '' }}">
-        <input type="email"  name="email1" placeholder="email@example.com" value="{{ owners[0].email if owners|length>0 else '' }}">
-        <input type="tel"    name="phone1" placeholder="010-xxxx-xxxx" value="{{ owners[0].phone if owners|length>0 else '' }}">
-      </div>
-      <div class="row" style="margin-top:6px;">
-        <input type="text"   name="name2"  placeholder="이름" value="{{ owners[1].name if owners|length>1 else '' }}">
-        <input type="email"  name="email2" placeholder="email@example.com" value="{{ owners[1].email if owners|length>1 else '' }}">
-        <input type="tel"    name="phone2" placeholder="010-xxxx-xxxx" value="{{ owners[1].phone if owners|length>1 else '' }}">
-      </div>
-      <div style="margin-top:8px;">
-        <button type="submit" class="btn primary">저장</button>
-        <span class="muted">* 저장 시 연락처 DB에도 반영됩니다.</span>
-      </div>
-    </form>
-  </div>
-
-  <table>
-    <tr>
-      <th>Equipment</th>
-      <th>Status</th>
-      <th>Action</th>
-    </tr>
-    {% for eq, info in eqs_in_category.items() %}
-      <tr class="{% if info.status == 'done' %}done{% else %}pending{% endif %}">
-        <td>{{ selected_category }} - {{ eq }}</td>
+    {% if rows and rows|length > 0 %}
+    <table class="list-compact">
+      <tr>
+        <th style="width:24%;">입력된 항목 (공유)</th>
+        <th>Q’TY</th>
+        <th>MAKER</th>
+        <th>TYPE</th>
+        <th>CERT.NO</th>
+        <th>EX-PROOF</th>
+        <th>IP</th>
+        <th>LOCATION</th>
+        <th>PAGE</th>
+        <th>File</th>
+        <th>수정시각</th>
+        <th>Action</th>
+      </tr>
+      {% for row in rows %}
+      <tr class="done">
+        <td style="text-align:left;">{{ row.eq }}</td>
+        <td>{{ row.qty }}</td>
+        <td>{{ row.maker }}</td>
+        <td>{{ row.type }}</td>
+        <td>{{ row.cert_no }}</td>
+        <td>{{ row.ex_proof_grade }}</td>
+        <td>{{ row.ip_grade }}</td>
+        <td>{{ row.location }}</td>
+        <td>{{ row.page }}</td>
         <td>
-          {% if info.status == "done" %}✅ 입력 완료{% else %}❌ 미완료{% endif %}
+          {% if row.file_key %}
+            <a href="{{ url_for('file_redirect', key=row.file_key) }}" target="_blank">열기</a>
+          {% elif row.file_url %}
+            <a href="{{ row.file_url }}" target="_blank">열기</a>
+          {% else %}
+            <span class="muted">-</span>
+          {% endif %}
         </td>
-        <td>
-          <a href="{{ url_for('edit', ship_number=selected_ship, category=selected_category, eq=eq) }}">Edit</a>
-          {# Location 링크 제거(요청사항) #}
+        <td class="nowrap">{{ row.last_modified or '-' }}</td>
+        <td class="nowrap">
+          <a href="{{ url_for('edit', ship_number=selected_ship, category=selected_category, eq=row.eq) }}">Edit</a>
         </td>
       </tr>
-    {% endfor %}
-  </table>
-  {% endif %}
+      {% endfor %}
+    </table>
+    {% else %}
+      <p class="muted">아직 입력된 항목이 없습니다.</p>
+    {% endif %}
 
-</body>
-  <div style="display:flex;justify-content:flex-end;align-items:center;gap:8px;">
-    {% if session.get('user') %}
-      <span class="muted">{{ session['user']['email'] }}</span>
-      <a href="{{ url_for('logout') }}" class="btn ghost">로그아웃</a>
+    <!-- 신규 입력 -->
+    <div class="panel">
+      <b>신규 입력</b>
+      <form id="newItemForm" method="post" enctype="multipart/form-data" class="inline-form"
+            onsubmit="return submitNewItemToEdit();">
+        <!-- 장비명은 목록에서 선택 -->
+        <div class="field" style="grid-column: span 2;">
+          <label>Equipment Name (목록에서 선택)</label>
+          <select id="new_eq_name" required>
+            <option value="">-- Select --</option>
+            {% set choices = CATALOG_EQUIPMENTS.get(selected_category) or [] %}
+            {% for nm in choices %}
+              <option value="{{ nm }}">{{ nm }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Q’TY</label>
+          <input type="text" name="qty" placeholder="">
+        </div>
+        <div class="field">
+          <label>MAKER</label>
+          <input type="text" name="maker" placeholder="">
+        </div>
+        <div class="field">
+          <label>TYPE</label>
+          <input type="text" name="type" placeholder="">
+        </div>
+        <div class="field">
+          <label>CERT.NO</label>
+          <input type="text" name="cert_no" placeholder="">
+        </div>
+        <div class="field">
+          <label>EX-PROOF GRADE</label>
+          <input type="text" name="ex_proof_grade" placeholder="">
+        </div>
+        <div class="field">
+          <label>IP GRADE</label>
+          <input type="text" name="ip_grade" placeholder="">
+        </div>
+        <div class="field">
+          <label>LOCATION</label>
+          <input type="text" name="location" placeholder="">
+        </div>
+        <div class="field">
+          <label>PAGE</label>
+          <input type="text" name="page" placeholder="">
+        </div>
+        <div class="field" style="grid-column: span 2;">
+          <label>File (선택)</label>
+          <input type="file" name="file" accept="*/*">
+        </div>
+
+        <div class="field">
+          <label>&nbsp;</label>
+          <button type="submit" class="btn primary">저장</button>
+        </div>
+      </form>
+      <p class="muted" style="margin-top:6px;">
+        * 값을 몰라도 빈칸으로 제출 가능합니다. (Edit 라우트가 비워둔 값도 저장 처리)
+      </p>
+    </div>
+
     {% endif %}
   </div>
 
+  <script>
+    // ✅ Jinja 문자열을 안전하게 주입 (tojson)
+    const SELECTED_SHIP = {{ (selected_ship or "")|tojson }};
+    const SELECTED_CATEGORY = {{ (selected_category or "")|tojson }};
+
+    // 신규 입력을 edit POST로 전달 (eq 이름을 URL path에 넣어야 해서 JS로 action 구성)
+    function submitNewItemToEdit(){
+      var sel = document.getElementById('new_eq_name');
+      if(!sel || !sel.value){
+        alert('장비명을 선택하세요.');
+        return false;
+      }
+      var eq = encodeURIComponent(sel.value);
+      var form = document.getElementById('newItemForm');
+
+      // ✅ 카테고리에 포함된 & 같은 특수문자가 이중 이스케이프되지 않도록 tojson 주입값을 encodeURIComponent 처리
+      const ship = encodeURIComponent(SELECTED_SHIP || "");
+      const cat  = encodeURIComponent(SELECTED_CATEGORY || "");
+
+      form.action = "{{ url_for('edit', ship_number='__S__', category='__C__', eq='__E__') }}"
+        .replace('__S__', ship)
+        .replace('__C__', cat)
+        .replace('__E__', eq);
+      return true; // 실제 submit 진행
+    }
+  </script>
+
+</body>
 </html>
