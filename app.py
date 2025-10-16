@@ -954,15 +954,44 @@ def category_status_set():
 
 # ================== Admin 기능 ==================
 def _require_admin():
+    # 외부망 등에서 admin 비활성 시: 404 유지
     if not ADMIN_ENABLED:
-        flash("관리자 권한이 없습니다.")
-        return redirect(url_for("home"))
-    return None
+        abort(404)
 
-@app.errorhandler(403)
-def handle_forbidden(e):
-    flash("관리자 권한이 없습니다.")
-    return redirect(url_for("home"))
+@app.errorhandler(404)
+def handle_404(e):
+    # /admin 경로일 때만 한국어 안내 페이지로 응답
+    if (request.path or "").startswith("/admin"):
+        home = url_for("home")
+        html = f"""<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>권한 없음</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {{ font-family: Arial, sans-serif; background:#f8fafc; color:#0f172a;
+           display:flex; align-items:center; justify-content:center; min-height:100vh; margin:0; }}
+    .box {{ text-align:center; background:#fff; border:1px solid #e5e7eb; border-radius:12px;
+            padding:24px; box-shadow:0 1px 2px rgba(0,0,0,.05); max-width:420px; }}
+    h2 {{ margin:0 0 8px 0; color:#1b5e20; }}
+    p {{ margin:0 0 16px 0; color:#475569; }}
+    a.btn {{ display:inline-block; padding:8px 12px; background:#2e7d32; color:#fff;
+             border-radius:8px; text-decoration:none; }}
+    a.btn:hover {{ background:#1b5e20; }}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>관리자 권한이 없습니다</h2>
+    <p>이 페이지에 접근할 권한이 없습니다.</p>
+    <a class="btn" href="{home}">Home으로 돌아가기</a>
+  </div>
+</body>
+</html>"""
+        return html, 404
+    # 그 외 404는 기존처럼
+    return e, 404
 
 
 @app.route("/admin")
