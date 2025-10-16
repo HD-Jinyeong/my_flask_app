@@ -9,6 +9,7 @@ import boto3
 from botocore.config import Config  # timeout/retry 설정
 from openpyxl import Workbook
 from functools import wraps
+from botocore.exceptions import ClientError
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "dev-only-change-me")
@@ -34,6 +35,8 @@ ACTIVITY_LOG_KEY = CATALOG_PREFIX + "logs/activity.jsonl"
 MAIL_ARCHIVE_PREFIX = CATALOG_PREFIX + "mails/"
 USERS_KEY = CATALOG_PREFIX + "auth/users.json"
 INVITES_KEY = CATALOG_PREFIX + "auth/invites.json"
+# ✅ 추가: 메일 이벤트 로그 저장 경로(prefix)
+MAIL_LOG_PREFIX = CATALOG_PREFIX + "logs/mail/"
 
 # 카탈로그 자동 생성
 AUTO_CREATE_CATALOG = os.getenv("AUTO_CREATE_CATALOG", "true").lower() == "true"
@@ -114,6 +117,68 @@ def s3_put_json(key, data):
     except Exception as e:
         print(f"[ERROR] s3_put_json failed key={key}: {e}")
         raise
+
+# ✅ 추가: 리스트 JSON 전용 get/put + 메일 이벤트 로그 유틸
+def _s3_get_json_list(key):
+    try:
+        obj = s3_client().get_object(Bucket=S3_BUCKET, Key=key)
+        body = obj["Body"].read().decode("utf-8")
+        data = json.loads(body)
+        return data if isinstance(data, list) else []
+    except ClientError as e:
+        if e.response.get("Error", {}).get("Code") in ("NoSuchKey", "404"):
+            return []
+        raise
+    except Exception:
+        return []
+
+def _s3_put_json_list(key, data_list):
+    s3_client().put_object(
+        Bucket=S3_BUCKET,
+        Key=key,
+        Body=json.dumps(data_list, ensure_ascii=False).encode("utf-8"),
+        ContentType="application/json; charset=utf-8",
+        CacheControl="no-cache, no-store, must-revalidate"
+    )
+
+def log_mail_event(ship: str, category: str, action: str, result: str, purpose: str = None, extra: dict = None):
+    """
+    메일 전송 이벤트를 S3에 append
+    파일: catalog/logs/mail/{ship}/{category}.json
+    항목: { ts, action, result, meta:{purpose, ...} }
+    """
+    if not (ship and category):
+        return False
+    key = f"{MAIL_LOG_PREFIX}{ship}/{category}.json"
+    logs = _s3_get_json_list(key)
+    item = {
+        "ts": datetime.datetime.utcnow().isoformat(timespec="seconds") + "Z",
+        "action": action,
+        "result": result,
+        "meta": {}
+    }
+    if purpose:
+        item["meta"]["purpose"] = purpose
+    if extra and isinstance(extra, dict):
+        item["meta"].update(extra)
+    logs.append(item)
+    _s3_put_json_list(key, logs)
+    return True
+
+def read_mail_logs_grouped(owners_by_ship: dict):
+    """
+    owners_by_ship[ship] = { category: [owners...] }
+    -> logs_by_ship[ship][category] = [...]
+    """
+    out = {}
+    for sh, cats in (owners_by_ship or {}).items():
+        out[sh] = {}
+        for cat in (cats or {}).keys():
+            key = f"{MAIL_LOG_PREFIX}{sh}/{cat}.json"
+            lst = _s3_get_json_list(key)
+            lst.sort(key=lambda x: x.get("ts", ""), reverse=True)
+            out[sh][cat] = lst
+    return out
 
 def append_activity_log(event: dict):
     s3 = s3_client()
@@ -889,7 +954,16 @@ def category_status_set():
 
 # ================== Admin 기능 ==================
 def _require_admin():
-    if not ADMIN_ENABLED: abort(404)
+    if not ADMIN_ENABLED:
+        flash("관리자 권한이 없습니다.")
+        return redirect(url_for("home"))
+    return None
+
+@app.errorhandler(403)
+def handle_forbidden(e):
+    flash("관리자 권한이 없습니다.")
+    return redirect(url_for("home"))
+
 
 @app.route("/admin")
 def admin_dashboard():
@@ -902,7 +976,7 @@ def admin_dashboard():
     incomplete_count = {sh: 0 for sh in ships}
     owners_by_ship = {}
     all_systems_set = set()        # 시스템 중복 제거
-    cat_status_by_ship = {}        # ✅ 추가: ship별 system 상태
+    cat_status_by_ship = {}        # ship별 system 상태
 
     for sh in ships:
         catalog = load_catalog(sh) or {}
@@ -916,12 +990,11 @@ def admin_dashboard():
             if isinstance(eqs, dict):
                 owners_by_ship[sh][cat] = eqs.get("__owners__", [])
                 all_systems_set.add(cat)
-                # ✅ 시스템 상태 수집(없으면 '미입력')
                 cat_status_by_ship.setdefault(sh, {})[cat] = (eqs.get("__status__") or "미입력")
 
     systems = sorted(all_systems_set)
 
-    # ----- 최근 로그 -----
+    # 최근 액티비티 로그(기존 유지)
     logs = []
     try:
         obj = s3_client().get_object(Bucket=S3_BUCKET, Key=ACTIVITY_LOG_KEY)
@@ -934,13 +1007,8 @@ def admin_dashboard():
     except Exception:
         pass
 
-    # ✅ ship별 로그
-    logs_by_ship = {}
-    for lg in logs:
-        sh = (lg.get("ship") or "").strip()
-        if not sh:
-            continue
-        logs_by_ship.setdefault(sh, []).append(lg)
+    # ✅ 메일 전송 로그: ship/system 단위로 S3에서 로드
+    logs_by_ship = read_mail_logs_grouped(owners_by_ship)
 
     deleted_by_ship = {}
     return render_template(
@@ -952,13 +1020,11 @@ def admin_dashboard():
         incomplete_count=incomplete_count,
         SHIP_DUE_DATES=SHIP_DUE_DATES,
         owners_by_ship=owners_by_ship,
-        systems=systems,                      # ← 기존 추가
-        logs_by_ship=logs_by_ship,            # ← 기존 추가
-        cat_status_by_ship=cat_status_by_ship, #  새로 전달
+        systems=systems,
+        logs_by_ship=logs_by_ship,             # ship -> system -> [mail logs...]
+        cat_status_by_ship=cat_status_by_ship,
         deleted_by_ship=deleted_by_ship
     )
-
-
 
 def _is_incomplete(item: dict) -> bool:
     return _recompute_status(item) != "done"
@@ -1101,7 +1167,7 @@ def admin_invite_owner():
             if isinstance(k, str) and not k.startswith("__"): first_eq = k; break
     next_url = url_for("edit", ship_number=ship, category=category, eq=first_eq) if first_eq else url_for("home", ship_number=ship, category=category)
     inv = _invites_load(); token = uuid.uuid4().hex
-    inv["invites"][token] = {"email": email,"created": datetime.datetime.now().isoformat(),"next": next_url}
+    inv["invites"][token] = {"email": email,"created": datetime.datetime.now().isoformat(), "next": next_url}
     _invites_save(inv)
     link = url_for("auth_complete", t=token, next=next_url, _external=True)
     subject = f"[HD] {ship}번선 {category} 담당자 초대"
@@ -1121,7 +1187,12 @@ def admin_invite_owner():
         err = str(e)
     append_activity_log({"ts": datetime.datetime.now().isoformat(),"actor": "admin","action": "invite_owner",
                          "ship": ship, "category": category, "equipment": "-","result": "ok" if ok else f"fail:{err}", "target": email})
-    return jsonify({"ok": ok, "error": err, "link": link, "ship": ship, "category": category, "email": email}), (200 if ok else 500)
+    # ✅ 메일 이벤트 별도 로그(S3)
+    try:
+        log_mail_event(ship, category, action="invite", result=("OK" if ok else f"ERROR: {err}"), purpose="invite_owner", extra={"email": email, "by": "admin_click"})
+    except Exception as _ex:
+        print("[WARN] log_mail_event failed:", _ex)
+    return jsonify({"ok": ok, "error": err, "link": link, "ship": ship, "category": category, "email": email, "purpose": "invite_owner"}), (200 if ok else 500)
 
 @app.route("/admin/system_mail", methods=["POST"], endpoint="admin_system_mail")
 def admin_system_mail():
@@ -1162,8 +1233,14 @@ def admin_system_mail():
         err = str(e)
     append_activity_log({"ts": datetime.datetime.now().isoformat(),"actor": "admin","action": "system_mail_send",
                          "ship": ship, "category": category, "equipment": "-","result": "ok" if ok else f"fail:{err}"})
+    # ✅ 메일 이벤트 별도 로그(S3)
+    try:
+        log_mail_event(ship, category, action="manual_mail", result=("OK" if ok else f"ERROR: {err}"), purpose="manual_system_mail", extra={"by": "admin_click"})
+    except Exception as _ex:
+        print("[WARN] log_mail_event failed:", _ex)
+
     if request.headers.get("X-Requested-With") == "fetch":
-        return jsonify({"ok": ok, "error": err})
+        return jsonify({"ok": ok, "error": err, "purpose": "manual_system_mail"})
     flash("시스템 메일 " + ("전송 완료" if ok else ("전송 실패: " + (err or ""))))
     return redirect(url_for("admin_dashboard", _=int(time.time())))
 
