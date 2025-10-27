@@ -88,16 +88,6 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-37" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-32">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="150" y="680" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-38" value="YES" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-37">
-          <mxGeometry x="-0.1624" y="-2" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-32" value="외부 입력&lt;div&gt;인가 ?&amp;nbsp;&lt;/div&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;" vertex="1" parent="1">
           <mxGeometry x="109.5" y="525" width="81" height="70" as="geometry" />
         </mxCell>
