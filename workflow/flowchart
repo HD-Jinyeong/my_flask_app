@@ -30,7 +30,7 @@
           <mxGeometry x="-160" y="270" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-6" value="Admin Page" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="294" y="520" width="120" height="60" as="geometry" />
+          <mxGeometry x="294" y="530" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-8" target="F9Db_4OS62OOrEtRdgMN-10">
           <mxGeometry relative="1" as="geometry" />
@@ -44,13 +44,13 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-8" value="User Page (Home)" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="-160" y="520" width="120" height="60" as="geometry" />
+          <mxGeometry x="-160" y="530" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-10" value="호선 선택" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="-160" y="670" width="120" height="60" as="geometry" />
+          <mxGeometry x="-160" y="660" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-12" value="Logout" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="-350" y="520" width="120" height="60" as="geometry" />
+          <mxGeometry x="-350" y="530" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-15" target="F9Db_4OS62OOrEtRdgMN-17">
           <mxGeometry relative="1" as="geometry" />
@@ -78,7 +78,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-23" value="LOGIN" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="-160" y="390" width="120" height="60" as="geometry" />
+          <mxGeometry x="-160" y="400" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-34" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-32" target="F9Db_4OS62OOrEtRdgMN-6">
           <mxGeometry relative="1" as="geometry" />
@@ -88,9 +88,9 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-37" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-32">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-37" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-32">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="140" y="680" as="targetPoint" />
+            <mxPoint x="150" y="680" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-38" value="YES" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-37">
@@ -99,7 +99,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-32" value="외부 입력&lt;div&gt;인가 ?&amp;nbsp;&lt;/div&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="109.5" y="515" width="81" height="70" as="geometry" />
+          <mxGeometry x="109.5" y="525" width="81" height="70" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
