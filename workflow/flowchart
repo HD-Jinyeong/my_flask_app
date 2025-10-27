@@ -9,7 +9,7 @@
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-26" value="Local Server 연결" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-7">
           <mxGeometry x="0.1835" y="2" relative="1" as="geometry">
-            <mxPoint as="offset" />
+            <mxPoint x="-86" y="-192" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-3" target="F9Db_4OS62OOrEtRdgMN-15">
@@ -17,7 +17,7 @@
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-30" value="Remote Server 연결" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-29">
           <mxGeometry x="-0.2206" y="-3" relative="1" as="geometry">
-            <mxPoint as="offset" />
+            <mxPoint x="-10" y="3" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-3" value="START" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" vertex="1" parent="1">
