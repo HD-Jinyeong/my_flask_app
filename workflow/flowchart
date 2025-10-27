@@ -38,19 +38,6 @@
         <mxCell id="F9Db_4OS62OOrEtRdgMN-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-8" target="F9Db_4OS62OOrEtRdgMN-12">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=8 8;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-8" target="F9Db_4OS62OOrEtRdgMN-6">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="60" y="570" />
-              <mxPoint x="60" y="570" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-48" value="접속 차단" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-45">
-          <mxGeometry x="0.0539" y="-5" relative="1" as="geometry">
-            <mxPoint x="4" as="offset" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-8" value="Home Page" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="-160" y="530" width="120" height="60" as="geometry" />
         </mxCell>
@@ -94,13 +81,27 @@
             <mxPoint x="-40" y="550" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-46" value="접속 허용" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-43">
-          <mxGeometry x="-0.0898" relative="1" as="geometry">
-            <mxPoint x="-2" as="offset" />
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-69" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="-40" y="565" width="334" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-45" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=8 8;" edge="1" parent="F9Db_4OS62OOrEtRdgMN-69" source="F9Db_4OS62OOrEtRdgMN-49">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="10" as="sourcePoint" />
+            <mxPoint x="334" y="10" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="190" y="10" />
+            </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-49" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.x;fillColor=#e51400;strokeColor=none;fontColor=#ffffff;" vertex="1" parent="1">
-          <mxGeometry x="130" y="585" width="20" height="20" as="geometry" />
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-66" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=8 8;entryX=0.65;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="F9Db_4OS62OOrEtRdgMN-69" target="F9Db_4OS62OOrEtRdgMN-49">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="10" as="sourcePoint" />
+            <mxPoint x="334" y="10" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-49" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.x;fillColor=#e51400;strokeColor=none;fontColor=#ffffff;" vertex="1" parent="F9Db_4OS62OOrEtRdgMN-69">
+          <mxGeometry x="160" width="20" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
