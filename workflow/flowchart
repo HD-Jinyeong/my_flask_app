@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" version="28.2.8">
   <diagram name="페이지-1" id="JFnJp5z0o5eQIz1p88r6">
-    <mxGraphModel dx="2655" dy="949" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2381" dy="807" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -38,14 +38,19 @@
         <mxCell id="F9Db_4OS62OOrEtRdgMN-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-8" target="F9Db_4OS62OOrEtRdgMN-12">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=8 8;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-8">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="100" y="575" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-8" value="User Page (Home)" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="-160" y="545" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-10" value="호선 선택" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="-300" y="670" width="120" height="60" as="geometry" />
+          <mxGeometry x="-160" y="670" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-12" value="Logout" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="-20" y="670" width="120" height="60" as="geometry" />
+          <mxGeometry x="-340" y="545" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-15" target="F9Db_4OS62OOrEtRdgMN-17">
           <mxGeometry relative="1" as="geometry" />
@@ -64,7 +69,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-15" value="Mail 인증" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="-140" y="130" width="80" height="80" as="geometry" />
+          <mxGeometry x="-140" y="130" width="80" height="70" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-17" value="원천 차단" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="-340" y="140" width="120" height="60" as="geometry" />
@@ -74,6 +79,27 @@
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-23" value="LOGIN" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="-160" y="410" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-34" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-32" target="F9Db_4OS62OOrEtRdgMN-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-35" value="NO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-34">
+          <mxGeometry x="-0.4159" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-37" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-32">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-38" value="YES" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-37">
+          <mxGeometry x="-0.1624" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-32" value="외부 입력&lt;div&gt;인가 ?&amp;nbsp;&lt;/div&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="100" y="540" width="81" height="70" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
