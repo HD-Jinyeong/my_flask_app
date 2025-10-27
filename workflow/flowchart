@@ -26,7 +26,7 @@
         <mxCell id="F9Db_4OS62OOrEtRdgMN-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-4" target="F9Db_4OS62OOrEtRdgMN-23">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-4" value="P.W. 생성" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-4" value="P.W 생성" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="-160" y="270" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-6" value="Admin Page" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
