@@ -12,8 +12,13 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-3" target="F9Db_4OS62OOrEtRdgMN-15">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-3" target="F9Db_4OS62OOrEtRdgMN-15">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-30" value="Remote Server 연결" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-29">
+          <mxGeometry x="-0.2206" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-3" value="START" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" vertex="1" parent="1">
           <mxGeometry x="100" y="70" width="100" height="60" as="geometry" />
@@ -22,7 +27,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-4" value="P.W. 생성" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="-40" y="280" width="120" height="60" as="geometry" />
+          <mxGeometry x="-150" y="270" width="100" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-6" value="Admin Page" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="250" y="420" width="120" height="60" as="geometry" />
@@ -34,13 +39,13 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-8" value="User Page (Home)" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="-40" y="555" width="120" height="60" as="geometry" />
+          <mxGeometry x="-160" y="545" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-10" value="호선 선택" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="-180" y="680" width="120" height="60" as="geometry" />
+          <mxGeometry x="-300" y="670" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-12" value="Logout" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="100" y="680" width="120" height="60" as="geometry" />
+          <mxGeometry x="-20" y="670" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-15" target="F9Db_4OS62OOrEtRdgMN-17">
           <mxGeometry relative="1" as="geometry" />
@@ -59,16 +64,16 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-15" value="Mail 인증" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="-20" y="140" width="80" height="80" as="geometry" />
+          <mxGeometry x="-140" y="130" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-17" value="원천 차단" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="-220" y="150" width="120" height="60" as="geometry" />
+          <mxGeometry x="-340" y="140" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-23" target="F9Db_4OS62OOrEtRdgMN-8">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-23" value="LOGIN" style="whiteSpace=wrap;html=1;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="-40" y="420" width="120" height="60" as="geometry" />
+          <mxGeometry x="-160" y="410" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
