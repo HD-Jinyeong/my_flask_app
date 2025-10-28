@@ -37,7 +37,7 @@
         <mxCell id="8Q5IUM5g_wMQxglXYhyg-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="bGp9mbCCQacK-xYrVzY_-10" target="8Q5IUM5g_wMQxglXYhyg-2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="8Q5IUM5g_wMQxglXYhyg-4" value="YES" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="8Q5IUM5g_wMQxglXYhyg-3">
+        <mxCell id="8Q5IUM5g_wMQxglXYhyg-4" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="8Q5IUM5g_wMQxglXYhyg-3">
           <mxGeometry x="-0.1714" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
@@ -45,8 +45,14 @@
         <mxCell id="bGp9mbCCQacK-xYrVzY_-10" value="미완료&amp;nbsp;&lt;div&gt;여부 판단&lt;br&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="340" y="460" width="100" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="8Q5IUM5g_wMQxglXYhyg-2" value="" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+        <mxCell id="8Q5IUM5g_wMQxglXYhyg-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8Q5IUM5g_wMQxglXYhyg-2" target="8Q5IUM5g_wMQxglXYhyg-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8Q5IUM5g_wMQxglXYhyg-2" value="Mail 탬플릿 자동 생성&lt;div&gt;(due date, 담당자, 항목 입력)&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="330" y="630" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8Q5IUM5g_wMQxglXYhyg-5" value="Outlook Mail 연결" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="330" y="760" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
