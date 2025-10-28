@@ -9,7 +9,7 @@
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-26" value="Local Server 연결" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-7">
           <mxGeometry x="0.1835" y="2" relative="1" as="geometry">
-            <mxPoint x="-86" y="-192" as="offset" />
+            <mxPoint x="-101" y="-134" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-3" target="F9Db_4OS62OOrEtRdgMN-15">
@@ -21,7 +21,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-3" value="START" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="100" y="70" width="100" height="60" as="geometry" />
+          <mxGeometry x="60" y="70" width="100" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-4" target="F9Db_4OS62OOrEtRdgMN-23">
           <mxGeometry relative="1" as="geometry" />
@@ -46,8 +46,8 @@
         <mxCell id="F9Db_4OS62OOrEtRdgMN-94" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-8" target="F9Db_4OS62OOrEtRdgMN-91">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="-240" y="480" />
-              <mxPoint x="-240" y="890" />
+              <mxPoint x="-210" y="480" />
+              <mxPoint x="-210" y="890" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -138,12 +138,12 @@
         <mxCell id="F9Db_4OS62OOrEtRdgMN-85" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-83" target="F9Db_4OS62OOrEtRdgMN-80">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="90" y="780" />
+              <mxPoint x="110" y="780" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-83" value="입력 사항 수정" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;" vertex="1" parent="1">
-          <mxGeometry x="38" y="540" width="118" height="60" as="geometry" />
+          <mxGeometry x="51" y="540" width="118" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-88" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-86" target="F9Db_4OS62OOrEtRdgMN-83">
           <mxGeometry relative="1" as="geometry" />
@@ -158,13 +158,13 @@
           <mxGeometry x="280" y="540" width="118" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-89" value="Excel 취합" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;" vertex="1" parent="1">
-          <mxGeometry x="280" y="640" width="118" height="60" as="geometry" />
+          <mxGeometry x="355" y="650" width="118" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-91" value="LOGOUT" style="whiteSpace=wrap;html=1;rounded=1;strokeWidth=2;arcSize=12;" vertex="1" parent="1">
           <mxGeometry x="-160" y="860" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-95" value="메일 전송 로그 확인" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;" vertex="1" parent="1">
-          <mxGeometry x="478" y="540" width="118" height="60" as="geometry" />
+          <mxGeometry x="210" y="650" width="118" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
