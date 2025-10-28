@@ -146,6 +146,14 @@
         <mxCell id="F9Db_4OS62OOrEtRdgMN-129" value="입력 로그&lt;div&gt;조회&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=20;fontFamily=HD현대체 Medium;fillColor=#D4E1F5;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="-201" y="640" width="120" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-134" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=-0.024;entryY=0.712;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-8" target="F9Db_4OS62OOrEtRdgMN-101">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-240" y="480" />
+              <mxPoint x="-240" y="993" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
