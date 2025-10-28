@@ -151,14 +151,20 @@
         <mxCell id="F9Db_4OS62OOrEtRdgMN-90" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-86" target="F9Db_4OS62OOrEtRdgMN-89">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-96" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-86" target="F9Db_4OS62OOrEtRdgMN-95">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-86" value="시스템 조회" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;" vertex="1" parent="1">
           <mxGeometry x="280" y="540" width="118" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-89" value="시스템 조회" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;" vertex="1" parent="1">
-          <mxGeometry x="478" y="540" width="118" height="60" as="geometry" />
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-89" value="Excel 취합" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="640" width="118" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-91" value="LOGOUT" style="whiteSpace=wrap;html=1;rounded=1;strokeWidth=2;arcSize=12;" vertex="1" parent="1">
           <mxGeometry x="-160" y="860" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-95" value="메일 전송 로그 확인" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="478" y="540" width="118" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
