@@ -53,12 +53,12 @@
         <mxCell id="F9Db_4OS62OOrEtRdgMN-10" value="호선, 시스템 선택" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;fontFamily=HD현대체 Medium;fontSize=19;fillColor=#D4E1F5;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="-199" y="540" width="118" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=19;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-15" target="F9Db_4OS62OOrEtRdgMN-4">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-21" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=19;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-15" target="F9Db_4OS62OOrEtRdgMN-4">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-22" value="YES" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=HD현대체 Medium;fontSize=19;" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-21">
           <mxGeometry x="-0.2824" y="2" relative="1" as="geometry">
-            <mxPoint as="offset" />
+            <mxPoint x="-2" y="-1" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-72" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=19;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-15" target="F9Db_4OS62OOrEtRdgMN-71">
@@ -66,11 +66,11 @@
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-73" value="NO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=HD현대체 Medium;fontSize=19;" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-72">
           <mxGeometry x="-0.0506" y="2" relative="1" as="geometry">
-            <mxPoint x="-3" y="-2" as="offset" />
+            <mxPoint x="4" y="-2" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-15" value="Mail 인증" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=2;fontFamily=HD현대체 Medium;fontSize=19;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="-186" y="130" width="100" height="80" as="geometry" />
+          <mxGeometry x="-191" y="130" width="100" height="80" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=19;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-23" target="F9Db_4OS62OOrEtRdgMN-8">
           <mxGeometry relative="1" as="geometry" />
