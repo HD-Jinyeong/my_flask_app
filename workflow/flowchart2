@@ -69,13 +69,13 @@
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="290" y="870" as="sourcePoint" />
             <Array as="points">
-              <mxPoint x="270" y="890" />
+              <mxPoint x="270" y="880" />
               <mxPoint x="270" y="230" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="8Q5IUM5g_wMQxglXYhyg-7" value="자동 메일 발송" style="whiteSpace=wrap;html=1;rounded=0;fontFamily=HD현대체 Medium;fontSize=18;fillColor=light-dark(#d4e1f5, #334a6c);strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="330" y="860" width="120" height="60" as="geometry" />
+          <mxGeometry x="330" y="850" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="8Q5IUM5g_wMQxglXYhyg-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontFamily=HD현대체 Medium;fontSize=18;strokeWidth=2;" edge="1" parent="1" source="8Q5IUM5g_wMQxglXYhyg-9" target="bGp9mbCCQacK-xYrVzY_-4">
           <mxGeometry relative="1" as="geometry" />
