@@ -9,7 +9,7 @@
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-26" value="Local Server 연결" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=HD현대체 Medium;fontSize=19;" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-7">
           <mxGeometry x="0.1835" y="2" relative="1" as="geometry">
-            <mxPoint x="-101" y="-134" as="offset" />
+            <mxPoint x="-101" y="-132" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=HD현대체 Medium;fontSize=19;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-3" target="F9Db_4OS62OOrEtRdgMN-15">
@@ -21,7 +21,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-3" value="START" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;fontFamily=HD현대체 Medium;fontSize=19;fillColor=#eeeeee;strokeColor=#36393d;" vertex="1" parent="1">
-          <mxGeometry x="60" y="70" width="100" height="60" as="geometry" />
+          <mxGeometry x="55" y="70" width="100" height="60" as="geometry" />
         </mxCell>
         <mxCell id="F9Db_4OS62OOrEtRdgMN-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=19;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-4" target="F9Db_4OS62OOrEtRdgMN-23">
           <mxGeometry relative="1" as="geometry" />
