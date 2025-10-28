@@ -1,115 +1,93 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" version="28.2.8">
   <diagram name="페이지-1" id="JFnJp5z0o5eQIz1p88r6">
-    <mxGraphModel dx="2655" dy="949" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3417" dy="1345" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=14;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-3" target="F9Db_4OS62OOrEtRdgMN-6">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=16;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-3" target="F9Db_4OS62OOrEtRdgMN-6">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-26" value="Local Server 연결" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-7">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-26" value="Local Server 연결" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=HD현대체 Medium;fontSize=16;" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-7">
           <mxGeometry x="0.1835" y="2" relative="1" as="geometry">
             <mxPoint x="-101" y="-134" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=HD현대체 Medium;fontSize=14;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-3" target="F9Db_4OS62OOrEtRdgMN-15">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=HD현대체 Medium;fontSize=16;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-3" target="F9Db_4OS62OOrEtRdgMN-15">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-30" value="Remote Server 연결" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-29">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-30" value="Remote Server 연결" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=HD현대체 Medium;fontSize=16;" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-29">
           <mxGeometry x="-0.2206" y="-3" relative="1" as="geometry">
             <mxPoint x="-10" y="3" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-3" value="START" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-3" value="START" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;fontFamily=HD현대체 Medium;fontSize=16;fillColor=#eeeeee;strokeColor=#36393d;" vertex="1" parent="1">
           <mxGeometry x="60" y="70" width="100" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=14;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-4" target="F9Db_4OS62OOrEtRdgMN-23">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=16;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-4" target="F9Db_4OS62OOrEtRdgMN-23">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-4" value="P.W 생성" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-4" value="P.W 생성" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;fontFamily=HD현대체 Medium;fontSize=16;fillColor=#D4E1F5;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="-160" y="260" width="118" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-87" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=14;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-6" target="F9Db_4OS62OOrEtRdgMN-86">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-87" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=16;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-6" target="F9Db_4OS62OOrEtRdgMN-86">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-6" value="Admin Page" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-6" value="Admin Page" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;fontFamily=HD현대체 Medium;fontSize=16;fillColor=#D4E1F5;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="280" y="450" width="118" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=14;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-8" target="F9Db_4OS62OOrEtRdgMN-10">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=16;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-8" target="F9Db_4OS62OOrEtRdgMN-10">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-94" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;fontFamily=HD현대체 Medium;fontSize=14;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-8" target="F9Db_4OS62OOrEtRdgMN-101">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-94" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;fontFamily=HD현대체 Medium;fontSize=16;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-8" target="F9Db_4OS62OOrEtRdgMN-101">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="-160" y="890" as="targetPoint" />
             <Array as="points">
               <mxPoint x="-210" y="480" />
-              <mxPoint x="-210" y="890" />
+              <mxPoint x="-210" y="880" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-8" value="Home Page" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-8" value="Home Page" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;fontFamily=HD현대체 Medium;fontSize=16;fillColor=#D4E1F5;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="-160" y="450" width="118" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-84" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=14;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-10" target="F9Db_4OS62OOrEtRdgMN-83">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-84" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=16;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-10" target="F9Db_4OS62OOrEtRdgMN-83">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-93" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=HD현대체 Medium;fontSize=14;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-10" target="F9Db_4OS62OOrEtRdgMN-78">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-93" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=HD현대체 Medium;fontSize=16;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-10" target="F9Db_4OS62OOrEtRdgMN-78">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-10" value="호선, 시스템 선택" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-10" value="호선, 시스템 선택" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;fontFamily=HD현대체 Medium;fontSize=16;fillColor=#D4E1F5;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="-160" y="540" width="118" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=14;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-15" target="F9Db_4OS62OOrEtRdgMN-4">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=16;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-15" target="F9Db_4OS62OOrEtRdgMN-4">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-22" value="YES" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-21">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-22" value="YES" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=HD현대체 Medium;fontSize=16;" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-21">
           <mxGeometry x="-0.2824" y="2" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-72" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=14;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-15" target="F9Db_4OS62OOrEtRdgMN-71">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-72" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=16;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-15" target="F9Db_4OS62OOrEtRdgMN-71">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-73" value="NO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-72">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-73" value="NO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=HD현대체 Medium;fontSize=16;" vertex="1" connectable="0" parent="F9Db_4OS62OOrEtRdgMN-72">
           <mxGeometry x="-0.0506" y="2" relative="1" as="geometry">
             <mxPoint x="-3" y="-2" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-15" value="Mail 인증" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=2;fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-15" value="Mail 인증" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=2;fontFamily=HD현대체 Medium;fontSize=16;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
           <mxGeometry x="-146" y="130" width="90" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=14;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-23" target="F9Db_4OS62OOrEtRdgMN-8">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=16;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-23" target="F9Db_4OS62OOrEtRdgMN-8">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-23" value="LOGIN" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-23" value="LOGIN" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;fontFamily=HD현대체 Medium;fontSize=16;fillColor=#D4E1F5;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="-160" y="360" width="118" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-69" value="" style="group;fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" connectable="0" parent="1">
-          <mxGeometry x="-42" y="480" width="322" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-45" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=8 8;fontFamily=HD현대체 Medium;fontSize=14;" edge="1" parent="F9Db_4OS62OOrEtRdgMN-69" source="F9Db_4OS62OOrEtRdgMN-49">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="10" as="sourcePoint" />
-            <mxPoint x="322.00000000000006" y="10" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="183.1736526946108" y="10" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-66" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=8 8;entryX=0.65;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;fontFamily=HD현대체 Medium;fontSize=14;" edge="1" parent="F9Db_4OS62OOrEtRdgMN-69" target="F9Db_4OS62OOrEtRdgMN-49">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="10" as="sourcePoint" />
-            <mxPoint x="322.00000000000006" y="10" as="targetPoint" />
-            <Array as="points" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-49" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.x;fillColor=#e51400;strokeColor=none;fontColor=#ffffff;fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" parent="F9Db_4OS62OOrEtRdgMN-69">
-          <mxGeometry x="154.25149700598803" width="19.281437125748504" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-71" value="접속 차단" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-71" value="접속 차단" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;fontFamily=HD현대체 Medium;fontSize=16;fillColor=#eeeeee;strokeColor=#36393d;" vertex="1" parent="1">
           <mxGeometry x="-300" y="140" width="100" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-82" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=14;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-78" target="F9Db_4OS62OOrEtRdgMN-80">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-82" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=16;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-78" target="F9Db_4OS62OOrEtRdgMN-80">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="-100" y="720" />
@@ -117,57 +95,68 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-78" value="장비 입력" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-78" value="장비 입력" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;fontFamily=HD현대체 Medium;fontSize=16;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
           <mxGeometry x="-151" y="640" width="100" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-92" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=14;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-80">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-92" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=16;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-80" target="F9Db_4OS62OOrEtRdgMN-101">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="-99.94117647058783" y="860" as="targetPoint" />
+            <mxPoint x="-100" y="840" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="-100" y="840" />
-              <mxPoint x="-100" y="840" />
+              <mxPoint x="-100" y="850" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-80" value="AWS 업로드" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;arcSize=12;fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-80" value="AWS 업로드" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;arcSize=12;fontFamily=HD현대체 Medium;fontSize=16;fillColor=#D4E1F5;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="-161" y="750" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-85" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontFamily=HD현대체 Medium;fontSize=14;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-83" target="F9Db_4OS62OOrEtRdgMN-80">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-85" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontFamily=HD현대체 Medium;fontSize=16;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-83" target="F9Db_4OS62OOrEtRdgMN-80">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="110" y="780" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-83" value="입력 사항 수정" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-83" value="입력 사항 수정" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;fontFamily=HD현대체 Medium;fontSize=16;fillColor=#D4E1F5;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="51" y="540" width="118" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-88" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontFamily=HD현대체 Medium;fontSize=14;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-86" target="F9Db_4OS62OOrEtRdgMN-83">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-88" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontFamily=HD현대체 Medium;fontSize=16;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-86" target="F9Db_4OS62OOrEtRdgMN-83">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-90" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=14;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-86" target="F9Db_4OS62OOrEtRdgMN-89">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-90" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=16;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-86" target="F9Db_4OS62OOrEtRdgMN-89">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-96" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=14;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-86" target="F9Db_4OS62OOrEtRdgMN-95">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-96" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=HD현대체 Medium;fontSize=16;strokeWidth=2;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-86" target="F9Db_4OS62OOrEtRdgMN-95">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-86" value="시스템 조회" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-86" value="시스템 조회" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;fontFamily=HD현대체 Medium;fontSize=16;fillColor=#D4E1F5;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="280" y="540" width="118" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-89" value="Excel 취합" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-89" value="Excel 취합" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;fontFamily=HD현대체 Medium;fontSize=16;fillColor=#D4E1F5;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="355" y="650" width="118" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-95" value="메일 전송 시스템" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-95" value="메일 전송 시스템" style="whiteSpace=wrap;html=1;strokeWidth=2;rounded=1;fontFamily=HD현대체 Medium;fontSize=16;fillColor=#D4E1F5;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="210" y="650" width="118" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-101" value="LOGOUT" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;fontFamily=HD현대체 Medium;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="-151" y="860" width="100" height="60" as="geometry" />
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-101" value="LOGOUT" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;fontFamily=HD현대체 Medium;fontSize=16;fillColor=#eeeeee;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="-151" y="850" width="100" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="F9Db_4OS62OOrEtRdgMN-103" value="" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-6" target="F9Db_4OS62OOrEtRdgMN-8">
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-103" value="" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;strokeWidth=2;fontFamily=HD현대체 Medium;fontSize=16;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-6" target="F9Db_4OS62OOrEtRdgMN-8">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="60" y="410" as="sourcePoint" />
             <mxPoint x="110" y="360" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-45" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;fontFamily=HD현대체 Medium;fontSize=16;strokeWidth=2;exitX=1;exitY=0.667;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="F9Db_4OS62OOrEtRdgMN-8">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-42" y="490" as="sourcePoint" />
+            <mxPoint x="280.00000000000006" y="490" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="141.1736526946108" y="490" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="F9Db_4OS62OOrEtRdgMN-49" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.x;fillColor=#e51400;strokeColor=none;fontColor=#ffffff;fontFamily=HD현대체 Medium;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="112.25149700598803" y="480" width="19.281437125748504" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
