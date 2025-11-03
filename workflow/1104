@@ -1,0 +1,40 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" version="28.2.9">
+  <diagram id="3228e29e-7158-1315-38df-8450db1d8a1d" name="Page-1">
+    <mxGraphModel dx="2590" dy="1415" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="21531" value="" style="ellipse;fillColor=#F08705;opacity=60;strokeColor=none;html=1;fontColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="339.5" y="308.5" width="500" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="21532" value="" style="ellipse;fillColor=#12AAB5;opacity=60;strokeColor=none;html=1;fontColor=#FFFFFF;fontSize=20;" parent="1" vertex="1">
+          <mxGeometry x="179.5" y="18.5" width="500" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="21533" value="" style="ellipse;fillColor=#e85642;opacity=60;strokeColor=none;html=1;fontColor=#FFFFFF;fontSize=20;" parent="1" vertex="1">
+          <mxGeometry x="489.5" y="18.5" width="500" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="21534" value="Yard 담당자" style="text;fontSize=40;align=center;verticalAlign=middle;html=1;fontColor=#FFFFFF;fontFamily=HD현대체 Medium;" parent="1" vertex="1">
+          <mxGeometry x="277.5" y="225" width="209" height="77" as="geometry" />
+        </mxCell>
+        <mxCell id="21535" value="현장 작업자" style="text;fontSize=40;align=center;verticalAlign=middle;html=1;fontColor=#FFFFFF;fontFamily=HD현대체 Medium;" parent="1" vertex="1">
+          <mxGeometry x="670" y="215" width="236.14" height="87" as="geometry" />
+        </mxCell>
+        <mxCell id="21536" value="MAKER" style="text;fontSize=40;align=center;verticalAlign=middle;html=1;fontColor=#FFFFFF;fontFamily=HD현대체 Medium;" parent="1" vertex="1">
+          <mxGeometry x="471.43" y="540" width="236.14" height="87" as="geometry" />
+        </mxCell>
+        <mxCell id="21537" value="도면-모델링&lt;div&gt;위치 정보&lt;/div&gt;" style="text;align=center;html=1;fontColor=#FFFFFF;fontSize=30;fontFamily=HD현대체 Medium;" parent="1" vertex="1">
+          <mxGeometry x="569.5" y="200.5" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="21538" value="장비 List&lt;div&gt;입력 요청&lt;/div&gt;" style="text;align=center;html=1;fontColor=#FFFFFF;fontSize=30;fontFamily=HD현대체 Medium;" parent="1" vertex="1">
+          <mxGeometry x="446.5" y="397.5" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="21539" value="Cert. No.&lt;div&gt;실물 확인&lt;/div&gt;" style="text;align=center;html=1;fontColor=#FFFFFF;fontSize=30;fontFamily=HD현대체 Medium;" parent="1" vertex="1">
+          <mxGeometry x="692.5" y="395.5" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="21540" value="자동화&amp;nbsp;&lt;div&gt;플랫폼&lt;/div&gt;" style="text;align=center;html=1;fontColor=#FFFFFF;fontSize=30;fontFamily=HD현대체 Medium;" parent="1" vertex="1">
+          <mxGeometry x="569.5" y="333.5" width="40" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
