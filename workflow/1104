@@ -64,6 +64,15 @@
         <mxCell id="4IWT9KMFcDPbJ7JeLI2v-21562" value="Balance" style="text;align=center;html=1;fontColor=#FFFFFF;fontSize=16;" vertex="1" parent="1">
           <mxGeometry x="1440" y="1010" width="40" height="40" as="geometry" />
         </mxCell>
+        <mxCell id="4IWT9KMFcDPbJ7JeLI2v-21563" value="" style="shape=mxgraph.signs.healthcare.health_education;html=1;pointerEvents=1;fillColor=#000000;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1388" y="320" width="162" height="162" as="geometry" />
+        </mxCell>
+        <mxCell id="4IWT9KMFcDPbJ7JeLI2v-21566" value="" style="shape=mxgraph.networks2.icon;aspect=fixed;fillColor=#EDEDED;strokeColor=#000000;gradientColor=#5B6163;network2IconShadow=1;network2bgFillColor=none;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;network2Icon=mxgraph.networks2.laptop;network2IconW=1;network2IconH=0.5734;" vertex="1" parent="1">
+          <mxGeometry x="850" y="690" width="50" height="28.67" as="geometry" />
+        </mxCell>
+        <mxCell id="4IWT9KMFcDPbJ7JeLI2v-21567" value="Cloud" style="html=1;whiteSpace=wrap;strokeColor=none;fillColor=#0079D6;labelPosition=center;verticalLabelPosition=middle;verticalAlign=top;align=center;fontSize=12;outlineConnect=0;spacingTop=-6;fontColor=#FFFFFF;sketch=0;shape=mxgraph.sitemap.cloud;" vertex="1" parent="1">
+          <mxGeometry x="820" y="670" width="120" height="70" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
