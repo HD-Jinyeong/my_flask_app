@@ -219,6 +219,9 @@
         <mxCell id="JD_6UHVInNE3xlbsNGsn-83" value="Inert Gas" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
           <mxGeometry x="730" y="450" width="145" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="JD_6UHVInNE3xlbsNGsn-100" value="" style="shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#4495D1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.veeam.company_user;" vertex="1" parent="1">
+          <mxGeometry x="150" y="140" width="100" height="100" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
