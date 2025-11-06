@@ -14,7 +14,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="6pWiD3QzUdYFHVuxOHDP-1" value="도면 담당자" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;fillColor=#f5f5f5;gradientColor=#b3b3b3;strokeColor=#666666;strokeWidth=2;fontSize=18;" parent="1" vertex="1">
-          <mxGeometry x="110" y="60" width="140" height="60" as="geometry" />
+          <mxGeometry x="110" y="60" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;fontSize=18;fontFamily=HD현대체 Medium;" edge="1" parent="1" source="6pWiD3QzUdYFHVuxOHDP-2" target="6pWiD3QzUdYFHVuxOHDP-21">
           <mxGeometry relative="1" as="geometry" />
@@ -26,7 +26,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="6pWiD3QzUdYFHVuxOHDP-2" value="선장 설계부" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;fillColor=#fff2cc;strokeColor=#d6b656;gradientColor=#ffd966;strokeWidth=2;fontSize=18;" parent="1" vertex="1">
-          <mxGeometry x="310" y="60" width="140" height="60" as="geometry" />
+          <mxGeometry x="310" y="60" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;fontSize=18;fontFamily=HD현대체 Medium;" edge="1" parent="1" source="6pWiD3QzUdYFHVuxOHDP-3" target="JD_6UHVInNE3xlbsNGsn-43">
           <mxGeometry relative="1" as="geometry" />
@@ -56,7 +56,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="6pWiD3QzUdYFHVuxOHDP-3" value="전장설계부" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;fillColor=#d5e8d4;strokeColor=#82b366;gradientColor=#97d077;strokeWidth=2;fontSize=18;" parent="1" vertex="1">
-          <mxGeometry x="310" y="220" width="140" height="60" as="geometry" />
+          <mxGeometry x="310" y="220" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-84" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=18;fontFamily=HD현대체 Medium;strokeWidth=2;" edge="1" parent="1" source="6pWiD3QzUdYFHVuxOHDP-4" target="JD_6UHVInNE3xlbsNGsn-75">
           <mxGeometry relative="1" as="geometry" />
@@ -142,82 +142,82 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="6pWiD3QzUdYFHVuxOHDP-4" value="배관설계부" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;fillColor=#dae8fc;strokeColor=#6c8ebf;gradientColor=#7ea6e0;strokeWidth=2;fontSize=18;" parent="1" vertex="1">
-          <mxGeometry x="310" y="-110" width="140" height="60" as="geometry" />
+          <mxGeometry x="310" y="-110" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="6pWiD3QzUdYFHVuxOHDP-32" value="" style="group;fontFamily=HD현대체 Medium;strokeWidth=2;fontSize=18;" parent="1" vertex="1" connectable="0">
-          <mxGeometry x="520" y="-10" width="140" height="200" as="geometry" />
+          <mxGeometry x="520" y="-10" width="145" height="200" as="geometry" />
         </mxCell>
         <mxCell id="6pWiD3QzUdYFHVuxOHDP-20" value="&lt;span&gt;&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;Ventilation Fan&amp;nbsp; &amp;nbsp;&lt;/font&gt;&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;fillColor=#fff2cc;gradientColor=#ffd966;strokeColor=#d6b656;strokeWidth=2;fontSize=18;" parent="6pWiD3QzUdYFHVuxOHDP-32" vertex="1">
-          <mxGeometry width="140" height="60" as="geometry" />
+          <mxGeometry width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="6pWiD3QzUdYFHVuxOHDP-21" value="Hose Handling Crane" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;fillColor=#fff2cc;gradientColor=#ffd966;strokeColor=#d6b656;strokeWidth=2;fontSize=18;" parent="6pWiD3QzUdYFHVuxOHDP-32" vertex="1">
-          <mxGeometry y="70" width="140" height="60" as="geometry" />
+          <mxGeometry y="70" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="6pWiD3QzUdYFHVuxOHDP-24" value="Life Saving Appline" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;fillColor=#fff2cc;gradientColor=#ffd966;strokeColor=#d6b656;strokeWidth=2;fontSize=18;" parent="6pWiD3QzUdYFHVuxOHDP-32" vertex="1">
-          <mxGeometry y="140" width="140" height="60" as="geometry" />
+          <mxGeometry y="140" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-42" value="" style="group;fontFamily=HD현대체 Medium;fontSize=18;" vertex="1" connectable="0" parent="1">
-          <mxGeometry x="520" y="220" width="140" height="620" as="geometry" />
+          <mxGeometry x="520" y="220" width="145" height="620" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-43" value="CCTV" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="JD_6UHVInNE3xlbsNGsn-42">
-          <mxGeometry width="140" height="60" as="geometry" />
+          <mxGeometry width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-44" value="Instrument" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="JD_6UHVInNE3xlbsNGsn-42">
-          <mxGeometry y="70" width="140" height="60" as="geometry" />
+          <mxGeometry y="70" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-45" value="Fire Detection&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="JD_6UHVInNE3xlbsNGsn-42">
-          <mxGeometry y="140" width="140" height="60" as="geometry" />
+          <mxGeometry y="140" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-46" value="E/R Overfill Alarm" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="JD_6UHVInNE3xlbsNGsn-42">
-          <mxGeometry y="210" width="140" height="60" as="geometry" />
+          <mxGeometry y="210" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-47" value="Lighting" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="JD_6UHVInNE3xlbsNGsn-42">
-          <mxGeometry y="280" width="140" height="60" as="geometry" />
+          <mxGeometry y="280" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-48" value="Life Saving Appline" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="JD_6UHVInNE3xlbsNGsn-42">
-          <mxGeometry y="350" width="140" height="60" as="geometry" />
+          <mxGeometry y="350" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-49" value="Portable UHF Tranceiver" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="JD_6UHVInNE3xlbsNGsn-42">
-          <mxGeometry y="420" width="140" height="60" as="geometry" />
+          <mxGeometry y="420" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-50" value="Auto Telephone" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="JD_6UHVInNE3xlbsNGsn-42">
-          <mxGeometry y="490" width="140" height="60" as="geometry" />
+          <mxGeometry y="490" width="145" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="JD_6UHVInNE3xlbsNGsn-51" value="Ship/Shoere Emergency Shutdown" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="JD_6UHVInNE3xlbsNGsn-42">
-          <mxGeometry y="560" width="140" height="60" as="geometry" />
+        <mxCell id="JD_6UHVInNE3xlbsNGsn-51" value="Ship Emergency Shutdown" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="JD_6UHVInNE3xlbsNGsn-42">
+          <mxGeometry y="560" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-73" value="Oxygen Monitoring" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="730" y="520" width="140" height="60" as="geometry" />
+          <mxGeometry x="730" y="520" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-74" value="Oil Discharge Monitoring" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="730" y="590" width="140" height="60" as="geometry" />
+          <mxGeometry x="730" y="590" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-75" value="Cargo Handling" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="730" y="-110" width="140" height="60" as="geometry" />
+          <mxGeometry x="730" y="-110" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-76" value="LPG Fuel Supply&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="730" y="-40" width="140" height="60" as="geometry" />
+          <mxGeometry x="730" y="-40" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-77" value="Deck Fan Unit" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="730" y="30" width="140" height="60" as="geometry" />
+          <mxGeometry x="730" y="30" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-78" value="Fixed Gas Sampling" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="730" y="100" width="140" height="60" as="geometry" />
+          <mxGeometry x="730" y="100" width="145" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="JD_6UHVInNE3xlbsNGsn-79" value="Emergency Shower&amp;nbsp;&lt;br style=&quot;padding: 0px; margin: 0px;&quot;&gt;&amp;amp; Eye Washer" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="730" y="170" width="140" height="60" as="geometry" />
+        <mxCell id="JD_6UHVInNE3xlbsNGsn-79" value="Emergency Shower&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="730" y="170" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-80" value="CO2 Fire Extinguishing&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="730" y="240" width="140" height="60" as="geometry" />
+          <mxGeometry x="730" y="240" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-81" value="Cargo Pumping&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="730" y="310" width="140" height="60" as="geometry" />
+          <mxGeometry x="730" y="310" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-82" value="Ballast Water Treatment" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="730" y="380" width="140" height="60" as="geometry" />
+          <mxGeometry x="730" y="380" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JD_6UHVInNE3xlbsNGsn-83" value="Inert Gas" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="730" y="450" width="140" height="60" as="geometry" />
+          <mxGeometry x="730" y="450" width="145" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
