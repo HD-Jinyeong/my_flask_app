@@ -569,8 +569,8 @@
         <mxCell id="IETyH9OJF_76NN8vwsqF-97" value="E/R Overfill Alarm" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
           <mxGeometry x="2120" y="1190" width="145" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-198" value="" style="rounded=1;whiteSpace=wrap;html=1;rotation=-180;fillColor=none;strokeColor=#FF3333;fontColor=#333333;strokeWidth=3;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="1780" y="790" width="1058.75" height="495.38" as="geometry" />
+        <mxCell id="IETyH9OJF_76NN8vwsqF-198" value="" style="rounded=1;whiteSpace=wrap;html=1;rotation=-180;fillColor=none;strokeColor=#4D4D4D;fontColor=#333333;strokeWidth=2;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="1791.9" y="790" width="1034.99" height="495.38" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
