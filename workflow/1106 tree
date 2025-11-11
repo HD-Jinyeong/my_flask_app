@@ -458,95 +458,119 @@
             </Array>
           </mxGeometry>
         </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-131" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=#ffffff;strokeWidth=2;" edge="1" parent="1" source="IETyH9OJF_76NN8vwsqF-62" target="IETyH9OJF_76NN8vwsqF-76">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-132" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=#ffffff;strokeWidth=2;" edge="1" parent="1" source="IETyH9OJF_76NN8vwsqF-62" target="IETyH9OJF_76NN8vwsqF-66">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-133" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=#ffffff;strokeWidth=2;" edge="1" parent="1" source="IETyH9OJF_76NN8vwsqF-62" target="IETyH9OJF_76NN8vwsqF-88">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="IETyH9OJF_76NN8vwsqF-62" value="도면 담당자" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;fillColor=#f5f5f5;gradientColor=#b3b3b3;strokeColor=#666666;strokeWidth=2;fontSize=24;" vertex="1" parent="1">
           <mxGeometry x="2200" y="710" width="145" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-134" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=#ffffff;strokeWidth=2;" edge="1" parent="1" source="IETyH9OJF_76NN8vwsqF-66" target="IETyH9OJF_76NN8vwsqF-90">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="IETyH9OJF_76NN8vwsqF-66" value="선장 설계부" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;fillColor=#fff2cc;strokeColor=#d6b656;gradientColor=#ffd966;strokeWidth=2;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="1995" y="830" width="145" height="60" as="geometry" />
+          <mxGeometry x="1832.5" y="860" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-136" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=#ffffff;strokeWidth=2;" edge="1" parent="1" source="IETyH9OJF_76NN8vwsqF-76" target="IETyH9OJF_76NN8vwsqF-94">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-137" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=#ffffff;strokeWidth=2;" edge="1" parent="1" source="IETyH9OJF_76NN8vwsqF-76" target="IETyH9OJF_76NN8vwsqF-98">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="IETyH9OJF_76NN8vwsqF-76" value="전장설계부" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;fillColor=#d5e8d4;strokeColor=#82b366;gradientColor=#97d077;strokeWidth=2;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="2200" y="830" width="145" height="60" as="geometry" />
+          <mxGeometry x="2200" y="860" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-138" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=#ffffff;strokeWidth=2;" edge="1" parent="1" source="IETyH9OJF_76NN8vwsqF-88" target="IETyH9OJF_76NN8vwsqF-105">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-139" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=#ffffff;strokeWidth=2;" edge="1" parent="1" source="IETyH9OJF_76NN8vwsqF-88" target="IETyH9OJF_76NN8vwsqF-110">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="IETyH9OJF_76NN8vwsqF-88" value="배관설계부" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;fillColor=#dae8fc;strokeColor=#6c8ebf;gradientColor=#7ea6e0;strokeWidth=2;fontSize=24;" vertex="1" parent="1">
-          <mxGeometry x="2410" y="820" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-89" value="" style="group;fontFamily=HD현대체 Medium;strokeWidth=2;fontSize=18;" vertex="1" connectable="0" parent="1">
-          <mxGeometry x="2895" y="510" width="145" height="200" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-90" value="&lt;span&gt;&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;Ventilation Fan&amp;nbsp; &amp;nbsp;&lt;/font&gt;&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;fillColor=#fff2cc;gradientColor=#ffd966;strokeColor=#d6b656;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-89">
-          <mxGeometry width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-91" value="Hose Handling Crane" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;fillColor=#fff2cc;gradientColor=#ffd966;strokeColor=#d6b656;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-89">
-          <mxGeometry y="70" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-92" value="Life Saving Appline" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;fillColor=#fff2cc;gradientColor=#ffd966;strokeColor=#d6b656;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-89">
-          <mxGeometry y="140" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-93" value="" style="group;fontFamily=HD현대체 Medium;fontSize=18;" vertex="1" connectable="0" parent="1">
-          <mxGeometry x="2895" y="740" width="150" height="620" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-94" value="CCTV" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-93">
-          <mxGeometry width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-95" value="Instrument" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-93">
-          <mxGeometry y="70" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-96" value="Fire Detection&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-93">
-          <mxGeometry y="140" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-97" value="E/R Overfill Alarm" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-93">
-          <mxGeometry y="210" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-98" value="Lighting" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-93">
-          <mxGeometry y="280" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-99" value="Life Saving Appline" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-93">
-          <mxGeometry y="350" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-100" value="Portable UHF Tranceiver" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-93">
-          <mxGeometry y="420" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-101" value="Auto Telephone" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-93">
-          <mxGeometry y="490" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-102" value="Ship Emergency Shutdown" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-93">
-          <mxGeometry y="560" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-103" value="Oxygen Monitoring" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="3105" y="1040" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-104" value="Oil Discharge Monitoring" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="3105" y="1110" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-105" value="Cargo Handling" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="3105" y="410" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-106" value="LPG Fuel Supply&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="3105" y="480" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-107" value="Deck Fan Unit" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="3105" y="550" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-108" value="Fixed Gas Sampling" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="3105" y="620" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-109" value="Emergency Shower&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="3105" y="690" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-110" value="CO2 Fire Extinguishing&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="3105" y="760" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-111" value="Cargo Pumping&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="3105" y="830" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-112" value="Ballast Water Treatment" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="3105" y="900" width="145" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="IETyH9OJF_76NN8vwsqF-113" value="Inert Gas" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="3105" y="970" width="145" height="60" as="geometry" />
+          <mxGeometry x="2571" y="860" width="145" height="60" as="geometry" />
         </mxCell>
         <mxCell id="IETyH9OJF_76NN8vwsqF-114" value="" style="shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#4495D1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.veeam.company_user;" vertex="1" parent="1">
           <mxGeometry x="2230" y="600" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-126" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="2280" y="980" width="145" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-98" value="Lighting" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-126">
+          <mxGeometry width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-99" value="Life Saving Appline" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-126">
+          <mxGeometry y="70" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-100" value="Portable UHF Tranceiver" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-126">
+          <mxGeometry y="140" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-101" value="Auto Telephone" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-126">
+          <mxGeometry y="210" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-127" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="2486" y="980" width="145" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-105" value="Cargo Handling" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-127">
+          <mxGeometry width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-106" value="LPG Fuel Supply&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-127">
+          <mxGeometry y="70" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-107" value="Deck Fan Unit" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-127">
+          <mxGeometry y="140" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-108" value="Fixed Gas Sampling" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-127">
+          <mxGeometry y="210" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-129" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="2656" y="980" width="145" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-110" value="CO2 Fire Extinguishing&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-129">
+          <mxGeometry width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-111" value="Cargo Pumping&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-129">
+          <mxGeometry y="70" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-112" value="Ballast Water Treatment" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-129">
+          <mxGeometry y="140" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-113" value="Inert Gas" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;strokeWidth=2;fontSize=18;" vertex="1" parent="IETyH9OJF_76NN8vwsqF-129">
+          <mxGeometry y="210" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-141" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#736CA8;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="IETyH9OJF_76NN8vwsqF-90" target="IETyH9OJF_76NN8vwsqF-91">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-90" value="&lt;span&gt;&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;Ventilation Fan&amp;nbsp; &amp;nbsp;&lt;/font&gt;&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;fillColor=#fff2cc;gradientColor=#ffd966;strokeColor=#d6b656;strokeWidth=2;fontSize=18;container=0;" vertex="1" parent="1">
+          <mxGeometry x="1832.5" y="980" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-142" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#736CA8;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="IETyH9OJF_76NN8vwsqF-91" target="IETyH9OJF_76NN8vwsqF-92">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-91" value="Hose Handling Crane" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;fillColor=#fff2cc;gradientColor=#ffd966;strokeColor=#d6b656;strokeWidth=2;fontSize=18;container=0;" vertex="1" parent="1">
+          <mxGeometry x="1832.5" y="1050" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-92" value="Life Saving Appline" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;fillColor=#fff2cc;gradientColor=#ffd966;strokeColor=#d6b656;strokeWidth=2;fontSize=18;container=0;" vertex="1" parent="1">
+          <mxGeometry x="1832.5" y="1120" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-94" value="CCTV" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="2120" y="980" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-95" value="Instrument" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="2120" y="1050" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-96" value="Fire Detection&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="2120" y="1120" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-97" value="E/R Overfill Alarm" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=HD현대체 Medium;container=0;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;strokeWidth=2;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="2120" y="1190" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IETyH9OJF_76NN8vwsqF-198" value="" style="rounded=1;whiteSpace=wrap;html=1;rotation=-180;fillColor=none;strokeColor=#FF3333;fontColor=#333333;strokeWidth=3;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="1780" y="790" width="1058.75" height="495.38" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
